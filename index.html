@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Christopher Zdenek — creativity meets strategy. Entrepreneur, storyteller, and improv performer based in Los Angeles.">
+  <meta property="og:title" content="Christopher Zdenek">
+  <meta property="og:description" content="Creativity meets strategy. Entrepreneur, storyteller, and improv performer based in Los Angeles.">
+  <meta property="og:image" content="images/headshot.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Christopher Zdenek">
+  <meta name="twitter:description" content="Creativity meets strategy. Entrepreneur, storyteller, and improv performer.">
+  <meta name="twitter:image" content="images/headshot.jpg">
+  <title>Christopher Zdenek</title>
+  <style>
+    /* ─── FONTS ─────────────────────────────────────────────── */
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap');
+
+    /* ─── RESET / BASE ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #1D1D1F;   /* Apple near-black                */
+      --deep:    #3A3A3C;   /* Apple dark gray                 */
+      --gold:    #1D1D1F;   /* accent = near-black (clean)     */
+      --gold2:   #3A3A3C;
+      --cream:   #F5F5F7;   /* Apple's signature off-white     */
+      --white:   #ffffff;
+      --muted:   #6E6E73;   /* Apple secondary text            */
+      --red:     #e63946;
+      --accent:  #0066CC;   /* Apple blue — buttons/links only */
+      --text:    #1D1D1F;
+      --cat-blue: #7ab3d4;
+      --cat-seal: #8b6f52;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVIGATION ────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .nav-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem; font-weight: 500;
+      color: var(--navy);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.82rem; font-weight: 400;
+      text-decoration: none; letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--navy); }
+
+    /* ─── HAMBURGER MENU ──────────────────────────────────── */
+    .nav-hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 0.4rem; margin-right: -0.4rem;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--navy); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav-hamburger span + span { margin-top: 5px; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 5rem;
+      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .hero-bg-pattern { display: none; }
+    .hero-shape      { display: none; }
+    .hero-content { position: relative; z-index: 2; max-width: 760px; }
+
+    /* Hero entrance animations */
+    .hero-enter {
+      opacity: 0; transform: translateY(28px);
+      animation: hero-fade-up 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+    .hero-enter-1 { animation-delay: 0.1s; }
+    .hero-enter-2 { animation-delay: 0.35s; }
+    .hero-enter-3 { animation-delay: 0.55s; }
+    .hero-enter-4 { animation-delay: 0.75s; }
+    .hero-enter-5 { animation-delay: 0.95s; }
+    @keyframes hero-fade-up {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-enter { opacity: 1; transform: none; animation: none; }
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem; font-weight: 400; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .hero-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 9.5rem);
+      font-weight: 200; line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--navy); margin-bottom: 2rem;
+      transition: transform 0.15s ease-out;
+      will-change: transform;
+    }
+    .hero-name span {
+      font-weight: 500; display: block;
+      background: linear-gradient(90deg, #3366cc, #5b4fbf, #3366cc, #2980b9, #3366cc);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 8s ease infinite;
+    }
+    @keyframes gradient-shift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted); font-weight: 300; line-height: 1.7;
+      max-width: 540px; margin: 0 auto 2.5rem;
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 0.15rem 0;
+      justify-content: center; margin-bottom: 3rem;
+      color: var(--muted); font-size: 0.82rem; font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+    .hero-tag { padding: 0.2rem 0; }
+    .hero-tag:not(:last-child)::after {
+      content: '·'; margin: 0 0.6rem; opacity: 0.5;
+    }
+    .hero-tag-rotate {
+      display: block; position: relative;
+      width: 100%; text-align: center;
+      overflow: hidden;
+      height: 1.6em; margin-top: 0.3rem;
+    }
+    .hero-tag-rotate span {
+      display: block;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      white-space: nowrap;
+    }
+    .hero-tag-rotate span.exiting {
+      opacity: 0; transform: translateY(-110%); position: absolute;
+      left: 0; right: 0; top: 0;
+    }
+    .hero-tag-rotate span.entering {
+      opacity: 0; transform: translateY(110%);
+    }
+    .hero-tag-rotate span.active {
+      opacity: 1; transform: translateY(0);
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .btn {
+      padding: 0.8rem 2rem; border-radius: 980px; font-size: 0.88rem;
+      font-weight: 500; letter-spacing: 0.2px; cursor: pointer;
+      transition: all 0.2s; text-decoration: none; display: inline-block;
+      border: 1px solid transparent;
+    }
+    .btn-gold {
+      background: var(--navy); color: var(--white); border-color: var(--navy);
+    }
+    .btn-gold:hover { background: var(--deep); border-color: var(--deep); }
+    .btn-outline {
+      background: transparent; color: var(--navy);
+      border-color: rgba(0,0,0,0.2);
+    }
+    .btn-outline:hover { border-color: var(--navy); }
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      color: var(--muted); font-size: 0.7rem; letter-spacing: 2px;
+      text-transform: uppercase; animation: bounce 2s infinite;
+    }
+    .scroll-hint::after {
+      content: ''; display: block; width: 1px; height: 36px;
+      background: rgba(0,0,0,0.15); margin: 0.5rem auto 0;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Currently status pill ── */
+    .hero-currently {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem; border-radius: 100px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.8rem; color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-currently-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #34c759;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,199,89,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(52,199,89,0); }
+    }
+
+    /* ── Film grain overlay ── */
+    #hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── Scroll progress bar ── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), #5b4fbf);
+      width: 0%; z-index: 1001;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Active nav link ── */
+    .nav-links a.nav-active {
+      color: var(--navy);
+    }
+
+    /* ── Nav dark mode adaptation ── */
+    nav {
+      transition: background 0.3s, border-color 0.3s;
+    }
+    nav .nav-logo, nav .nav-hamburger span {
+      transition: color 0.3s, background 0.3s;
+    }
+    nav.nav-dark {
+      background: rgba(29,29,31,0.88);
+      border-bottom-color: rgba(255,255,255,0.07);
+    }
+    nav.nav-dark .nav-logo { color: var(--white); }
+    nav.nav-dark .nav-links a { color: rgba(255,255,255,0.6); }
+    nav.nav-dark .nav-links a:hover,
+    nav.nav-dark .nav-links a.nav-active { color: var(--white); }
+    nav.nav-dark .nav-hamburger span { background: var(--white); }
+
+    /* ── Back to top ── */
+    .back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.2s;
+      z-index: 999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .back-to-top.visible {
+      opacity: 1; pointer-events: auto;
+    }
+    .back-to-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    /* ── Marquee pause on hover ── */
+    .taste-marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    /* ─── SECTIONS SHARED ───────────────────────────────────── */
+    section { padding: 7rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300; color: var(--navy); line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .divider {
+      width: 40px; height: 1px; background: rgba(0,0,0,0.15);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── ABOUT ─────────────────────────────────────────────── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3.5rem;
+      align-items: stretch;
+    }
+    /* ── Left column: headshot stacked above stat boxes ── */
+    .about-visual {
+      display: flex; flex-direction: column; gap: 0.65rem;
+    }
+    .about-visual .headshot-wrap {
+      width: 100%; flex-shrink: 0;
+    }
+    .about-visual .headshot-img {
+      width: 100%; border-radius: 12px;
+      display: block; object-fit: cover; aspect-ratio: 4/5;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .about-visual .about-stats {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.55rem;
+      margin-top: 0;
+    }
+    .about-visual .stat-card {
+      padding: 0.6rem 0.75rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .about-visual .stat-number { font-size: 1.45rem; }
+    /* ── Right column: text ── */
+    .about-text {
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-text p {
+      font-size: 1.05rem; line-height: 1.8;
+      color: #4a5568; margin-bottom: 1.25rem;
+    }
+    .about-text p strong { color: var(--navy); }
+    .about-text p:last-child { margin-bottom: 0; }
+    /* Stat card base (shared) */
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: var(--cream); border-radius: 10px;
+      padding: 1.5rem; border: 1px solid rgba(0,0,0,0.06);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .stat-number {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 2.4rem; font-weight: 200;
+      color: var(--navy); line-height: 1;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; font-weight: 400; }
+    .about-card-stack { position: relative; height: 420px; }
+    .about-card {
+      position: absolute; border-radius: 12px; padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+    .about-card-main {
+      top: 0; left: 0; right: 0;
+      background: var(--navy);
+      color: var(--white); z-index: 2;
+    }
+    .about-card-accent {
+      bottom: 0; right: -20px; width: 75%;
+      background: var(--cream); color: var(--navy);
+      border: 1px solid rgba(0,0,0,0.08); z-index: 1;
+    }
+    .about-card-main h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.4rem; font-weight: 300; margin-bottom: 0.75rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .about-card-main p { font-size: 0.9rem; line-height: 1.7; opacity: 0.85; }
+    .about-card-accent h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem; margin-bottom: 0.5rem;
+    }
+    .about-card-accent p { font-size: 0.85rem; opacity: 0.8; }
+    .interest-chips {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
+    }
+    .interest-chip {
+      padding: 0.3rem 0.85rem; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 500;
+      background: rgba(255,255,255,0.12);
+      color: var(--cream); border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ─── EXPERIENCE ────────────────────────────────────────── */
+    #experience { background: var(--cream); }
+    .timeline { position: relative; padding-left: 2.5rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: rgba(0,0,0,0.1);
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 3rem;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -2.5rem; top: 10px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--navy); border: 2px solid var(--white);
+      transform: translateX(-3px);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+    }
+    .timeline-period {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+    }
+    .timeline-role {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.3rem; font-weight: 400; color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-company {
+      font-size: 0.95rem; font-weight: 600; color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .timeline-desc {
+      font-size: 0.95rem; line-height: 1.7; color: #4a5568;
+    }
+    .timeline-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem;
+    }
+    .timeline-tag {
+      padding: 0.2rem 0.65rem; border-radius: 100px; font-size: 0.72rem;
+      font-weight: 400; letter-spacing: 0.2px;
+      background: rgba(0,0,0,0.05); color: var(--deep);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    /* ── Timeline Show More / Less ── */
+    .timeline-collapsed .timeline-item:nth-child(n+4) {
+      display: none;
+    }
+    .timeline-show-more {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      margin: 2rem auto 0; padding: 0.7rem 1.8rem;
+      background: transparent; border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 100px; cursor: pointer;
+      font-size: 0.82rem; font-weight: 600; color: var(--navy);
+      letter-spacing: 0.3px; transition: all 0.25s ease;
+    }
+    .timeline-show-more:hover {
+      background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.25);
+    }
+    .timeline-show-more svg {
+      transition: transform 0.3s ease;
+    }
+    .timeline-show-more.expanded svg {
+      transform: rotate(180deg);
+    }
+    /* ── Collapsible Timeline ── */
+    .timeline-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      cursor: pointer; gap: 1rem;
+      padding: 0.5rem 0;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .timeline-header > div:first-child {
+      flex: 1; min-width: 0; /* text column fills available space */
+    }
+    .timeline-header:hover {
+      background: rgba(0,0,0,0.02);
+      margin: 0 -0.75rem; padding: 0.5rem 0.75rem;
+    }
+    .timeline-chevron {
+      flex-shrink: 0; margin-top: 0.6rem;
+      transition: transform 0.3s ease;
+      color: var(--muted); opacity: 0.7;
+    }
+    .timeline-item.expanded .timeline-chevron {
+      transform: rotate(180deg);
+    }
+    .timeline-details {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+                  opacity 0.35s ease;
+      opacity: 0;
+    }
+    .timeline-item.expanded .timeline-details {
+      opacity: 1;
+    }
+    .timeline-details-inner {
+      padding-top: 0.75rem;
+    }
+    /* ── Company Logos ── */
+    .company-logos {
+      display: flex; align-items: center; gap: 0.85rem; flex-shrink: 0;
+    }
+    @media (min-width: 769px) {
+      .timeline-header {
+        align-items: center; /* vertically center logos with text block */
+      }
+      .company-logos {
+        margin-left: auto; /* push logos to the far right */
+      }
+      .company-logo {
+        max-width: 220px; /* allow bigger logos on desktop */
+      }
+    }
+    .company-logo {
+      height: 56px; width: auto; max-width: 160px;
+      object-fit: contain; display: block;
+      filter: grayscale(100%) opacity(0.38);
+      transition: filter 0.3s ease;
+    }
+    .timeline-item:hover .company-logo {
+      filter: grayscale(0%) opacity(0.9);
+    }
+    .timeline-company { color: var(--accent); }
+    .timeline-badge {
+      display: inline-block; font-size: 0.6rem; font-weight: 600;
+      background: rgba(100,85,191,0.1); color: var(--accent);
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+      margin-left: 0.5rem; vertical-align: middle;
+      letter-spacing: 0.03em; text-transform: uppercase;
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(100,85,191,0.15);
+    }
+    .timeline-badge::after {
+      content: ''; position: absolute;
+      top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      animation: badge-shine 3s ease-in-out infinite;
+    }
+    @keyframes badge-shine {
+      0%, 100% { left: -100%; }
+      50% { left: 150%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .timeline-badge::after { animation: none; }
+    }
+
+    /* ─── FRANCHISES ────────────────────────────────────────── */
+    #franchises { background: var(--white); }
+    #franchises .section-label { color: var(--accent); font-size: 1rem; letter-spacing: 2px; }
+    .franchise-intro {
+      font-size: 1rem; color: rgba(0,0,0,0.45);
+      max-width: 500px; line-height: 1.7; margin-bottom: 2.75rem;
+    }
+    .franchise-grid {
+      display: flex; flex-wrap: wrap;
+      gap: 2.25rem 3.5rem; align-items: center; justify-content: center;
+    }
+    .franchise-logo {
+      height: 44px; width: auto; max-width: 150px;
+      object-fit: contain; display: block;
+      filter: grayscale(100%) opacity(0.3);
+      transition: filter 0.35s ease, transform 0.2s ease;
+    }
+    .franchise-logo:hover {
+      filter: grayscale(0%) opacity(1);
+      transform: scale(1.1);
+    }
+
+    /* ─── WRITING ───────────────────────────────────────────── */
+    #writing { background: var(--navy); }
+    #writing .section-title { color: var(--white); }
+    #writing .section-label { color: rgba(255,255,255,0.45); }
+    .writing-intro {
+      font-size: 1.05rem; line-height: 1.8;
+      color: rgba(255,255,255,0.6); margin-bottom: 3rem; max-width: 600px;
+    }
+    .essay-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      position: relative; overflow: hidden;
+    }
+    .essay-hero {
+      position: relative;
+      background: url('images/Essay Photo/Pool Parties Photo.jpg') center/cover no-repeat;
+      padding: 4rem 3rem 3rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      min-height: 220px;
+    }
+    .essay-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 100%);
+      pointer-events: none;
+    }
+    .essay-card-body {
+      padding: 2rem 3rem 3rem;
+    }
+    .essay-card::before {
+      content: '"';
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12rem; line-height: 1;
+      color: var(--gold); opacity: 0.08;
+      position: absolute; top: -1.5rem; left: 1rem;
+      pointer-events: none;
+    }
+    .essay-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 2rem; font-weight: 300; color: var(--white);
+      margin-bottom: 0.5rem;
+      animation: pool-float 3s ease-in-out infinite;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 30px rgba(100, 180, 255, 0.35), 0 0 60px rgba(100, 180, 255, 0.15);
+      position: relative; z-index: 1;
+    }
+    .essay-meta {
+      font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-bottom: 0;
+      position: relative; z-index: 1;
+    }
+    .essay-body { position: relative; z-index: 1; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.85; color: rgba(255,255,255,0.78);
+      margin-bottom: 1.25rem;
+    }
+    .essay-body p:last-child { margin-bottom: 0; }
+    .essay-body em { color: #f0d078; font-style: italic; font-weight: 500; }
+    .essay-collapsed .essay-body { max-height: 250px; overflow: hidden; position: relative; }
+    .essay-collapsed .essay-body::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(to bottom, transparent, rgba(29,29,31,0.95));
+    }
+    .essay-toggle {
+      display: block; margin: 1.5rem auto 0;
+      background: transparent; border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.85); padding: 0.6rem 1.5rem; border-radius: 4px;
+      cursor: pointer; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.5px; transition: all 0.2s;
+    }
+    .essay-toggle:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+    /* ─── INTERESTS ─────────────────────────────────────────── */
+    #interests { background: var(--white); }
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+    }
+    @media (max-width: 660px) { .interests-grid { grid-template-columns: 1fr; } }
+    .interest-card {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem 1.4rem; border-radius: 12px;
+      background: #fff; border: 1px solid rgba(0,0,0,0.07);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .interest-card:hover {
+      border-color: rgba(0,102,204,0.2);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    }
+    .interest-icon-wrap {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border-radius: 8px; background: rgba(0,102,204,0.08);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .interest-card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 600; margin-bottom: 0.25rem;
+      color: var(--navy); line-height: 1.3;
+    }
+    .interest-card p { font-size: 0.78rem; line-height: 1.55; color: rgba(0,0,0,0.5); margin: 0; }
+
+    /* ─── TASTE MARQUEES ───────────────────────────────────── */
+    .taste-marquee-section { margin-top: 3.5rem; }
+    .taste-marquee-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(0,0,0,0.32); margin-bottom: 0.75rem;
+    }
+    .taste-marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    }
+    .taste-marquee-section + .taste-marquee-section { margin-top: 2rem; }
+    .marquee-track {
+      display: flex; width: max-content;
+      will-change: transform;
+      animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .marquee-track img {
+      height: 130px; border-radius: 6px;
+      object-fit: cover; display: block;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.3s ease;
+    }
+    .marquee-track img:hover {
+      transform: scale(1.4);
+      z-index: 2;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .marquee-item {
+      display: inline-block;
+      flex-shrink: 0; margin-right: 14px;
+    }
+    .marquee-track .film-poster { width: calc(130px * 2 / 3); }
+    .marquee-track .album-cover { height: 106px; width: 106px; }
+    @keyframes marquee-scroll {
+      0%   { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    @keyframes pool-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    @media (max-width: 768px) {
+      .marquee-track img { height: 110px; }
+      .marquee-track .film-poster { width: calc(110px * 2 / 3); }
+      .marquee-track .album-cover { height: 90px; width: 90px; }
+      .taste-marquee-section { margin-top: 2.5rem; }
+    }
+    @media (max-width: 480px) {
+      .marquee-track img { height: 90px; }
+      .marquee-track .film-poster { width: calc(90px * 2 / 3); }
+      .marquee-track .album-cover { height: 74px; width: 74px; }
+      .marquee-item { margin-right: 10px; }
+      .taste-marquee-section { margin-top: 2rem; }
+    }
+
+    /* ─── CATS / PONG ───────────────────────────────────────── */
+    #cats { background: var(--cream); padding-top: 4rem; }
+    .cats-intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .cat-profile {
+      border-radius: 12px; padding: 1.25rem;
+      border: 2px solid transparent; transition: border-color 0.2s;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .cat-profile:hover { border-color: var(--gold); }
+    .cat-juneau { background: linear-gradient(135deg, #c8e6f7 0%, #e0f2fe 100%); }
+    .cat-elie   { background: linear-gradient(135deg, #e8d5c4 0%, #f5ede4 100%); }
+    .cat-photo-col {
+      flex-shrink: 0; width: 90px;
+    }
+    .cat-text-col { flex: 1; min-width: 0; }
+    .cat-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem; font-weight: 900; margin-bottom: 0.15rem;
+    }
+    .cat-juneau .cat-name { color: #1e6fa0; }
+    .cat-elie .cat-name   { color: #7a4a1e; }
+    .cat-breed {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.6;
+    }
+    .cat-desc { font-size: 0.83rem; line-height: 1.6; opacity: 0.8; }
+    .cat-emoji { font-size: 3.5rem; margin-bottom: 0.5rem; display: block; }
+
+    /* ─── PONG GAME ─────────────────────────────────────────── */
+    .pong-section {
+      background: var(--navy);
+      border-radius: 16px; padding: 2.5rem;
+    }
+    .pong-header { text-align: center; margin-bottom: 2rem; }
+    .pong-header h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.8rem; font-weight: 400; color: var(--white); margin-bottom: 0.5rem;
+    }
+    .pong-header p { color: var(--muted); font-size: 0.9rem; }
+    .pong-controls-row {
+      display: flex; gap: 1rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .pong-btn {
+      padding: 0.6rem 1.4rem; border-radius: 6px; border: none;
+      cursor: pointer; font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.5px; transition: all 0.2s;
+    }
+    .pong-btn-juneau {
+      background: var(--cat-blue); color: var(--white);
+    }
+    .pong-btn-juneau:hover { background: #5a9dc4; transform: scale(1.05); }
+    .pong-btn-juneau.active { box-shadow: 0 0 0 3px #7ab3d4, 0 0 16px rgba(122,179,212,0.5); }
+    .pong-btn-elie {
+      background: var(--cat-seal); color: var(--white);
+    }
+    .pong-btn-elie:hover { background: #7a5f42; transform: scale(1.05); }
+    .pong-btn-elie.active { box-shadow: 0 0 0 3px #8b6f52, 0 0 16px rgba(139,111,82,0.5); }
+    .pong-btn-start {
+      background: var(--accent); color: var(--white);
+      box-shadow: 0 2px 12px rgba(0,102,204,0.45);
+    }
+    .pong-btn-start:hover { background: #0055b3; transform: scale(1.05); }
+    .pong-btn-reset {
+      background: rgba(255,255,255,0.12); color: var(--white);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .pong-btn-reset:hover { background: rgba(255,255,255,0.22); }
+    .pong-score-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 2rem; margin-bottom: 1.5rem;
+    }
+    .pong-score-name {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; text-align: center;
+    }
+    .pong-score-name.juneau-label { color: var(--cat-blue); }
+    .pong-score-name.elie-label   { color: var(--cat-seal); }
+    .pong-score-name.ai-label     { color: var(--muted); }
+    .pong-score-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 3rem; font-weight: 200; color: var(--white);
+      line-height: 1;
+    }
+    .pong-score-sep { font-size: 2rem; color: var(--muted); }
+    #pongCanvas {
+      display: block; margin: 0 auto;
+      border-radius: 8px;
+      border: 1px solid rgba(140,80,20,0.25);
+      background: #c4882a;
+      max-width: 100%;
+    }
+    .pong-instructions {
+      text-align: center; margin-top: 1rem;
+      font-size: 0.8rem; color: var(--muted);
+    }
+    .pong-instructions kbd {
+      background: rgba(255,255,255,0.1); border-radius: 4px;
+      padding: 0.15rem 0.4rem; color: var(--cream);
+      font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.2);
+    }
+    .pong-overlay {
+      position: absolute; inset: 0; border-radius: 8px;
+      background: rgba(8,13,20,0.60);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .pong-canvas-wrap { position: relative; width: fit-content; margin: 0 auto; }
+    .pong-overlay h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem; color: var(--white); margin-bottom: 0.5rem;
+    }
+    .pong-overlay p { color: var(--muted); font-size: 0.9rem; }
+
+    /* ─── CONTACT ───────────────────────────────────────────── */
+    #contact { background: var(--navy); }
+    #contact .section-title { color: var(--white); }
+    #contact .section-label { color: rgba(255,255,255,0.45); }
+    .contact-subtitle {
+      font-size: 1.05rem; color: rgba(255,255,255,0.6);
+      max-width: 500px; line-height: 1.7; margin-bottom: 3rem;
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem; max-width: 860px;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.75rem 1.5rem;
+      text-decoration: none; color: inherit;
+      transition: all 0.25s; display: flex;
+      flex-direction: column; align-items: flex-start;
+      min-height: 140px;
+    }
+    .contact-card:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-3px);
+    }
+    .contact-card-icon { margin-bottom: 0.85rem; line-height: 1; }
+    .contact-card-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem;
+    }
+    .contact-card-value { font-size: 0.9rem; color: var(--white); font-weight: 500; line-height: 1.4; }
+
+    .contact-location-card {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px; padding: 0.75rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .contact-location-icon { line-height: 1; flex-shrink: 0; }
+    .contact-location-text { display: flex; align-items: baseline; gap: 0.4rem; }
+    .contact-location-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+    }
+    .contact-location-value {
+      font-size: 1rem; color: var(--white); font-weight: 500;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    footer {
+      background: #080d14; text-align: center;
+      padding: 2rem; color: var(--muted); font-size: 0.8rem;
+    }
+    footer span { color: rgba(255,255,255,0.7); }
+
+    /* ─── HEADSHOT / PHOTO STYLES ───────────────────────────── */
+    .headshot-wrap {
+      position: relative; display: inline-block; width: 100%;
+    }
+    .headshot-img {
+      width: 100%; max-width: 380px; border-radius: 12px;
+      display: block; object-fit: cover; aspect-ratio: 4/5;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.18);
+      position: relative; z-index: 2;
+    }
+    .headshot-accent {
+      position: absolute; bottom: -16px; right: -16px;
+      width: 80%; height: 80%; border-radius: 12px;
+      border: 3px solid var(--gold); z-index: 1; opacity: 0.5;
+    }
+    .headshot-placeholder {
+      width: 100%; max-width: 380px; aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--navy), var(--deep));
+      border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; flex-direction: column;
+      color: var(--muted); font-size: 0.8rem; text-align: center;
+      padding: 2rem; box-shadow: 0 30px 80px rgba(0,0,0,0.18);
+    }
+    .headshot-placeholder::before {
+      content: '👤'; font-size: 4rem; margin-bottom: 1rem; opacity: 0.4;
+    }
+    /* Festival photo */
+    .festival-photo-wrap {
+      margin: 1.5rem 0 0; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      max-width: 560px;
+    }
+    .festival-photo-wrap img {
+      width: 100%; display: block; border-radius: 10px;
+    }
+    .festival-caption {
+      font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem;
+      font-style: italic; letter-spacing: 0.3px;
+    }
+    /* Cat photos */
+    .cat-photo-frame {
+      width: 90px; height: 90px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0;
+      background: rgba(255,255,255,0.4);
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid rgba(255,255,255,0.6);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .cat-photo-frame img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .cat-photo-frame-placeholder {
+      font-size: 3rem; opacity: 0.4;
+    }
+    /* ─── PHOTOGRAPHY (removed — content redistributed) ────── */
+    #writing .divider, #contact .divider { background: rgba(255,255,255,0.1); }
+    .photo-intro {
+      font-size: 1rem; line-height: 1.75;
+      color: rgba(255,255,255,0.65); max-width: 680px; margin-bottom: 3rem;
+    }
+    .photo-event-feature {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 14px; padding: 2rem 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .photo-event-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem;
+    }
+    /* ── Photo thumbnails — compact clickable strip ── */
+    .photo-thumb-grid {
+      display: flex; gap: 0.55rem; margin-top: 1.25rem;
+    }
+    .photo-thumb {
+      flex: 1; height: 120px; border-radius: 8px; overflow: hidden;
+      cursor: pointer; position: relative;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .photo-thumb:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.55);
+    }
+    .photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s; }
+    .photo-thumb:hover img { opacity: 0.65; }
+    .photo-thumb::after {
+      content: '⤢'; position: absolute;
+      inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; color: #fff;
+      opacity: 0; transition: opacity 0.2s;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+      pointer-events: none;
+    }
+    .photo-thumb:hover::after { opacity: 1; }
+    .photo-thumb-hint {
+      margin-top: 0.5rem; text-align: center;
+      font-size: 0.72rem; color: rgba(255,255,255,0.32);
+      letter-spacing: 0.5px;
+    }
+
+    /* Work experience photo strips (light bg in Experience section) */
+    .timeline-item .photo-thumb-grid {
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .timeline-item .photo-thumb-hint {
+      margin-top: 0.4rem;
+      color: rgba(0,0,0,0.32);
+    }
+
+    /* YouTube video card */
+    .yt-thumb-link {
+      display: block; margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      text-decoration: none; max-width: 360px;
+    }
+    .yt-thumb {
+      position: relative; border-radius: 8px; overflow: hidden;
+      background: #000; border: 1px solid rgba(255,255,255,0.08);
+    }
+    .yt-thumb img {
+      width: 100%; display: block; object-fit: cover;
+      aspect-ratio: 16/9; opacity: 0.82;
+      transition: opacity 0.2s;
+    }
+    .yt-thumb-link:hover .yt-thumb img { opacity: 1; }
+    .yt-play-btn {
+      position: absolute; inset: 0; display: flex;
+      align-items: center; justify-content: center; pointer-events: none;
+    }
+    .yt-play-btn svg { filter: drop-shadow(0 2px 8px rgba(0,0,0,0.7)); transition: transform 0.15s; }
+    .yt-thumb-link:hover .yt-play-btn svg { transform: scale(1.1); }
+    .yt-thumb-label {
+      margin-top: 0.45rem; font-size: 0.72rem;
+      color: rgba(0,0,0,0.32); letter-spacing: 0.5px; text-align: center;
+    }
+
+    /* ── Lightbox overlay ── */
+    .lb-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.93);
+      align-items: center; justify-content: center;
+    }
+    .lb-overlay.open { display: flex; }
+    .lb-img-wrap { position: relative; max-width: 90vw; max-height: 84vh; }
+    .lb-img-wrap img {
+      max-width: 90vw; max-height: 84vh;
+      border-radius: 6px; display: block;
+      object-fit: contain;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+    }
+    .lb-caption {
+      position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.48); font-size: 0.82rem;
+      text-align: center; white-space: nowrap;
+      pointer-events: none;
+    }
+    .lb-close {
+      position: fixed; top: 1.1rem; right: 1.4rem;
+      color: rgba(255,255,255,0.6); font-size: 2rem; line-height: 1;
+      cursor: pointer; z-index: 10000; transition: color 0.18s;
+      background: none; border: none; padding: 0;
+    }
+    .lb-close:hover { color: #fff; }
+    .lb-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      color: rgba(255,255,255,0.55); font-size: 2.8rem;
+      cursor: pointer; z-index: 10000; padding: 0.75rem 1rem;
+      user-select: none; transition: color 0.18s;
+      background: none; border: none;
+    }
+    .lb-nav:hover { color: #fff; }
+    .lb-prev { left: 0.5rem; }
+    .lb-next { right: 0.5rem; }
+    .lb-count {
+      position: fixed; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.28); font-size: 0.75rem; pointer-events: none;
+    }
+    /* ─── VOLUNTEER ──────────────────────────────────────────── */
+    #volunteer { background: var(--cream); padding-bottom: 4rem; }
+    .volunteer-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem;
+    }
+    @media (max-width: 768px) { .volunteer-grid { grid-template-columns: 1fr; } }
+    .volunteer-card {
+      background: #fff; border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.07); overflow: hidden;
+    }
+    .volunteer-card-body { padding: 1.4rem 1.5rem 1.25rem; }
+    .volunteer-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.45rem;
+    }
+    .volunteer-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem; font-weight: 500; color: var(--navy);
+      margin-bottom: 0.25rem; line-height: 1.35;
+    }
+    .volunteer-org {
+      font-size: 0.76rem; color: var(--muted); margin-bottom: 0.7rem;
+    }
+    .volunteer-desc {
+      font-size: 0.81rem; line-height: 1.65; color: rgba(0,0,0,0.58);
+    }
+    .volunteer-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+    .volunteer-tag {
+      font-size: 0.67rem; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 0.28rem 0.65rem;
+      background: rgba(0,102,204,0.08); color: var(--accent); border-radius: 4px;
+    }
+    .volunteer-media { width: 100%; display: block; border-top: 1px solid rgba(0,0,0,0.07); }
+    .volunteer-media img { width: 100%; display: block; }
+    .volunteer-media video { width: 100%; display: block; max-height: 300px; object-fit: cover; object-position: center 35%; }
+
+    /* ── Photo-event overrides for cream (volunteer) background ── */
+    #volunteer .photo-event-feature {
+      background: #fff;
+      border-color: rgba(0,0,0,0.07);
+    }
+    #volunteer .photo-event-eyebrow {
+      color: var(--accent);
+    }
+    #volunteer .photo-event-title {
+      color: var(--navy);
+    }
+    #volunteer .photo-event-desc {
+      color: rgba(0,0,0,0.58);
+    }
+    #volunteer .photo-event-tag {
+      background: rgba(0,102,204,0.08);
+      color: var(--accent);
+      border-color: rgba(0,102,204,0.15);
+    }
+    #volunteer .photo-thumb {
+      border-color: rgba(0,0,0,0.1);
+      background: rgba(0,0,0,0.06);
+    }
+    #volunteer .photo-thumb-hint {
+      color: rgba(0,0,0,0.35);
+    }
+    #volunteer .writing-intro {
+      color: rgba(0,0,0,0.58);
+    }
+
+    .photo-event-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.5rem; font-weight: 500; color: var(--white);
+      margin-bottom: 0.75rem; line-height: 1.3;
+    }
+    .photo-event-desc {
+      font-size: 0.92rem; line-height: 1.8;
+      color: rgba(255,255,255,0.65); margin-bottom: 1.5rem;
+    }
+    .photo-event-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .photo-event-tag {
+      padding: 0.25rem 0.75rem; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 500;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15);
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .photo-grid-solo {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      max-width: 680px;
+    }
+    .photo-grid-solo .photo-grid-item {
+      aspect-ratio: 16/10;
+    }
+    .photo-grid-item {
+      aspect-ratio: 4/3; border-radius: 10px; overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .photo-grid-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .photo-grid-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .photo-grid-item-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.5rem;
+      color: rgba(255,255,255,0.25); font-size: 0.75rem;
+      text-align: center; padding: 1rem;
+    }
+    .photo-grid-item-placeholder::before {
+      content: '📷'; font-size: 2rem; opacity: 0.4;
+    }
+    .photo-section-divider {
+      border: none; border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 2.5rem 0;
+    }
+    .photo-personal-note {
+      font-size: 0.9rem; color: rgba(255,255,255,0.5);
+      font-style: italic; text-align: center; margin-top: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .photo-grid { grid-template-columns: 1fr; }
+      .photo-grid-solo { max-width: 100%; }
+      .photo-event-feature { padding: 1.5rem; }
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-hamburger { display: flex; flex-direction: column; }
+      .nav-links {
+        display: none; position: fixed;
+        top: 56px; right: 0; bottom: 0; left: 0;
+        height: calc(100vh - 56px) !important; width: 100%;
+        background: #fff;
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 0; padding: 2rem 0; z-index: 999;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; text-align: center; }
+      .nav-links a {
+        display: block; padding: 1rem 2rem; font-size: 1.1rem;
+        color: var(--navy); font-weight: 500;
+      }
+      .nav-links a:hover { background: rgba(0,0,0,0.04); }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-visual { flex-direction: row; flex-wrap: wrap; gap: 0.75rem; }
+      .about-visual .headshot-wrap { width: 140px; flex-shrink: 0; }
+      .about-visual .headshot-img { aspect-ratio: 4/5; }
+      .about-visual .about-stats { flex: 1; min-width: 160px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0.5rem; }
+      .about-visual .stat-card { padding: 0.5rem 0.6rem; }
+      .about-visual .stat-number { font-size: 1.2rem; }
+      .stat-label { font-size: 0.68rem; }
+      .cats-intro { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.25rem; }
+      .essay-hero { padding: 3rem 1.5rem 2rem; }
+      .essay-card-body { padding: 1.5rem; }
+      .timeline-desc { font-size: 0.85rem; }
+      .pong-btn { padding: 0.5rem 1rem; font-size: 0.78rem; }
+      .pong-score-row { gap: 1.2rem; }
+      .company-logo { max-height: 40px !important; }
+    }
+
+    /* ─── SMALL PHONES ─────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .hero-name { font-size: clamp(3.2rem, 14vw, 4.5rem); }
+      .section-title { font-size: clamp(1.8rem, 6vw, 2.2rem); }
+      section { padding: 3rem 1rem; }
+      .photo-thumb { height: 90px; }
+      .pong-score-row { gap: 0.8rem; }
+      .contact-card { min-height: auto; padding: 1.25rem 1rem; }
+      .essay-hero { padding: 2.5rem 1.1rem 1.5rem; min-height: 160px; }
+      .essay-card-body { padding: 1.25rem 1.1rem; }
+    }
+
+    /* ─── SCROLL REVEAL (Apple-style) ──────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+                  transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1; transform: none;
+        transition: none;
+      }
+      .essay-title { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#hero">CZ</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#writing">Creative</a></li>
+    <li><a href="#interests">Interests</a></li>
+    <li><a href="#volunteer">Volunteer</a></li>
+    <li><a href="#cats">Elie &amp; Juneau</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────── -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<section id="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow hero-enter hero-enter-1" id="heroGreeting">Hey there — I'm</p>
+    <h1 class="hero-name hero-enter hero-enter-1">Christopher<br><span>Zdenek</span></h1>
+    <p class="hero-tagline hero-enter hero-enter-2">
+      Creativity meets strategy. I'm just as comfortable on an improv stage as I am working with a spreadsheet.
+    </p>
+    <div class="hero-currently hero-enter hero-enter-3">
+      <span class="hero-currently-dot"></span>
+      Currently at The Gotham Group
+    </div>
+    <div class="hero-tags hero-enter hero-enter-3">
+      <span class="hero-tag">Strategy</span>
+      <span class="hero-tag">Technology</span>
+      <span class="hero-tag">Creative</span>
+      <span class="hero-tag">Leadership</span>
+      <span class="hero-tag-rotate"><span class="active">AI Generalist</span></span>
+    </div>
+    <div class="hero-cta hero-enter hero-enter-4">
+      <a href="#about" class="btn btn-gold">Get to Know Me</a>
+      <a href="#writing" class="btn btn-outline">See My Creative Side</a>
+    </div>
+  </div>
+  <div class="scroll-hint hero-enter hero-enter-5">Scroll</div>
+</section>
+
+<!-- ── ABOUT ────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <!-- Left: headshot + stat boxes -->
+      <div class="about-visual reveal">
+        <div class="headshot-wrap">
+          <img
+            src="images/headshot.jpg"
+            alt="Christopher Zdenek"
+            class="headshot-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+          <div class="headshot-placeholder" style="display:none;">
+            Drop your headshot here as<br><code>images/headshot.jpg</code>
+          </div>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Studios &amp; Companies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">25+</div>
+            <div class="stat-label">Films &amp; Series Supported</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2×</div>
+            <div class="stat-label">Syracuse University Graduate<br><span style="font-size:0.7em;opacity:0.75;">M.S. &amp; B.S.</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Balinese Cat Companions</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: text -->
+      <div class="about-text reveal reveal-delay-1">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">A few things worth<br>knowing about me</h2>
+        <div class="divider"></div>
+        <p>
+          I'm Christopher Zdenek — raised between <strong>Maryland and New Jersey</strong>, deeply proud of my Baltimore roots, and based in Los Angeles. I'm just as comfortable on an improv stage as I am working with a spreadsheet.
+        </p>
+        <p>
+          I'm a big sports fan, and I really admire utility players like Dodger <strong>Kiké Hernández</strong> — they bring versatility, fun, and a team-first attitude. That's the same approach I take to my work, whether I'm building a project, managing a budget, or writing something personal.
+        </p>
+        <p>
+          My experience spans studios, startups, and consulting — from <strong>Paramount &amp; Nickelodeon</strong> to <strong>The Gotham Group</strong>, where I'm now implementing AI-driven systems to modernize operations. I bring an entrepreneurial mindset shaped by degrees from Syracuse's Newhouse and Whitman schools, and I'm always looking for the intersection of strategy, technology, and creativity. Here, you'll find my work, my interests, and some personal writing so you can get to know me better.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ───────────────────────────────────────────── -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label reveal">Work &amp; Experience</p>
+    <h2 class="section-title reveal reveal-delay-1">Where I've been</h2>
+    <div class="divider reveal reveal-delay-2"></div>
+    <div class="timeline timeline-collapsed" id="workTimeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2026 – Present</div>
+            <div class="timeline-role">Emerging Technology Consultant</div>
+            <div class="timeline-company">The Gotham Group &nbsp;·&nbsp; West Hollywood, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/gotham-group.png" class="company-logo" alt="The Gotham Group" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Driving the modernization of infrastructure and operations at a leading entertainment management and production company through agentic AI implementation. Rebuilding core systems across talent tracking, submissions, internal workflow, and communications using intelligent automation. Overseeing the complete rebuild of the company's digital presence and web platform. Currently developing two bespoke internal applications alongside the new website, leveraging AI-native architecture to streamline creative operations.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">AI Implementation</span>
+              <span class="timeline-tag">Agentic AI</span>
+              <span class="timeline-tag">Workflow Automation</span>
+              <span class="timeline-tag">Web Development</span>
+              <span class="timeline-tag">Infrastructure</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2025 – Present</div>
+            <div class="timeline-role">Improvisational Performance Track <span class="timeline-badge">&#10022; Personal Growth</span></div>
+            <div class="timeline-company">The Groundlings School &nbsp;·&nbsp; Hollywood, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/groundlings.webp" class="company-logo" alt="The Groundlings" style="height:100px;" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Selected into the highest performance track at The Groundlings — one of the most elite and selective improv and sketch comedy programs in the country. Sharpening live communication, rapid adaptability, active listening, and audience engagement through unscripted performances.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">On-Camera</span>
+              <span class="timeline-tag">Improv</span>
+              <span class="timeline-tag">Live Performance</span>
+              <span class="timeline-tag">Public Speaking</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2022 – 2025</div>
+            <div class="timeline-role">Feature Development</div>
+            <div class="timeline-company">Paramount &amp; Nickelodeon &nbsp;·&nbsp; Los Angeles, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/paramount.svg" class="company-logo" alt="Paramount" style="height:44px;" loading="lazy">
+            <img src="images/logos/nickelodeon.png" class="company-logo" alt="Nickelodeon" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Drove narrative development across 25+ films and series, aligning creative, production, finance, and legal teams at a major studio. Authored executive-facing decks, briefs, talking points, and strategic materials for pitches and presentations. Led competitive, talent, and IP research to shape development strategy and audience targeting. Managed high-stakes production events with cross-functional partners.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Development</span>
+              <span class="timeline-tag">Script Analysis</span>
+              <span class="timeline-tag">Creative Strategy</span>
+              <span class="timeline-tag">Cross-Functional</span>
+            </div>
+            <div class="photo-thumb-grid">
+              <div class="photo-thumb" data-lb="0" data-gallery="paramount" title="Click to enlarge">
+                <img src="images/work/paramount-dodgeball.jpg" alt="Dodgeball Champions — Paramount team" loading="lazy">
+              </div>
+              <div class="photo-thumb" data-lb="1" data-gallery="paramount" title="Click to enlarge">
+                <img src="images/work/paramount-glsen.jpg" alt="GLSEN Event — Paramount &amp; Nickelodeon" loading="lazy">
+              </div>
+              <div class="photo-thumb" data-lb="2" data-gallery="paramount" title="Click to enlarge">
+                <img src="images/work/paramount-tmnt.jpg" alt="TMNT Toys — Paramount &amp; Nickelodeon" loading="lazy">
+              </div>
+              <div class="photo-thumb" data-lb="3" data-gallery="paramount" title="Click to enlarge">
+                <img src="images/work/paramount-transformers.jpg" alt="Transformers — Paramount &amp; Nickelodeon" loading="lazy">
+              </div>
+            </div>
+            <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2021 – 2022</div>
+            <div class="timeline-role">Talent Management</div>
+            <div class="timeline-company">The Gotham Group &nbsp;·&nbsp; West Hollywood, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/gotham-group.png" class="company-logo" alt="The Gotham Group" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Orchestrated multi-party communication between talent, agents, studios, and producers at a leading film, television, and animation management company. Built pitch materials, talent briefs, and strategic research summaries to drive representation strategy and packaging decisions. Managed high-volume communication pipelines across studios, networks, and legal partners.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Talent Management</span>
+              <span class="timeline-tag">Film</span>
+              <span class="timeline-tag">Television</span>
+              <span class="timeline-tag">Animation</span>
+            </div>
+            <div class="photo-thumb-grid">
+              <div class="photo-thumb" data-lb="0" data-gallery="gotham2122" title="Click to enlarge">
+                <img src="images/work/gotham-team.jpg" alt="The Gotham Group team" loading="lazy">
+              </div>
+              <div class="photo-thumb" data-lb="1" data-gallery="gotham2122" title="Click to enlarge">
+                <img src="images/work/gotham-event.jpg" alt="The Gotham Group at event" loading="lazy">
+              </div>
+            </div>
+            <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2021</div>
+            <div class="timeline-role">Graduate Student Consultant</div>
+            <div class="timeline-company">Syracuse University &nbsp;·&nbsp; Syracuse, NY</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/syracuse-seal.webp" class="company-logo" alt="Syracuse University" style="height:60px;" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Delivered a 67-page strategic report for a disability-focused entrepreneur, analyzing performance metrics to optimize her website and service offerings. Designed a comprehensive marketing plan featuring SWOT and partnership analyses, growth opportunities, differentiation strategies, and diversity benefit optimization. Produced and edited three professional promotional videos (11-min, 3-min, and 1-min) with an actionable roadmap for public speaking opportunities.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Strategy</span>
+              <span class="timeline-tag">Consulting</span>
+              <span class="timeline-tag">Marketing</span>
+              <span class="timeline-tag">Video Production</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2020 – 2021</div>
+            <div class="timeline-role">Screenwriting Graduate Assistant</div>
+            <div class="timeline-company">Syracuse University &nbsp;·&nbsp; Syracuse, NY</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/syracuse-new.png" class="company-logo" alt="Syracuse University" style="height:42px;" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Partnered directly with Disney screenwriter <strong>Rob Edwards</strong> (writer, <em>The Princess and the Frog</em>) to co-design the curriculum, creative vision, and learning experience. Delivered detailed script feedback, led office hours, and evaluated student screenwriting projects against professional standards.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Screenwriting</span>
+              <span class="timeline-tag">Curriculum Development</span>
+              <span class="timeline-tag">Creative Feedback</span>
+            </div>
+            <div class="photo-thumb-grid">
+              <div class="photo-thumb" data-lb="0" data-gallery="syracuse" title="Click to enlarge">
+                <img src="images/work/syracuse-popquiz.jpg" alt="Pop Quiz — Syracuse Screenwriting class" loading="lazy">
+              </div>
+              <div class="photo-thumb" data-lb="1" data-gallery="syracuse" title="Click to enlarge">
+                <img src="images/work/syracuse-roasted.jpg" alt="Rob Edwards — Syracuse Screenwriting class" loading="lazy">
+              </div>
+            </div>
+            <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2020</div>
+            <div class="timeline-role">Co-Founder &amp; Producer</div>
+            <div class="timeline-company">DC Point Productions, LLC &nbsp;·&nbsp; New York, NY</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/dc-point.png" class="company-logo" alt="DC Point Productions" style="height:68px;" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Launched a production company and produced an unscripted pilot during the height of COVID-19 — managing logistics, budgeting, financing, and location scouting from the ground up. Recruited on-screen talent and assembled a full production team while implementing safety protocols that resulted in zero COVID incidents.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Production</span>
+              <span class="timeline-tag">Unscripted</span>
+              <span class="timeline-tag">Entrepreneurship</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=rkIR-cyb0Ec" target="_blank" rel="noopener"
+               class="yt-thumb-link" title="Watch on YouTube">
+              <div class="yt-thumb">
+                <img src="images/work/dcpoint-custom-thumb.jpg"
+                     alt="DC Point Productions — unscripted pilot" loading="lazy">
+                <div class="yt-play-btn" aria-hidden="true">
+                  <svg viewBox="0 0 68 48" width="64" height="44">
+                    <path d="M66.5 7.7c-.8-2.9-2.9-5-5.8-5.8C55.3 1 34 1 34 1S12.7 1 7.3 1.9c-2.9.8-5 2.9-5.8 5.8C.6 12.1.5 24 .5 24s.1 11.9.9 16.3c.8 2.9 2.9 5 5.8 5.8C12.7 47 34 47 34 47s21.3 0 26.7-.9c2.9-.8 5-2.9 5.8-5.8.8-4.4.9-16.3.9-16.3s-.1-11.9-.9-16.3z" fill="#f00"/>
+                    <path d="M27 33l18-9-18-9v18z" fill="#fff"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="yt-thumb-label">▶ Watch on YouTube</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2020</div>
+            <div class="timeline-role">Marketing Analytics Intern</div>
+            <div class="timeline-company">Sunrun &nbsp;·&nbsp; San Francisco, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/sunrun.png" class="company-logo" alt="Sunrun" style="height:84px;" onerror="this.style.display=’none’" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Drove execution of the company’s first multi-million-dollar marketing campaign, managing action items and deadlines for executives across five marketing divisions. Created and presented a successful proposal for increased UGC initiatives.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Marketing Analytics</span>
+              <span class="timeline-tag">Project Management</span>
+              <span class="timeline-tag">UGC</span>
+              <span class="timeline-tag">Renewable Energy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2020</div>
+            <div class="timeline-role">Development Intern</div>
+            <div class="timeline-company">Illumination &nbsp;·&nbsp; Santa Monica, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/illumination.png" class="company-logo" alt="Illumination" style="height:76px;" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Delivered research decks, writer packets, and competitive breakdowns on fast-paced timelines at one of animation’s top studios. Executed script analysis and creative breakdowns to fuel ideation, world-building, and franchise development for executives and producers.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Animation</span>
+              <span class="timeline-tag">Development</span>
+              <span class="timeline-tag">Script Coverage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2020</div>
+            <div class="timeline-role">Current Series Intern</div>
+            <div class="timeline-company">Cartoon Network Studios &nbsp;·&nbsp; Burbank, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/cartoon-network.png" class="company-logo" alt="Cartoon Network" style="height:90px;" onerror="this.style.display=’none’" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Built and launched the studio’s competitive tracking program, leveraging data and analytics to inform creative strategy. Produced daily script coverage, identifying writer and creator fits for the studio. Reviewed storyboards, animatics, and work prints on delivery for Development and Current Programming departments.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Animation</span>
+              <span class="timeline-tag">Current Series</span>
+              <span class="timeline-tag">Script Coverage</span>
+              <span class="timeline-tag">Analytics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2019</div>
+            <div class="timeline-role">Current Programming Intern</div>
+            <div class="timeline-company">The Walt Disney Company &nbsp;·&nbsp; Burbank, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/disney.png" class="company-logo" alt="Disney" style="height:30px;" loading="lazy">
+            <img src="images/logos/abc.png" class="company-logo" alt="ABC" style="height:34px;" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Partnered with executives across Current Programming and Development at Disney/ABC, managing scheduling, communications, and script analysis. Authored weekly coverage and reports distributed to 200+ staff, directly informing programming decisions and creative development.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Current Programming</span>
+              <span class="timeline-tag">Coverage</span>
+              <span class="timeline-tag">Disney/ABC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2018</div>
+            <div class="timeline-role">Original Series Intern</div>
+            <div class="timeline-company">Warner Bros. Discovery &nbsp;·&nbsp; Burbank, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/warner-bros.png" class="company-logo" alt="Warner Bros." style="height:32px;" loading="lazy">
+            <img src="images/logos/tbs.png" class="company-logo" alt="TBS" style="height:26px;" loading="lazy">
+            <img src="images/logos/tnt.svg" class="company-logo" alt="TNT" style="height:28px;" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Gained cross-functional exposure by rotating across development, production, and marketing teams — contributing to campaigns, evaluations, and business reports. Supported TBS and TNT FYC campaign events on location for Emmy consideration.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Original Series</span>
+              <span class="timeline-tag">FYC Campaigns</span>
+              <span class="timeline-tag">Emmy Events</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+          <div>
+            <div class="timeline-period">2017</div>
+            <div class="timeline-role">Policy &amp; Communications Intern</div>
+            <div class="timeline-company">Sunrun &nbsp;·&nbsp; San Francisco, CA</div>
+          </div>
+          <div class="company-logos">
+            <img src="images/logos/sunrun.png" class="company-logo" alt="Sunrun" style="height:84px;" onerror="this.style.display='none'" loading="lazy">
+          </div>
+          <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </div>
+        <div class="timeline-details">
+          <div class="timeline-details-inner">
+            <div class="timeline-desc">
+              Produced 8 policy advocacy videos championing solar energy adoption for the nation's largest residential solar and storage provider. Researched renewable energy policy and political developments, launched social campaigns to drive awareness, and tracked performance analytics across social media platforms.
+            </div>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Policy</span>
+              <span class="timeline-tag">Communications</span>
+              <span class="timeline-tag">Video Production</span>
+              <span class="timeline-tag">Social Media</span>
+              <span class="timeline-tag">Renewable Energy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button class="timeline-show-more" id="timelineShowMore" onclick="toggleTimeline()">
+      <span>Show all experiences</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+    </button>
+
+    <!-- Education -->
+    <div style="margin-top:4rem;">
+      <p class="section-label reveal">Education</p>
+      <div class="timeline" style="margin-top:1.5rem;">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+            <div>
+              <div class="timeline-period">2021</div>
+              <div class="timeline-role">Master of Science — Entrepreneurship &amp; Emerging Enterprises</div>
+              <div class="timeline-company">Syracuse University</div>
+            </div>
+            <div class="company-logos">
+              <img src="images/logos/syracuse-seal.webp" class="company-logo" alt="Syracuse University" style="height:60px;" loading="lazy">
+            </div>
+            <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+          </div>
+          <div class="timeline-details">
+            <div class="timeline-details-inner">
+              <div class="timeline-desc">
+                GPA: 3.83 &nbsp;·&nbsp; Academic Excellence Award &nbsp;·&nbsp; Top of Class &nbsp;·&nbsp; Whitman School Ambassador &nbsp;·&nbsp; Beta Gamma Sigma Honor Society
+              </div>
+              <div class="timeline-desc" style="margin-top:0.5rem;">
+                Areas of study: Managerial Finance, Digital Marketing, Accounting, Social Entrepreneurship, Entrepreneurial Turnarounds, Opportunity Recognition &amp; Ideation, Emerging Enterprise Consulting, Behavior in Organizations
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Entrepreneurship</span>
+                <span class="timeline-tag">Finance</span>
+                <span class="timeline-tag">Digital Marketing</span>
+                <span class="timeline-tag">Beta Gamma Sigma</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+            <div>
+              <div class="timeline-period">2020</div>
+              <div class="timeline-role">Bachelor of Science — Television, Radio &amp; Film</div>
+              <div class="timeline-company">Syracuse University</div>
+            </div>
+            <div class="company-logos">
+              <img src="images/logos/syracuse-seal.webp" class="company-logo" alt="Syracuse University" style="height:60px;" loading="lazy">
+            </div>
+            <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+          </div>
+          <div class="timeline-details">
+            <div class="timeline-details-inner">
+              <div class="timeline-desc">
+                Magna Cum Laude &nbsp;·&nbsp; NBCUniversal PitchNY Selection &nbsp;·&nbsp; Delta Kappa Alpha &nbsp;·&nbsp; Newhouse Tour Guide &nbsp;·&nbsp; Student Radio Board Member &amp; Host &nbsp;·&nbsp; PFC Board Member
+              </div>
+              <div class="timeline-desc" style="margin-top:0.5rem;">
+                As Student Television Producer: produced and edited multi-cam show <em>The Review Crew</em> for Orange TV Network — won the station's Show of the Year Award every year as producer.
+              </div>
+              <div class="timeline-desc" style="margin-top:0.5rem;">
+                Areas of study: Film Analysis &amp; History, Media Ethics, Line Producing, Communications Law, Development, Game Theory, Immigration &amp; Public Policy, Italian, Art History, International Relations
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Television &amp; Film</span>
+                <span class="timeline-tag">Magna Cum Laude</span>
+                <span class="timeline-tag">NBCUniversal PitchNY</span>
+                <span class="timeline-tag">Student TV Producer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-header" title="Click to expand" onclick="this.parentElement.classList.toggle('expanded'); var d=this.nextElementSibling; if(d.style.maxHeight){d.style.maxHeight=null;}else{d.style.maxHeight=d.scrollHeight+'px';}">
+            <div>
+              <div class="timeline-period">2016</div>
+              <div class="timeline-role">High School Diploma</div>
+              <div class="timeline-company">The Friends School of Baltimore &nbsp;·&nbsp; Baltimore, MD</div>
+            </div>
+            <div class="company-logos">
+              <img src="images/Friends School Logo/Friends School of Baltimore Logo.png.webp" class="company-logo" alt="The Friends School of Baltimore" style="height:60px;" loading="lazy">
+            </div>
+            <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+          </div>
+          <div class="timeline-details">
+            <div class="timeline-details-inner">
+              <div class="timeline-desc">
+                Varsity Tennis Captain &nbsp;·&nbsp; Film Club Head &nbsp;·&nbsp; Director of High School Film Festival &nbsp;·&nbsp; Film Critic for Student Newspaper &nbsp;·&nbsp; Writer for Student Arts Publication &nbsp;·&nbsp; Jazz Band Guitarist &nbsp;·&nbsp; Band Ensemble Trumpeter
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Baltimore</span>
+                <span class="timeline-tag">Quaker Education</span>
+                <span class="timeline-tag">Tennis Captain</span>
+                <span class="timeline-tag">Film</span>
+                <span class="timeline-tag">Music</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FRANCHISES ───────────────────────────────────────────── -->
+<section id="franchises">
+  <div class="container">
+    <p class="section-label reveal">IP &amp; Franchises</p>
+    <p class="franchise-intro reveal reveal-delay-1">A few of the properties and franchises I've had the chance to work on.</p>
+    <div class="franchise-grid reveal reveal-delay-2">
+      <img src="images/franchises/spongebob-logo.png" class="franchise-logo" alt="SpongeBob SquarePants" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/greys-anatomy-logo.png" class="franchise-logo" alt="Grey's Anatomy" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/tmnt-logo.png" class="franchise-logo" alt="Teenage Mutant Ninja Turtles" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/modern-family-logo.png" class="franchise-logo" alt="Modern Family" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/shrek-logo.webp" class="franchise-logo" alt="Shrek" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/agents-of-shield-logo.png" class="franchise-logo" alt="Agents of S.H.I.E.L.D." onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/avatar-logo.png" class="franchise-logo" alt="Avatar: The Last Airbender" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/blackish-logo.png" class="franchise-logo" alt="Black-ish" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/minions-logo.webp" class="franchise-logo" alt="Minions" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/the-rookie-logo.svg" class="franchise-logo" alt="The Rookie" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/blues-clues-logo.png" class="franchise-logo" alt="Blue's Clues" style="height:60px;" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/claws-logo.png" class="franchise-logo" alt="Claws" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/loud-house-logo.png" class="franchise-logo" alt="The Loud House" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/snowpiercer-logo.webp" class="franchise-logo" alt="Snowpiercer" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/apple--onion-logo.webp" class="franchise-logo" alt="Apple &amp; Onion" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/secret-life-of-pets-logo.png" class="franchise-logo" alt="The Secret Life of Pets" onerror="this.style.display='none'" loading="lazy">
+      <img src="images/franchises/max-and-the-midknights-logo.webp" class="franchise-logo" alt="Max and the Midknights" onerror="this.style.display='none'" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ── WRITING ──────────────────────────────────────────────── -->
+<section id="writing">
+  <div class="container">
+    <p class="section-label reveal">Creative Side</p>
+    <h2 class="section-title reveal reveal-delay-1">Things I've written<br>&amp; captured</h2>
+    <div class="divider reveal reveal-delay-2"></div>
+    <p class="writing-intro reveal reveal-delay-2">
+      Writing is how I make sense of the world. Sometimes funny, sometimes earnest, always honest.
+      I rotate what's featured here — think of this as the current selection.
+    </p>
+
+    <div class="essay-card reveal reveal-delay-3" id="essayCard">
+      <div class="essay-hero">
+        <div class="essay-title">I Hate Pool Parties</div>
+        <div class="essay-meta">Personal Essay &nbsp;·&nbsp; Christopher Zdenek</div>
+      </div>
+      <div class="essay-card-body">
+      <div class="essay-body" id="essayBody">
+        <p>I hate pool parties. Don't get me wrong, I've always enjoyed a good party, and I've loved swimming since I was young. So what makes that combo so dreadful? Epilepsy and water don't go too well together.</p>
+
+        <p>To provide some quick exposition, I had my first seizure at the end of a fifth-grade school day. I barely remember the experience. I was talking to Sarai, my crush, and my heart rate suddenly rose (unrelated to my romantic endeavors, I assure you), and everything went black. I woke up just a few minutes later to a sea of children's eyes in abject horror, and learning that an ambulance was on its way. What was possibly the safest place to have my first seizure from a physical standpoint was the worst from a social standpoint. So much for my plan to win Sarai's heart... When I came back to school, everything had changed. It was as if I had a "SEIZURE KID" plastered on my forehead for everyone to see. I felt othered. I felt alone. Don't get me wrong, it's not like my friends from school stopped hanging out with me. It's just that things were different.</p>
+
+        <p>Now that the exposition is out of the way, back to pool parties.</p>
+
+        <p>Every time my mom dropped me off at a pool party, she would walk me up to the door. She would knock on the door and introduce herself to the parents at the party, as I would prepare myself for the show. They would always engage in light-hearted banter and would then hit them with something along the lines of, "I just wanted to let you know that Chris has epilepsy, and while it shouldn't be a problem at all, he might have a seizure and drown in your pool." The light always left the other parent's eyes at that moment, as they wished they had done their recon. My mom always ended by telling me to "Have fun!" when she left. Bless her heart. It should go without saying that I wasn't allowed in pools at other friends' houses. I watched all my friends splash around, as I was relegated to talking to parents about the weather.</p>
+
+        <p>I ended up changing schools for seventh grade, and I had a plan. I went into the year with the goal of not letting any classmates know I had epilepsy. I knew no one from the school and saw it as a perfect chance to start over and be <em>normal</em>. And honestly, it worked. No one knew who I really was, and I loved that. I made a ton of friends and even became remotely popular. Remotely popular enough that I was invited to a start-of-the-year pool party at Cecily D'Amore's house.</p>
+
+        <p>It just had to be a pool party. It's not like I had any choice of going; it's middle school. It's life or death, and I needed to make a plan. I strategically went home that night and began planting the seeds of deception. I told my mother it was a board game party and packed my swimsuit and a small towel into an empty board game box. When we arrived at the house, my mom let me even go to the door myself. Mission accomplished.</p>
+
+        <p>Once inside, I got changed and went toward the pool. This was the moment I had been dreaming of since 5th grade. I cannonballed in, and couldn't tell if the chill came from the temperature of the pool or the ecstasy of middle-school conformity. My classmates and I began playing all sorts of aquatic games.</p>
+
+        <p>In between games, something caught my eye. It was Sahil, a kid from my homeroom. Fully clothed. Sitting next to Cecily's mom. I asked a classmate what he was doing outside of the pool, and they responded, "oh yeah, he has seizures. His mom doesn't let him swim. I don't really know why he comes to these things." When the next game started, everything continued as before. Well, except for the fact that I wasn't playing. I was sitting with Sahil. I was having my first real conversation with the person who would become my best friend. The first conversation that year where I felt comfortable letting down my facade. And that was better than any pool cannonball could have ever been.</p>
+
+        <p>After I met Sahil, I wasn't afraid of being the seizure kid since I was now <em>a</em> seizure kid. After I met Sahil, I didn't feel alone anymore. I no longer hated sitting on the side of pool parties, since I wasn't sitting alone.</p>
+      </div>
+      <button class="essay-toggle" id="essayToggle" onclick="toggleEssay()">Read Full Essay</button>
+      </div>
+    </div>
+
+    <hr style="border:none; border-top:1px solid rgba(255,255,255,0.08); margin:3rem 0;">
+
+    <!-- Personal Photography -->
+    <div style="margin-bottom:1rem;" class="reveal">
+      <div class="photo-event-eyebrow" style="margin-bottom:0.75rem;">Selected Personal Photos</div>
+    </div>
+    <div class="photo-thumb-grid reveal reveal-delay-1">
+      <div class="photo-thumb" data-lb="0" data-gallery="personal" title="Click to enlarge">
+        <img src="images/photo-1.jpg" alt="Italy — personal travel photography by Christopher Zdenek" loading="lazy">
+      </div>
+      <div class="photo-thumb" data-lb="1" data-gallery="personal" title="Click to enlarge">
+        <img src="images/nyc-photo.jpg" alt="New York City — personal travel photography by Christopher Zdenek" loading="lazy">
+      </div>
+      <div class="photo-thumb" data-lb="2" data-gallery="personal" title="Click to enlarge">
+        <img src="images/alec-italy.jpg" alt="Italy with Alec — personal travel photography by Christopher Zdenek" loading="lazy">
+      </div>
+    </div>
+    <div class="photo-thumb-hint">Click any photo to enlarge &middot; &larr; &rarr; to navigate</div>
+  </div>
+</section>
+
+<!-- ── INTERESTS ────────────────────────────────────────────── -->
+<section id="interests">
+  <div class="container">
+    <p class="section-label reveal">Interests &amp; Passions</p>
+    <h2 class="section-title reveal reveal-delay-1">What makes me<br>come alive</h2>
+    <div class="divider"></div>
+    <div class="interests-grid">
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M212.92,17.69a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,56V166.08A36,36,0,1,0,88,196V110.25l112-28v51.83A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.69ZM52,216a20,20,0,1,1,20-20A20,20,0,0,1,52,216ZM88,93.75V62.25l112-28v31.5ZM180,184a20,20,0,1,1,20-20A20,20,0,0,1,180,184Z"/></svg>
+        </div>
+        <div>
+          <h3>Musical Theater</h3>
+          <p>From Sondheim to Ashman, the marriage of music and story is its own kind of magic.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M216,104H102.09L210,75.51a8,8,0,0,0,5.68-9.84l-8.16-30a15.93,15.93,0,0,0-19.42-11.13L35.81,64.74a15.75,15.75,0,0,0-9.7,7.4,15.51,15.51,0,0,0-1.55,12L32,111.56c0,.14,0,.29,0,.44v88a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A8,8,0,0,0,216,104ZM192.16,40l6,22.07-22.62,6L147.42,51.83Zm-66.69,17.6,28.12,16.24-36.94,9.75L88.53,67.37Zm-79.4,44.62-6-22.08,26.5-7L94.69,89.4ZM208,200H48V120H208v80Z"/></svg>
+        </div>
+        <div>
+          <h3>Film &amp; Television</h3>
+          <p>An obsessive consumer and thoughtful analyst of what's on screen — and what's going on behind the camera.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M232,32a8,8,0,0,0-8-8c-44.08,0-89.31,49.71-114.43,82.63A60,60,0,0,0,32,164c0,30.88-19.54,44.73-20.47,45.37A8,8,0,0,0,16,224H92a60,60,0,0,0,57.37-77.57C182.3,121.31,232,76.08,232,32ZM92,208H34.63C41.38,198.41,48,183.92,48,164a44,44,0,1,1,44,44Zm32.42-94.45q5.14-6.66,10.09-12.55A76.23,76.23,0,0,1,155,121.49q-5.9,4.94-12.55,10.09A60.54,60.54,0,0,0,124.42,113.55Zm42.7-2.68a92.57,92.57,0,0,0-22-22c31.78-34.53,55.75-45,69.9-47.91C212.17,55.12,201.65,79.09,167.12,110.87Z"/></svg>
+        </div>
+        <div>
+          <h3>Animation</h3>
+          <p>Hands down the most underappreciated art form. Animation tells truths live action can't reach.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"/></svg>
+        </div>
+        <div>
+          <h3>Professional Wrestling</h3>
+          <p>Athletic theater at its finest. Long-form storytelling with sweat, pageantry, and genuine stakes.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM60,72.17A87.2,87.2,0,0,1,79.63,120H40.37A87.54,87.54,0,0,1,60,72.17ZM136,120V40.37a87.59,87.59,0,0,1,48.68,20.37A103.06,103.06,0,0,0,160.3,120Zm-16,0H95.7A103.06,103.06,0,0,0,71.32,60.74,87.59,87.59,0,0,1,120,40.37ZM79.63,136A87.2,87.2,0,0,1,60,183.83,87.54,87.54,0,0,1,40.37,136Zm16.07,0H120v79.63a87.59,87.59,0,0,1-48.68-20.37A103.09,103.09,0,0,0,95.7,136Zm40.3,0h24.3a103.09,103.09,0,0,0,24.38,59.26A87.59,87.59,0,0,1,136,215.63Zm40.37,0h39.26A87.54,87.54,0,0,1,196,183.83,87.2,87.2,0,0,1,176.37,136Zm0-16A87.2,87.2,0,0,1,196,72.17,87.54,87.54,0,0,1,215.63,120Z"/></svg>
+        </div>
+        <div>
+          <h3>Playing Basketball</h3>
+          <p>On the court, not just from the couch. The game demands your full presence — I love that about it.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M96,140a12,12,0,1,1-12-12A12,12,0,0,1,96,140Zm76-12a12,12,0,1,0,12,12A12,12,0,0,0,172,128Zm60-80v88c0,52.93-46.65,96-104,96S24,188.93,24,136V48A16,16,0,0,1,51.31,36.69c.14.14.26.27.38.41L69,57a111.22,111.22,0,0,1,118.1,0L204.31,37.1c.12-.14.24-.27.38-.41A16,16,0,0,1,232,48Zm-16,0-21.56,24.8A8,8,0,0,1,183.63,74,88.86,88.86,0,0,0,168,64.75V88a8,8,0,1,1-16,0V59.05a97.43,97.43,0,0,0-16-2.72V88a8,8,0,1,1-16,0V56.33a97.43,97.43,0,0,0-16,2.72V88a8,8,0,1,1-16,0V64.75A88.86,88.86,0,0,0,72.37,74a8,8,0,0,1-10.81-1.17L40,48v88c0,41.66,35.21,76,80,79.67V195.31l-13.66-13.66a8,8,0,0,1,11.32-11.31L128,180.68l10.34-10.34a8,8,0,0,1,11.32,11.31L136,195.31v20.36c44.79-3.69,80-38,80-79.67Z"/></svg>
+        </div>
+        <div>
+          <h3>Cat Dad Extraordinaire</h3>
+          <p>Elie and Juneau are Balinese cats. They are perfect. All other pets are fine, I suppose.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8Zm144-8.9c0,35.52-29,64.64-64,64.9a64,64,0,0,1-64-64V56H192ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></svg>
+        </div>
+        <div>
+          <h3>Sports Fanatic</h3>
+          <p>Orioles. Dodgers. Lakers. Ravens. Yes, all four. My allegiances are multifaceted and I stand by them.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M227.32,73.37,182.63,28.69a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H216a8,8,0,0,0,0-16H115.32l112-112A16,16,0,0,0,227.32,73.37ZM136,75.31,152.69,92,68,176.69,51.31,160ZM48,208V179.31L76.69,208Zm48-3.31L79.32,188,164,103.31,180.69,120Zm96-96L147.32,64l24-24L216,84.69Z"/></svg>
+        </div>
+        <div>
+          <h3>Writing</h3>
+          <p>Personal essays, criticism, storytelling — finding the right words for things that matter.</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M249.66,46.34l-40-40a8,8,0,0,0-11.31,11.32L200.69,20,140.52,80.16C117.73,68.3,92.21,69.29,76.75,84.74a42.27,42.27,0,0,0-9.39,14.37A8.24,8.24,0,0,1,59.81,104c-14.59.49-27.26,5.72-36.65,15.11C11.08,131.22,6,148.6,8.74,168.07,11.4,186.7,21.07,205.15,36,220s33.34,24.56,52,27.22A71.13,71.13,0,0,0,98.1,248c15.32,0,28.83-5.23,38.76-15.16,9.39-9.39,14.62-22.06,15.11-36.65a8.24,8.24,0,0,1,4.92-7.55,42.12,42.12,0,0,0,14.37-9.39c15.45-15.46,16.44-41,4.58-63.77L236,55.31l2.34,2.34a8,8,0,1,0,11.32-11.31ZM160,167.93a26.12,26.12,0,0,1-8.95,5.83,24.24,24.24,0,0,0-15,21.89c-.36,10.46-4,19.41-10.43,25.88-8.44,8.43-21,11.95-35.36,9.89C75,229.25,59.73,221.19,47.27,208.73S26.75,181,24.58,165.81c-2-14.37,1.46-26.92,9.89-35.36C40.94,124,49.89,120.37,60.35,120h0a24.22,24.22,0,0,0,21.89-15,26.12,26.12,0,0,1,5.83-9c5.49-5.49,13-8.13,21.38-8.13a49.38,49.38,0,0,1,19.13,4.19L108.5,112.19a32,32,0,1,0,35.31,35.31l20.08-20.08C170.41,142.71,169.47,158.41,160,167.93Zm-10.4-61.48a72.9,72.9,0,0,1,5.93,6.75l-15.42,15.42a32.22,32.22,0,0,0-12.68-12.68l15.42-15.43A73,73,0,0,1,149.55,106.45ZM112,128a16,16,0,0,1,16,16h0a16,16,0,1,1-16-16Zm48.85-32.85a86.94,86.94,0,0,0-6.68-6L176,67.31,188.69,80l-21.83,21.82A86.94,86.94,0,0,0,160.86,95.14ZM200,68.68,187.32,56,212,31.31,224.69,44ZM93.66,194.33a8,8,0,0,1-11.31,11.32l-32-32a8,8,0,0,1,11.32-11.31Z"/></svg>
+        </div>
+        <div>
+          <h3>Guitar, Trumpet &amp; Ukulele</h3>
+          <p>Three very different instruments, one common thread: making noise that sounds intentional. (Piano next.)</p>
+        </div>
+      </div>
+
+      <div class="interest-card reveal">
+        <div class="interest-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M168,16A72.07,72.07,0,0,0,96,88a73.29,73.29,0,0,0,.63,9.42L27.12,192.22A15.93,15.93,0,0,0,28.71,213L43,227.29a15.93,15.93,0,0,0,20.78,1.59l94.81-69.53A73.29,73.29,0,0,0,168,160a72,72,0,1,0,0-144Zm56,72a55.72,55.72,0,0,1-11.16,33.52L134.49,43.16A56,56,0,0,1,224,88ZM54.32,216,40,201.68,102.14,117A72.37,72.37,0,0,0,139,153.86ZM112,88a55.67,55.67,0,0,1,11.16-33.51l78.34,78.34A56,56,0,0,1,112,88Zm-2.35,58.34a8,8,0,0,1,0,11.31l-8,8a8,8,0,1,1-11.31-11.31l8-8A8,8,0,0,1,109.67,146.33Z"/></svg>
+        </div>
+        <div>
+          <h3>Karaoke</h3>
+          <p>A safe space for commitment, charisma, and questionable song choices. Absolutely no irony — I mean every word.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Films marquee -->
+    <div class="taste-marquee-section reveal">
+      <p class="taste-marquee-label">A selection of some of my favorite films</p>
+      <div class="taste-marquee">
+        <div class="marquee-track" style="--marquee-duration:50s">
+          <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></span>
+          <!-- duplicate for seamless loop -->
+          <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Albums marquee -->
+    <div class="taste-marquee-section reveal">
+      <p class="taste-marquee-label">Albums on rotation right now</p>
+      <div class="taste-marquee">
+        <div class="marquee-track" style="--marquee-duration:56s">
+          <span class="marquee-item"><img class="album-cover" src="images/albums/blonde---frank-ocean.jpg" alt="Blonde — Frank Ocean" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/dookie---green-day.jpg" alt="Dookie — Green Day" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/hadestown---original-broadway-cast.jpg" alt="Hadestown — Original Broadway Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/abraxas---santana.jpg" alt="Abraxas — Santana" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/short-n-sweet---sabrina-carpenter.jpg" alt="Short n' Sweet — Sabrina Carpenter" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/whats-going-on---marvin-gaye.jpg" alt="What's Going On — Marvin Gaye" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/a-larum---johnny-flynn.jpg" alt="A Larum — Johnny Flynn" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/gypsy---2024-broadway-cast.jpg" alt="Gypsy — 2024 Broadway Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/3-feet-high-and-rising---de-la-soul.jpeg" alt="3 Feet High and Rising — De La Soul" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/sketches-in-spain---miles-davis.jpg" alt="Sketches of Spain — Miles Davis" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/buzzkill---lyn-lapid.jpeg" alt="Buzzkill — Lyn Lapid" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/speaking-in-tongues---talking-heads.jpg" alt="Speaking in Tongues — Talking Heads" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/beyonce---cowboy-carter.jpg" alt="Cowboy Carter — Beyoncé" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/next-to-normal---original-london-cast.jpeg" alt="Next to Normal — Original London Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/cant-buy-a-thrill---steely-dan.jpg" alt="Can't Buy a Thrill — Steely Dan" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/the-art-of-loving---olivia-dean.jpg" alt="The Art of Loving — Olivia Dean" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/maybe-happy-ending---original-broadway-cast.jpg" alt="Maybe Happy Ending — Original Broadway Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/eternal-sunshine---ariana-grande.jpeg" alt="Eternal Sunshine — Ariana Grande" loading="lazy"></span>
+          <!-- duplicate for seamless loop -->
+          <span class="marquee-item"><img class="album-cover" src="images/albums/blonde---frank-ocean.jpg" alt="Blonde — Frank Ocean" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/dookie---green-day.jpg" alt="Dookie — Green Day" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/hadestown---original-broadway-cast.jpg" alt="Hadestown — Original Broadway Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/abraxas---santana.jpg" alt="Abraxas — Santana" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/short-n-sweet---sabrina-carpenter.jpg" alt="Short n' Sweet — Sabrina Carpenter" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/whats-going-on---marvin-gaye.jpg" alt="What's Going On — Marvin Gaye" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/a-larum---johnny-flynn.jpg" alt="A Larum — Johnny Flynn" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/gypsy---2024-broadway-cast.jpg" alt="Gypsy — 2024 Broadway Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/3-feet-high-and-rising---de-la-soul.jpeg" alt="3 Feet High and Rising — De La Soul" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/sketches-in-spain---miles-davis.jpg" alt="Sketches of Spain — Miles Davis" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/buzzkill---lyn-lapid.jpeg" alt="Buzzkill — Lyn Lapid" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/speaking-in-tongues---talking-heads.jpg" alt="Speaking in Tongues — Talking Heads" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/beyonce---cowboy-carter.jpg" alt="Cowboy Carter — Beyoncé" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/next-to-normal---original-london-cast.jpeg" alt="Next to Normal — Original London Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/cant-buy-a-thrill---steely-dan.jpg" alt="Can't Buy a Thrill — Steely Dan" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/the-art-of-loving---olivia-dean.jpg" alt="The Art of Loving — Olivia Dean" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/maybe-happy-ending---original-broadway-cast.jpg" alt="Maybe Happy Ending — Original Broadway Cast" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/eternal-sunshine---ariana-grande.jpeg" alt="Eternal Sunshine — Ariana Grande" loading="lazy"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── VOLUNTEER ────────────────────────────────────────────── -->
+<section id="volunteer">
+  <div class="container">
+    <p class="section-label reveal">Giving Back</p>
+    <h2 class="section-title reveal reveal-delay-1">Recent volunteer<br>work</h2>
+    <div class="divider"></div>
+    <!-- Featured Event — Firefighter Breakfast -->
+    <div class="photo-event-feature reveal">
+      <div class="photo-event-eyebrow">Volunteer &middot; Photographer &amp; Videographer &middot; 2025</div>
+      <div class="photo-event-title">"Saluting Our Firefighting Heroes: Breakfast with the Brave"</div>
+      <div class="photo-event-desc">
+        In the wake of the January 2025 LA firestorms, I had the privilege of helping with a community event honoring the Los Angeles firefighters who protected the city. It was inspiring to see the community come together — from Mayor Karen Bass to local youth and cultural performers — celebrating heroes in a fun, family-friendly way.
+        <br><br>
+        Organized by Michael Browning, I contributed ahead of the event with ideas on outreach, youth engagement, and event marketing. On the day of, I served as photographer and videographer, capturing the energy, gratitude, and community spirit as it unfolded. Volunteering and contributing in this way made the experience especially meaningful.
+      </div>
+      <div class="photo-event-tags">
+        <span class="photo-event-tag">Photography</span>
+        <span class="photo-event-tag">Videography</span>
+        <span class="photo-event-tag">Community Event</span>
+        <span class="photo-event-tag">Volunteer</span>
+        <span class="photo-event-tag">Los Angeles</span>
+        <span class="photo-event-tag">Event Marketing</span>
+      </div>
+      <!-- Thumbnail gallery — click any to enlarge -->
+      <div class="photo-thumb-grid">
+        <div class="photo-thumb" data-lb="0" data-gallery="firefighter" title="Click to enlarge">
+          <img src="images/event-1.jpg" alt="Mayor Karen Bass with firefighters at Breakfast with the Brave" loading="lazy">
+        </div>
+        <div class="photo-thumb" data-lb="1" data-gallery="firefighter" title="Click to enlarge">
+          <img src="images/event-2.jpg" alt="LAFD honored at Breakfast with the Brave community event" loading="lazy">
+        </div>
+        <div class="photo-thumb" data-lb="2" data-gallery="firefighter" title="Click to enlarge">
+          <img src="images/helmet-and-jacket.jpg" alt="LAFD firefighter helmet and jacket" loading="lazy">
+        </div>
+      </div>
+      <div class="photo-thumb-hint">Click any photo to enlarge &middot; &larr; &rarr; to navigate</div>
+    </div>
+
+    <div class="volunteer-grid">
+
+      <!-- WeHo Basketball -->
+      <div class="volunteer-card reveal">
+        <div class="volunteer-card-body">
+          <div class="volunteer-eyebrow">2026 · West Hollywood</div>
+          <div class="volunteer-title">Youth Basketball Coach</div>
+          <div class="volunteer-org">WeHo Rec League</div>
+          <div class="volunteer-desc">
+            Volunteered as a coach for the West Hollywood Recreation League's youth basketball program — running drills, building fundamentals, and making sure the kids had fun while doing it.
+          </div>
+          <div class="volunteer-tags">
+            <span class="volunteer-tag">Youth Coaching</span>
+            <span class="volunteer-tag">Basketball</span>
+            <span class="volunteer-tag">Community</span>
+          </div>
+        </div>
+        <div class="volunteer-media">
+          <video controls playsinline muted
+                 onerror="this.parentElement.style.display='none'">
+            <source src="images/coaching-video.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- Moderator & Screenings Host -->
+      <div class="volunteer-card reveal">
+        <div class="volunteer-card-body">
+          <div class="volunteer-eyebrow">2025 · San Luis Obispo, CA</div>
+          <div class="volunteer-title">Moderator &amp; Screenings Host</div>
+          <div class="volunteer-org">San Luis Obispo International Film Festival</div>
+          <div class="volunteer-desc">
+            Moderated filmmaker Q&amp;As and hosted public screenings at one of California's premier independent film festivals, engaging audiences and guiding conversations with directors and talent in front of live audiences.
+          </div>
+          <div class="volunteer-tags">
+            <span class="volunteer-tag">On-Camera</span>
+            <span class="volunteer-tag">Moderation</span>
+            <span class="volunteer-tag">Film Festival</span>
+            <span class="volunteer-tag">Public Speaking</span>
+          </div>
+        </div>
+        <div class="volunteer-media">
+          <img src="images/festival.jpg" alt="Christopher Zdenek moderating at the SLO Film Festival"
+               onerror="this.parentElement.style.display='none'" loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CATS + PONG ────────────────────────────────────────────── -->
+<section id="cats">
+  <div class="container">
+    <p class="section-label reveal">You Made It to the Bottom</p>
+    <h2 class="section-title reveal reveal-delay-1">Meet Elie &amp; Juneau<br><span style="font-size:0.65em; color:var(--muted); font-family:'Plus Jakarta Sans',sans-serif; font-weight:400;">Your reward for scrolling this far</span></h2>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="cats-intro reveal reveal-delay-3">
+      <div class="cat-profile cat-juneau">
+        <div class="cat-photo-col">
+          <div class="cat-photo-frame">
+            <img
+              src="images/juneau.jpg"
+              alt="Juneau — Blue Point Balinese"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              loading="lazy"
+            >
+            <span class="cat-photo-frame-placeholder" style="display:none;">🐱</span>
+          </div>
+        </div>
+        <div class="cat-text-col">
+          <div class="cat-name">Juneau</div>
+          <div class="cat-breed">Balinese · The Elegant One</div>
+          <div class="cat-desc">
+            Cool grey and gorgeous. Suspicious of strangers — until she decides you're worthy. Named after Alaska because she's breathtaking and slightly hard to reach.
+          </div>
+        </div>
+      </div>
+      <div class="cat-profile cat-elie">
+        <div class="cat-photo-col">
+          <div class="cat-photo-frame">
+            <img
+              src="images/elie.jpg"
+              alt="Elie — Seal Point Balinese"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              loading="lazy"
+            >
+            <span class="cat-photo-frame-placeholder" style="display:none;">😸</span>
+          </div>
+        </div>
+        <div class="cat-text-col">
+          <div class="cat-name">Elie</div>
+          <div class="cat-breed">Balinese · The Confident One</div>
+          <div class="cat-desc">
+            Walks into a room and immediately owns it. She's not warm — she's <em>confident</em>. Signature look: tongue slightly out, fully aware you should be grateful she's letting you watch.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PONG -->
+    <div class="pong-section reveal">
+      <div class="pong-header">
+        <h3>🐾 Cat Laser Pong</h3>
+        <p>Play as Elie or Juneau and swipe at the laser dot. Choose your cat, then start!</p>
+      </div>
+
+      <div class="pong-controls-row">
+        <button class="pong-btn pong-btn-juneau" id="btnJuneau" onclick="selectCat('juneau')">Play as Juneau</button>
+        <button class="pong-btn pong-btn-elie"   id="btnElie"   onclick="selectCat('elie')">Play as Elie</button>
+        <button class="pong-btn pong-btn-start"  id="btnStart"  onclick="startGame()">Start Game</button>
+        <button class="pong-btn pong-btn-reset"  onclick="resetGame()">Reset</button>
+      </div>
+
+      <div class="pong-score-row">
+        <div>
+          <div class="pong-score-name" id="playerLabel">YOU</div>
+          <div class="pong-score-num" id="scorePlayer">0</div>
+        </div>
+        <div class="pong-score-sep">:</div>
+        <div>
+          <div class="pong-score-name ai-label" id="aiLabel">AI</div>
+          <div class="pong-score-num" id="scoreAI">0</div>
+        </div>
+      </div>
+
+      <div class="pong-canvas-wrap">
+        <canvas id="pongCanvas" width="700" height="400"></canvas>
+        <div class="pong-overlay" id="pongOverlay">
+          <h4>Cat Laser Pong</h4>
+          <p>Choose your cat and press Start</p>
+        </div>
+      </div>
+
+      <div class="pong-instructions">
+        Move your paw with <kbd>W</kbd> / <kbd>S</kbd> or <kbd>↑</kbd> / <kbd>↓</kbd> &nbsp;|&nbsp;
+        First to <strong>7</strong> wins &nbsp;|&nbsp;
+        The COM cat doesn't go easy
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label reveal">Get In Touch</p>
+    <h2 class="section-title reveal reveal-delay-1">Let's connect</h2>
+    <div class="divider reveal reveal-delay-2"></div>
+    <p class="contact-subtitle reveal reveal-delay-2">
+      Whether it's about work, a shared love of wrestling, a debate about the best musical, or just to say hi — I'm always glad to hear from someone interesting.
+    </p>
+    <div class="contact-location-card reveal reveal-delay-3">
+        <div class="contact-location-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="rgba(255,255,255,0.85)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+        </div>
+        <div class="contact-location-text">
+          <span class="contact-location-label">Based in</span>
+          <span class="contact-location-value">Los Angeles, CA</span>
+        </div>
+      </div>
+
+    <div class="contact-grid reveal reveal-delay-3">
+      <a href="mailto:chrispzdenek@gmail.com" class="contact-card">
+        <div class="contact-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="28" height="28" fill="rgba(255,255,255,0.85)"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>
+        </div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-value">chrispzdenek@gmail.com</div>
+      </a>
+      <a href="https://www.linkedin.com/in/christopher-zdenek/" target="_blank" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="rgba(255,255,255,0.85)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div class="contact-card-label">LinkedIn</div>
+        <div class="contact-card-value">christopher-zdenek</div>
+      </a>
+      <a href="https://www.instagram.com/chriszdenek/" target="_blank" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="rgba(255,255,255,0.85)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </div>
+        <div class="contact-card-label">Instagram</div>
+        <div class="contact-card-value">@chriszdenek</div>
+      </a>
+      <a href="https://letterboxd.com/chriszdenek/" target="_blank" class="contact-card">
+        <div class="contact-card-icon">
+          <img src="images/logos/letterboxd.png" alt="Letterboxd" style="height:28px;width:auto;filter:brightness(0) invert(1) opacity(0.85);" loading="lazy">
+        </div>
+        <div class="contact-card-label">Letterboxd</div>
+        <div class="contact-card-value">chriszdenek</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── BACK TO TOP ──────────────────────────────────────────── -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,165.66a8,8,0,0,1-11.32,0L128,99.31,61.66,165.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,165.66Z"/></svg>
+</button>
+
+<!-- ── FOOTER ───────────────────────────────────────────────── -->
+<footer>
+  <p>© 2026 <span>Christopher Zdenek</span> &nbsp;·&nbsp; Made with intention &nbsp;·&nbsp; Powered by Elie &amp; Juneau</p>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ────────────────  CAT PONG ENGINE  ───────────────────── -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<script>
+/* ───── Timeline show more/less ───── */
+function toggleTimeline() {
+  var tl = document.getElementById('workTimeline');
+  var btn = document.getElementById('timelineShowMore');
+  var isCollapsed = tl.classList.contains('timeline-collapsed');
+  if (isCollapsed) {
+    tl.classList.remove('timeline-collapsed');
+    btn.querySelector('span').textContent = 'Show less';
+    btn.classList.add('expanded');
+    // trigger reveal animation on newly visible items
+    var items = tl.querySelectorAll('.timeline-item');
+    items.forEach(function(el, i) {
+      if (i >= 3 && !el.classList.contains('visible')) {
+        setTimeout(function() { el.classList.add('visible'); }, (i - 3) * 80);
+      }
+    });
+  } else {
+    tl.classList.add('timeline-collapsed');
+    btn.querySelector('span').textContent = 'Show all experiences';
+    btn.classList.remove('expanded');
+    // scroll back to top of section
+    tl.closest('section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+/* ───── Essay toggle ───── */
+let essayOpen = false;
+function toggleEssay() {
+  essayOpen = !essayOpen;
+  const body = document.getElementById('essayBody');
+  const btn  = document.getElementById('essayToggle');
+  const card = document.getElementById('essayCard');
+  if (essayOpen) {
+    body.style.maxHeight = 'none';
+    body.style.overflow  = 'visible';
+    body.style.position  = 'relative';
+    // remove gradient fade
+    body.style.setProperty('--fade', 'none');
+    card.classList.remove('essay-collapsed');
+    btn.textContent = 'Show Less';
+  } else {
+    body.style.maxHeight = '';
+    body.style.overflow  = '';
+    body.style.position  = '';
+    body.style.removeProperty('--fade');
+    card.classList.add('essay-collapsed');
+    btn.textContent = 'Read Full Essay';
+  }
+}
+// Start collapsed
+document.getElementById('essayCard').classList.add('essay-collapsed');
+
+/* ───── Pong Game ───── */
+const canvas  = document.getElementById('pongCanvas');
+const ctx     = canvas.getContext('2d');
+const overlay = document.getElementById('pongOverlay');
+
+// Retina / HiDPI support — keeps logical coords unchanged
+const dpr = window.devicePixelRatio || 1;
+const W = canvas.width;
+const H = canvas.height;
+canvas.width  = W * dpr;
+canvas.height = H * dpr;
+canvas.style.width  = W + 'px';
+canvas.style.height = H + 'px';
+ctx.scale(dpr, dpr);
+
+const PAD_W = 36;
+const PAD_H = 96;
+const BALL_R = 8;
+const WIN_SCORE = 7;
+
+// Preload cat sprites
+const CAT_SPRITES = {};
+['juneau', 'elie'].forEach(key => {
+  const img = new Image();
+  img.src = `images/${key}-sprite.png`;
+  CAT_SPRITES[key] = img;
+});
+
+// Cat themes — Balinese colorpoint accurate palettes
+const CATS = {
+  juneau: {
+    name:        'Juneau',
+    // Blue Point Balinese: cool grey points, cream body
+    bodyBase:    '#f4f1ec',
+    pointColor:  '#8a9aa6',  // cool grey — accurate Blue Point
+    eyeColor:    '#1a4e8a',  // deep dark sapphire
+    noseColor:   '#b09aaa',
+    tongueColor: '#d06878',
+    glowColor:   'rgba(138,154,166,0.5)',
+    label:       'JUNEAU',
+    labelClass:  'juneau-label',
+    tongue:      false,
+  },
+  elie: {
+    name:        'Elie',
+    // Seal Point Balinese: very dark brown points, warm fawn body
+    bodyBase:    '#f5ede0',
+    pointColor:  '#2c1208',  // dark seal — very dark brown, near-black (accurate from photo)
+    eyeColor:    '#1a4e8a',  // same sapphire blue
+    noseColor:   '#1a0a04',  // near-black nose (as in photo)
+    tongueColor: '#e04060',
+    glowColor:   'rgba(44,18,8,0.35)',
+    label:       'ELIE',
+    labelClass:  'elie-label',
+    tongue:      true,       // Elie's signature move
+  }
+};
+
+// AI always plays as the other cat
+function getAICat(playerKey) {
+  return playerKey === 'juneau' ? CATS.elie : CATS.juneau;
+}
+
+let selectedCat = null;
+let gameRunning = false;
+let gameOver    = false;
+let animId      = null;
+let idleAnimId  = null;
+let winAnimId   = null;
+let confettiParts = [];
+
+// State
+let playerY, aiY, ballX, ballY, ballVX, ballVY;
+let scorePlayer = 0, scoreAI = 0;
+let keys = {};
+
+// AI
+let aiTargetY;
+let aiSpeed = 3.2;
+let aiReactDelay = 0;
+let aiReactTimer = 0;
+
+function selectCat(key) {
+  selectedCat = key;
+  document.getElementById('btnJuneau').classList.toggle('active', key === 'juneau');
+  document.getElementById('btnElie').classList.toggle('active', key === 'elie');
+
+  const cat = CATS[key];
+  const aiCat = getAICat(key);
+  document.getElementById('playerLabel').textContent = cat.label;
+  document.getElementById('playerLabel').className = 'pong-score-name ' + cat.labelClass;
+  document.getElementById('aiLabel').textContent = aiCat.label + ' (COM)';
+  document.getElementById('aiLabel').className = 'pong-score-name ' + aiCat.labelClass;
+}
+
+function initBall(towardsPlayer) {
+  ballX = W / 2;
+  ballY = H / 2;
+  const speed = 4.5;
+  const angle = (Math.random() * 0.8 - 0.4); // radians
+  const dir = towardsPlayer ? -1 : 1;
+  ballVX = dir * speed * Math.cos(angle);
+  ballVY = speed * Math.sin(angle);
+  aiReactDelay = 20 + Math.random() * 30;
+  aiReactTimer = 0;
+}
+
+function resetGame() {
+  if (animId)     { cancelAnimationFrame(animId);     animId    = null; }
+  if (idleAnimId) { cancelAnimationFrame(idleAnimId); idleAnimId = null; }
+  if (winAnimId)  { cancelAnimationFrame(winAnimId);  winAnimId  = null; }
+  gameRunning = false;
+  gameOver    = false;
+  scorePlayer = 0; scoreAI = 0;
+  document.getElementById('scorePlayer').textContent = '0';
+  document.getElementById('scoreAI').textContent = '0';
+  playerY = H / 2 - PAD_H / 2;
+  aiY     = H / 2 - PAD_H / 2;
+  overlay.innerHTML = '<h4>Cat Laser Pong</h4><p>Choose your cat — then press Start!</p>';
+  overlay.style.display    = 'flex';
+  overlay.style.background = '';
+  overlay.style.pointerEvents = '';
+  startIdleLoop();
+}
+
+function startGame() {
+  if (!selectedCat) {
+    overlay.innerHTML = '<h4>Pick a cat first! 🐱</h4><p>Choose Juneau or Elie above</p>';
+    overlay.style.display = 'flex';
+    return;
+  }
+  if (gameRunning) return;
+  if (idleAnimId) { cancelAnimationFrame(idleAnimId); idleAnimId = null; }
+  gameOver = false;
+  gameRunning = true;
+  playerY = H / 2 - PAD_H / 2;
+  aiY     = H / 2 - PAD_H / 2;
+  initBall(Math.random() > 0.5);
+  overlay.style.display = 'none';
+  loop();
+}
+
+function loop() {
+  if (!gameRunning) return;
+  update();
+  draw();
+  animId = requestAnimationFrame(loop);
+}
+
+function update() {
+  // Player movement
+  const speed = 7;
+  if (keys['w'] || keys['arrowup']) {
+    playerY = Math.max(0, playerY - speed);
+  }
+  if (keys['s'] || keys['arrowdown']) {
+    playerY = Math.min(H - PAD_H, playerY + speed);
+  }
+
+  // AI movement
+  aiReactTimer++;
+  if (aiReactTimer >= aiReactDelay) {
+    // Predict ball landing position
+    const timeToReach = (W - PAD_W*2 - ballX) / Math.abs(ballVX + 0.001);
+    let predictY = ballY + ballVY * timeToReach;
+    // Bounce prediction (rough)
+    while (predictY < 0 || predictY > H) {
+      if (predictY < 0) predictY = -predictY;
+      if (predictY > H) predictY = 2*H - predictY;
+    }
+    aiTargetY = predictY - PAD_H / 2;
+  }
+  if (aiTargetY !== undefined) {
+    const diff = aiTargetY - aiY;
+    if (Math.abs(diff) > 3) {
+      aiY += (diff > 0 ? 1 : -1) * Math.min(aiSpeed, Math.abs(diff));
+    }
+    aiY = Math.max(0, Math.min(H - PAD_H, aiY));
+  }
+
+  // Ball movement
+  ballX += ballVX;
+  ballY += ballVY;
+
+  // Top / bottom wall
+  if (ballY - BALL_R <= 0)     { ballY = BALL_R;        ballVY = Math.abs(ballVY); }
+  if (ballY + BALL_R >= H)     { ballY = H - BALL_R;    ballVY = -Math.abs(ballVY); }
+
+  // Player paddle (left)
+  const playerPadX = PAD_W + 20;
+  if (ballX - BALL_R <= playerPadX + PAD_W &&
+      ballX - BALL_R >= playerPadX &&
+      ballY >= playerY && ballY <= playerY + PAD_H) {
+    ballVX = Math.abs(ballVX) * 1.04;
+    const hitPos = (ballY - playerY) / PAD_H; // 0-1
+    ballVY = (hitPos - 0.5) * 10;
+    ballX = playerPadX + PAD_W + BALL_R;
+    aiReactDelay = 10 + Math.random() * 20;
+    aiReactTimer = 0;
+  }
+
+  // AI paddle (right)
+  const aiPadX = W - PAD_W - 20 - PAD_W;
+  if (ballX + BALL_R >= aiPadX &&
+      ballX + BALL_R <= aiPadX + PAD_W + 5 &&
+      ballY >= aiY && ballY <= aiY + PAD_H) {
+    ballVX = -Math.abs(ballVX) * 1.04;
+    const hitPos = (ballY - aiY) / PAD_H;
+    ballVY = (hitPos - 0.5) * 10;
+    ballX = aiPadX - BALL_R;
+  }
+
+  // Clamp max speed
+  const maxSpd = 14;
+  const spd = Math.sqrt(ballVX*ballVX + ballVY*ballVY);
+  if (spd > maxSpd) { ballVX = ballVX/spd*maxSpd; ballVY = ballVY/spd*maxSpd; }
+
+  // Score
+  if (ballX < 0) {
+    scoreAI++;
+    document.getElementById('scoreAI').textContent = scoreAI;
+    checkWin();
+    if (!gameOver) initBall(false);
+  }
+  if (ballX > W) {
+    scorePlayer++;
+    document.getElementById('scorePlayer').textContent = scorePlayer;
+    checkWin();
+    if (!gameOver) initBall(true);
+  }
+}
+
+function checkWin() {
+  if (scorePlayer >= WIN_SCORE || scoreAI >= WIN_SCORE) {
+    gameOver    = true;
+    gameRunning = false;
+    const cat    = CATS[selectedCat];
+    const aiCat  = getAICat(selectedCat);
+    const youWon = scorePlayer >= WIN_SCORE;
+    drawWinScreen(youWon ? cat : aiCat, youWon);
+  }
+}
+
+/* ── Confetti helpers ─────────────────────────────────── */
+function initConfetti() {
+  const cols = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#f97316','#a855f7','#ec4899','#22d3ee'];
+  confettiParts = Array.from({length: 90}, () => ({
+    x:    Math.random() * W,
+    y:   -Math.random() * H * 0.7,
+    vx:   (Math.random() - 0.5) * 3,
+    vy:   1.6 + Math.random() * 3,
+    rot:  Math.random() * Math.PI * 2,
+    rotV: (Math.random() - 0.5) * 0.15,
+    w:    7 + Math.random() * 8,
+    h:    4 + Math.random() * 4,
+    color: cols[Math.floor(Math.random() * cols.length)]
+  }));
+}
+function stepConfetti() {
+  confettiParts.forEach(p => {
+    p.x   += p.vx + (Math.random() - 0.5) * 0.3;
+    p.y   += p.vy;
+    p.rot += p.rotV;
+    if (p.y > H + 12) { p.y = -10; p.x = Math.random() * W; }
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillStyle   = p.color;
+    ctx.globalAlpha = 0.88;
+    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    ctx.restore();
+  });
+  ctx.globalAlpha = 1;
+}
+
+/* ── Animated win screen ──────────────────────────────── */
+function drawWinScreen(winnerCat, youWon) {
+  initConfetti();
+  // Hide overlay completely — all UI is drawn on canvas
+  overlay.style.display = 'none';
+
+  const sw = 160, sh = 240;           // sprite draw size
+  const sx = W / 2 - sw / 2;
+  const sy = 18;                       // tight top padding
+  const textY1 = sy + sh + 32;        // winner headline
+  const textY2 = textY1 + 22;         // subtitle
+  const textY3 = H - 16;              // "Press Reset" at very bottom
+
+  const spriteKey = winnerCat.name.toLowerCase();
+  const sprite    = CAT_SPRITES[spriteKey];
+  let frame = 0;
+
+  function winFrame() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Dark backdrop
+    ctx.fillStyle = 'rgba(8,13,20,0.93)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Confetti
+    stepConfetti();
+
+    // Winner sprite — glowing, centered
+    ctx.save();
+    ctx.shadowColor = winnerCat.glowColor;
+    ctx.shadowBlur  = 44;
+    if (sprite && sprite.complete && sprite.naturalWidth > 0) {
+      // Rounded-corner clip on win screen sprite too
+      ctx.beginPath();
+      ctx.roundRect(sx, sy, sw, sh, 12);
+      ctx.clip();
+      ctx.drawImage(sprite, sx, sy, sw, sh);
+    } else {
+      drawCatFace(W / 2, sy + sh / 2, 72, winnerCat);
+    }
+    ctx.restore();
+
+    // Text — fade in over first 25 frames
+    const alpha = Math.min(1, frame / 25);
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.textAlign   = 'center';
+
+    // Winner headline
+    ctx.fillStyle = '#ffffff';
+    ctx.font      = '300 26px "DM Sans", sans-serif';
+    ctx.fillText(youWon ? `${winnerCat.name} Wins! 🎉` : `${winnerCat.name} (COM) Wins!`, W / 2, textY1);
+
+    // Flavour subtitle
+    ctx.fillStyle = 'rgba(255,255,255,0.50)';
+    ctx.font      = '400 12px "DM Sans", sans-serif';
+    ctx.fillText(
+      youWon ? 'Impressive paw work. The laser never stood a chance.'
+             : 'The AI cat got you this time… practice your swipe.',
+      W / 2, textY2
+    );
+
+    // "Press Reset" hint at bottom
+    ctx.fillStyle = 'rgba(255,255,255,0.28)';
+    ctx.font      = '400 11px "DM Sans", sans-serif';
+    ctx.fillText('Press Reset to play again', W / 2, textY3);
+
+    ctx.restore();
+    ctx.textAlign = 'left';
+
+    frame++;
+    if (gameOver) { winAnimId = requestAnimationFrame(winFrame); }
+    else          { winAnimId = null; }
+  }
+  winFrame();
+}
+
+/* ─── Shared helper: draw one cat ear triangle ─── */
+function drawEarTriangle(ctx, tipX, tipY, baseX, baseY, halfW, pointColor) {
+  ctx.beginPath();
+  ctx.moveTo(baseX - halfW, baseY);
+  ctx.lineTo(tipX, tipY);
+  ctx.lineTo(baseX + halfW, baseY);
+  ctx.closePath();
+  ctx.fillStyle = pointColor;
+  ctx.fill();
+}
+
+/* ─── Win screen cat face — big, simple, cute ─── */
+function drawCatFace(cx, cy, r, cat) {
+  ctx.save();
+
+  // Soft glow
+  ctx.shadowColor = cat.glowColor;
+  ctx.shadowBlur  = 28;
+
+  // Ears (behind head) — white rim + fill + inner accent
+  drawEarTriangle(ctx, cx - r*0.52, cy - r*1.27, cx - r*0.52, cy - r*0.69, r*0.31, 'rgba(255,255,255,0.5)');
+  drawEarTriangle(ctx, cx + r*0.52, cy - r*1.27, cx + r*0.52, cy - r*0.69, r*0.31, 'rgba(255,255,255,0.5)');
+  drawEarTriangle(ctx, cx - r*0.52, cy - r*1.22, cx - r*0.52, cy - r*0.72, r*0.28, cat.pointColor);
+  drawEarTriangle(ctx, cx + r*0.52, cy - r*1.22, cx + r*0.52, cy - r*0.72, r*0.28, cat.pointColor);
+  drawEarTriangle(ctx, cx - r*0.52, cy - r*0.98, cx - r*0.52, cy - r*0.75, r*0.14, 'rgba(255,195,185,0.65)');
+  drawEarTriangle(ctx, cx + r*0.52, cy - r*0.98, cx + r*0.52, cy - r*0.75, r*0.14, 'rgba(255,195,185,0.65)');
+
+  // Head
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI*2);
+  ctx.fillStyle = cat.bodyBase;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Face mask — soft oval of point color in center of face
+  ctx.beginPath();
+  ctx.ellipse(cx, cy + r*0.08, r*0.58, r*0.65, 0, 0, Math.PI*2);
+  ctx.fillStyle = cat.pointColor;
+  ctx.globalAlpha = 0.22;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Eyes — big, round, expressive
+  const eyeY = cy - r*0.1;
+  [-0.36, 0.36].forEach(xOff => {
+    const ex = cx + xOff * r;
+    // Iris
+    ctx.beginPath();
+    ctx.arc(ex, eyeY, r*0.195, 0, Math.PI*2);
+    ctx.fillStyle = cat.eyeColor;
+    ctx.fill();
+    // Pupil
+    ctx.beginPath();
+    ctx.arc(ex, eyeY, r*0.095, 0, Math.PI*2);
+    ctx.fillStyle = '#030810';
+    ctx.fill();
+    // Shine
+    ctx.beginPath();
+    ctx.arc(ex + r*0.07, eyeY - r*0.07, r*0.06, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.fill();
+  });
+
+  // Nose — small dot
+  ctx.beginPath();
+  ctx.arc(cx, cy + r*0.26, r*0.06, 0, Math.PI*2);
+  ctx.fillStyle = cat.noseColor;
+  ctx.fill();
+
+  // Elie: tongue out  /  Juneau: little smile
+  if (cat.tongue) {
+    ctx.beginPath();
+    ctx.ellipse(cx, cy + r*0.44, r*0.10, r*0.14, 0, 0, Math.PI*2);
+    ctx.fillStyle = cat.tongueColor;
+    ctx.fill();
+  } else {
+    ctx.beginPath();
+    ctx.arc(cx, cy + r*0.30, r*0.14, 0.2, Math.PI - 0.2);
+    ctx.strokeStyle = cat.pointColor + 'aa';
+    ctx.lineWidth = r*0.04;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    // Blush
+    [-0.4, 0.4].forEach(xOff => {
+      ctx.beginPath();
+      ctx.ellipse(cx + xOff*r, eyeY + r*0.38, r*0.14, r*0.07, 0, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(230,150,160,0.3)';
+      ctx.fill();
+    });
+  }
+
+  // Two whiskers each side
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+  ctx.lineWidth = 1.5; ctx.lineCap = 'round';
+  [[-0.05, -0.02], [0.05, 0.08]].forEach(([a, b]) => {
+    ctx.beginPath(); ctx.moveTo(cx - r*0.14, cy + r*0.2 + a*r); ctx.lineTo(cx - r*0.95, cy + r*0.2 + b*r); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + r*0.14, cy + r*0.2 + a*r); ctx.lineTo(cx + r*0.95, cy + r*0.2 + b*r); ctx.stroke();
+  });
+
+  ctx.restore();
+}
+
+/* ───── Drawing ───── */
+function drawPad(x, y, cat, isSwipe, side) {
+  ctx.save();
+
+  const spriteKey = cat.name.toLowerCase();
+  const sprite    = CAT_SPRITES[spriteKey];
+
+  const cx    = x + PAD_W / 2;
+  const drawH = PAD_H;
+  // Use the actual sprite aspect ratio so cats aren't stretched
+  const ratio = (sprite && sprite.naturalWidth && sprite.naturalHeight)
+    ? sprite.naturalWidth / sprite.naturalHeight : (2 / 3);
+  const drawW = Math.round(drawH * ratio);
+  const drawX = cx - drawW / 2;
+  const drawY = y;
+  const cr    = 10; // corner radius for the cat card
+
+  if (sprite && sprite.complete && sprite.naturalWidth > 0) {
+    // Clip to rounded rect — clean card edges
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(drawX, drawY, drawW, drawH, cr);
+    ctx.clip();
+    if (side === 'right') {
+      ctx.translate(drawX * 2 + drawW, 0);
+      ctx.scale(-1, 1);
+    }
+    ctx.drawImage(sprite, drawX, drawY, drawW, drawH);
+    ctx.restore();
+  } else {
+    // Fallback while sprite loads
+    ctx.fillStyle = cat.bodyBase;
+    ctx.beginPath();
+    ctx.roundRect(drawX, drawY, drawW, drawH, cr);
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function drawBall(x, y) {
+  // Glow
+  ctx.save();
+  const glow = ctx.createRadialGradient(x, y, 0, x, y, BALL_R * 3);
+  glow.addColorStop(0, 'rgba(255,50,50,0.7)');
+  glow.addColorStop(0.5, 'rgba(255,50,50,0.2)');
+  glow.addColorStop(1, 'transparent');
+  ctx.beginPath();
+  ctx.arc(x, y, BALL_R * 3, 0, Math.PI * 2);
+  ctx.fillStyle = glow;
+  ctx.fill();
+
+  // Dot
+  ctx.beginPath();
+  ctx.arc(x, y, BALL_R, 0, Math.PI * 2);
+  const dg = ctx.createRadialGradient(x - BALL_R*0.3, y - BALL_R*0.3, 0, x, y, BALL_R);
+  dg.addColorStop(0, '#ff8888');
+  dg.addColorStop(0.5, '#ff2222');
+  dg.addColorStop(1, '#cc0000');
+  ctx.fillStyle = dg;
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawCourt() {
+  // ── Hardwood floor planks ──────────────────────────────
+  const plankH = 42;
+  // Warm honey-oak color pairs [topEdge, mid, bottomEdge]
+  const planks = [
+    ['#d4922e','#c8882a','#bc7e24'],
+    ['#c07828','#cc8c32','#b87426'],
+    ['#ca8c30','#be8028','#d49638'],
+    ['#b87a26','#c6882c','#bc8028'],
+    ['#d09038','#c4842c','#b87a26'],
+    ['#c88a2e','#bc7e28','#cc9032'],
+    ['#be7e28','#d09038','#c4862a'],
+    ['#cc8c32','#c07828','#c88a2e'],
+    ['#c4862a','#b87a26','#d09038'],
+    ['#d49638','#c8882a','#c07828'],
+  ];
+
+  let row = 0;
+  for (let py = 0; py < H; py += plankH, row++) {
+    const [c1, c2, c3] = planks[row % planks.length];
+    // Plank fill gradient
+    const pg = ctx.createLinearGradient(0, py, 0, py + plankH);
+    pg.addColorStop(0,   c1);
+    pg.addColorStop(0.45, c2);
+    pg.addColorStop(1,   c3);
+    ctx.fillStyle = pg;
+    ctx.fillRect(0, py, W, plankH);
+
+    // Grain lines — subtle wavy strokes
+    ctx.strokeStyle = 'rgba(0,0,0,0.055)';
+    ctx.lineWidth = 0.9;
+    for (let gi = 0; gi < 5; gi++) {
+      const gy = py + 4 + gi * 7;
+      const s  = Math.sin(row * 1.9 + gi * 2.3) * 4;
+      ctx.beginPath();
+      ctx.moveTo(0, gy + s * 0.3);
+      ctx.bezierCurveTo(
+        W * 0.3, gy + s,
+        W * 0.65, gy - s * 0.8,
+        W,       gy + s * 0.5
+      );
+      ctx.stroke();
+    }
+
+    // Plank edge (horizontal seam)
+    ctx.strokeStyle = 'rgba(70,35,5,0.28)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, py); ctx.lineTo(W, py);
+    ctx.stroke();
+  }
+
+  // Overhead light — brightens centre slightly
+  const glow = ctx.createRadialGradient(W/2, H*0.38, 0, W/2, H/2, W * 0.68);
+  glow.addColorStop(0, 'rgba(255,248,215,0.22)');
+  glow.addColorStop(1, 'rgba(0,0,0,0.14)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+
+  // Centre dashed line — white tape on the floor
+  ctx.setLineDash([10, 8]);
+  ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Centre circle
+  ctx.beginPath();
+  ctx.arc(W/2, H/2, 50, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  drawCourt();
+
+  if (!selectedCat) return; // shouldn't happen while gameRunning
+  const cat   = CATS[selectedCat];
+  const aiCat = getAICat(selectedCat);
+
+  // Determine swipe (near ball)
+  const playerPadX = PAD_W + 20;
+  const aiPadX     = W - PAD_W - 20 - PAD_W;
+
+  const playerSwipe = gameRunning && Math.abs(ballX - playerPadX) < 80;
+  const aiSwipe     = gameRunning && Math.abs(ballX - (aiPadX + PAD_W)) < 80;
+
+  drawPad(playerPadX, playerY, cat,   playerSwipe, 'left');
+  drawPad(aiPadX,     aiY,     aiCat, aiSwipe,     'right');
+
+  if (gameRunning || gameOver) {
+    drawBall(ballX, ballY);
+  }
+}
+
+/* ── Idle animation loop — always starts fresh with a cleared canvas ── */
+function startIdleLoop() {
+  if (idleAnimId) { cancelAnimationFrame(idleAnimId); idleAnimId = null; }
+  idleAnimId = requestAnimationFrame(drawIdleFrame);
+}
+function drawIdleFrame() {
+  ctx.clearRect(0, 0, W, H);
+  drawCourt();
+  const cat   = selectedCat ? CATS[selectedCat] : CATS.juneau;
+  const aiCat = selectedCat ? getAICat(selectedCat) : CATS.elie;
+  playerY = H / 2 - PAD_H / 2;
+  aiY     = H / 2 - PAD_H / 2;
+  drawPad(PAD_W + 20,              playerY, cat,   false, 'left');
+  drawPad(W - PAD_W - 20 - PAD_W, aiY,     aiCat, false, 'right');
+  // Idle laser dot wiggle
+  const t  = Date.now() / 800;
+  const ix = W / 2 + Math.cos(t) * 60;
+  const iy = H / 2 + Math.sin(t * 1.3) * 40;
+  drawBall(ix, iy);
+  if (!gameRunning && !gameOver) { idleAnimId = requestAnimationFrame(drawIdleFrame); }
+  else                            { idleAnimId = null; }
+}
+// Backward-compat alias
+function drawIdle() { startIdleLoop(); }
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  keys[e.key.toLowerCase()] = true;
+  if (gameRunning && ['arrowup','arrowdown'].includes(e.key.toLowerCase())) e.preventDefault();
+});
+document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+// Touch support for mobile
+let touchStartY = null;
+canvas.addEventListener('touchstart', e => {
+  touchStartY = e.touches[0].clientY;
+  e.preventDefault();
+}, { passive: false });
+canvas.addEventListener('touchmove', e => {
+  if (touchStartY === null) return;
+  const dy = e.touches[0].clientY - touchStartY;
+  playerY = Math.max(0, Math.min(H - PAD_H, playerY + dy));
+  touchStartY = e.touches[0].clientY;
+  e.preventDefault();
+}, { passive: false });
+
+// Init — resetGame() calls startIdleLoop() internally
+resetGame();
+
+/* ── Photo Lightbox initialised after DOM in separate <script> below ── */
+</script>
+
+<!-- ── Lightbox overlay ── -->
+<div class="lb-overlay" id="lbOverlay">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+  <div class="lb-img-wrap">
+    <img id="lbImg" src="" alt="">
+  </div>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">&#8250;</button>
+  <div class="lb-caption" id="lbCaption"></div>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<!-- ── Mobile nav toggle ── -->
+<script>
+(function () {
+  var btn   = document.getElementById('navHamburger');
+  var links = document.getElementById('navLinks');
+  btn.addEventListener('click', function () {
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+    document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+  });
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
+
+<!-- ── Lightbox JS — runs after DOM so getElementById works ── -->
+<script>
+(function () {
+  var GALLERIES = {
+    firefighter: [
+      { src: 'images/event-1.jpg',           alt: 'Mayor Karen Bass with firefighters at Breakfast with the Brave' },
+      { src: 'images/event-2.jpg',           alt: 'LAFD honored at Breakfast with the Brave community event' },
+      { src: 'images/helmet-and-jacket.jpg', alt: 'LAFD firefighter helmet and jacket' }
+    ],
+    personal: [
+      { src: 'images/photo-1.jpg',    alt: 'Italy — personal travel photography by Christopher Zdenek' },
+      { src: 'images/nyc-photo.jpg',  alt: 'New York City — personal travel photography by Christopher Zdenek' },
+      { src: 'images/alec-italy.jpg', alt: 'Italy with Alec — personal travel photography by Christopher Zdenek' }
+    ],
+    paramount: [
+      { src: 'images/work/paramount-dodgeball.jpg',   alt: 'Dodgeball Champions — Paramount team' },
+      { src: 'images/work/paramount-glsen.jpg',        alt: 'GLSEN Event — Paramount & Nickelodeon' },
+      { src: 'images/work/paramount-tmnt.jpg',         alt: 'TMNT Toys — Paramount & Nickelodeon' },
+      { src: 'images/work/paramount-transformers.jpg', alt: 'Transformers — Paramount & Nickelodeon' }
+    ],
+    gotham2122: [
+      { src: 'images/work/gotham-team.jpg',  alt: 'The Gotham Group team' },
+      { src: 'images/work/gotham-event.jpg', alt: 'The Gotham Group at event' }
+    ],
+    syracuse: [
+      { src: 'images/work/syracuse-popquiz.jpg',  alt: 'Pop Quiz — Syracuse Screenwriting class' },
+      { src: 'images/work/syracuse-roasted.jpg',  alt: 'Rob Edwards — Syracuse Screenwriting class' }
+    ]
+  };
+
+  var lbGallery = 'firefighter';
+  var lbCurrent = 0;
+
+  var lbOv  = document.getElementById('lbOverlay');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCaption');
+  var lbCnt = document.getElementById('lbCount');
+
+  function lbShow(i) {
+    var photos = GALLERIES[lbGallery];
+    lbCurrent = ((i % photos.length) + photos.length) % photos.length;
+    lbImg.src         = photos[lbCurrent].src;
+    lbImg.alt         = photos[lbCurrent].alt;
+    lbCap.textContent = photos[lbCurrent].alt;
+    lbCnt.textContent = (lbCurrent + 1) + ' / ' + photos.length;
+  }
+  function lbOpen(gallery, i) {
+    lbGallery = gallery;
+    lbShow(i);
+    lbOv.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    lbOv.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-lb]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      lbOpen(el.dataset.gallery || 'firefighter', parseInt(el.dataset.lb, 10));
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', lbClose);
+  document.getElementById('lbPrev').addEventListener('click', function () { lbShow(lbCurrent - 1); });
+  document.getElementById('lbNext').addEventListener('click', function () { lbShow(lbCurrent + 1); });
+  lbOv.addEventListener('click', function (e) { if (e.target === lbOv) lbClose(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lbOv.classList.contains('open')) return;
+    if (e.key === 'Escape')     lbClose();
+    if (e.key === 'ArrowLeft')  lbShow(lbCurrent - 1);
+    if (e.key === 'ArrowRight') lbShow(lbCurrent + 1);
+  });
+})();
+</script>
+
+<!-- ── Rotating Hero Pill ── -->
+<script>
+(function () {
+  var phrases = [
+    'AI Generalist',
+    'Entrepreneurship',
+    'Improv',
+    'Analytics',
+    'Storytelling',
+    'Emerging Tech',
+    'Cat Dad',
+    '& A Lot More'
+  ];
+  var pill = document.querySelector('.hero-tag-rotate');
+  if (!pill) return;
+  var current = pill.querySelector('span');
+  var idx = 0;
+  var timer;
+
+  function advance() {
+    idx = (idx + 1) % phrases.length;
+    current.classList.remove('active');
+    current.classList.add('exiting');
+    var next = document.createElement('span');
+    next.textContent = phrases[idx];
+    next.classList.add('entering');
+    pill.appendChild(next);
+    next.offsetHeight;
+    next.classList.remove('entering');
+    next.classList.add('active');
+    var old = current;
+    setTimeout(function () { old.remove(); }, 500);
+    current = next;
+  }
+
+  timer = setInterval(advance, 2400);
+})();
+</script>
+
+<!-- ── Scroll Reveal Observer ── -->
+<script>
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('visible'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<!-- ── Hero Cursor Tilt ── -->
+<script>
+(function() {
+  var hero = document.getElementById('hero');
+  var name = document.querySelector('.hero-name');
+  if (!hero || !name) return;
+  var isMobile = 'ontouchstart' in window;
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isMobile || prefersReduced) return;
+
+  hero.addEventListener('mousemove', function(e) {
+    var rect = hero.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width - 0.5;
+    var y = (e.clientY - rect.top) / rect.height - 0.5;
+    var maxTilt = 3;
+    name.style.transform = 'perspective(800px) rotateY(' + (x * maxTilt) + 'deg) rotateX(' + (-y * maxTilt) + 'deg)';
+  });
+
+  hero.addEventListener('mouseleave', function() {
+    name.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+  });
+})();
+</script>
+
+<!-- ── Time-of-Day Greeting ── -->
+<script>
+(function() {
+  var el = document.getElementById('heroGreeting');
+  if (!el) return;
+  var h = new Date().getHours();
+  var greeting = h < 12 ? 'Good morning — I\'m' : h < 17 ? 'Good afternoon — I\'m' : 'Good evening — I\'m';
+  el.textContent = greeting;
+})();
+</script>
+
+<!-- ── Scroll Progress + Active Nav + Nav Dark/Light ── -->
+<script>
+(function() {
+  var progressBar = document.getElementById('scrollProgress');
+  var nav = document.querySelector('nav');
+  var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  var darkSections = document.querySelectorAll('#writing, #contact');
+  var sections = [];
+  navLinks.forEach(function(link) {
+    var id = link.getAttribute('href').slice(1);
+    var section = document.getElementById(id);
+    if (section) sections.push({ el: section, link: link });
+  });
+
+  function onScroll() {
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (progressBar) progressBar.style.width = progress + '%';
+
+    // Active nav
+    var current = '';
+    sections.forEach(function(s) {
+      var rect = s.el.getBoundingClientRect();
+      if (rect.top <= 100) current = s.link.getAttribute('href').slice(1);
+    });
+    navLinks.forEach(function(link) {
+      link.classList.toggle('nav-active', link.getAttribute('href') === '#' + current);
+    });
+
+    // Nav dark/light
+    var isDark = false;
+    darkSections.forEach(function(section) {
+      var rect = section.getBoundingClientRect();
+      if (rect.top <= 60 && rect.bottom >= 60) isDark = true;
+    });
+    if (nav) nav.classList.toggle('nav-dark', isDark);
+
+    // Back to top
+    var backBtn = document.getElementById('backToTop');
+    if (backBtn) backBtn.classList.toggle('visible', scrollTop > window.innerHeight);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+<!-- ── Stat Counter Animation ── -->
+<script>
+(function() {
+  var stats = document.querySelectorAll('.stat-number');
+  if (!stats.length) return;
+
+  function animateCounter(el) {
+    var text = el.textContent.trim();
+    var suffix = '';
+    var target = 0;
+
+    if (text.indexOf('+') !== -1) {
+      suffix = '+';
+      target = parseInt(text);
+    } else if (text.indexOf('\u00d7') !== -1 || text.indexOf('x') !== -1) {
+      suffix = '\u00d7';
+      target = parseInt(text);
+    } else {
+      target = parseInt(text);
+    }
+
+    if (isNaN(target)) return;
+
+    var duration = 1500;
+    var start = performance.now();
+    el.textContent = '0' + suffix;
+
+    function step(now) {
+      var progress = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(eased * target);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  stats.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+
+
+<!-- ── Magnetic Hero Buttons ── -->
+<script>
+(function() {
+  if ('ontouchstart' in window) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.querySelectorAll('.hero-cta .btn').forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = '';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

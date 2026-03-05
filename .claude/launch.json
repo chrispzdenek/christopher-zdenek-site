@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "christopher-zdenek-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", "/Volumes/Boh/Coding/christopher-zdenek-site", "-p", "8090", "-c-1"],
+      "port": 8090
+    }
+  ]
+}
