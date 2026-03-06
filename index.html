@@ -858,6 +858,62 @@
     }
     .pong-overlay p { color: var(--muted); font-size: 0.9rem; }
 
+    /* ─── PONG FULLSCREEN (mobile) ─────────────────────────── */
+    .pong-section.pong-fullscreen {
+      position: fixed; inset: 0; z-index: 10001;
+      border-radius: 0; padding: 0;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .pong-section.pong-fullscreen .pong-header { display: none; }
+    .pong-section.pong-fullscreen .pong-instructions { display: none; }
+    .pong-section.pong-fullscreen .pong-controls-row {
+      padding: 0.5rem 1rem; margin-bottom: 0.5rem;
+      gap: 0.5rem;
+    }
+    .pong-section.pong-fullscreen .pong-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+    .pong-section.pong-fullscreen .pong-score-row {
+      margin-bottom: 0.5rem; gap: 1rem;
+    }
+    .pong-section.pong-fullscreen .pong-score-num { font-size: 2rem; }
+    .pong-section.pong-fullscreen .pong-canvas-wrap {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 0 0.5rem 0.5rem;
+    }
+    .pong-section.pong-fullscreen #pongCanvas {
+      max-width: 100%; max-height: 100%;
+      width: auto; height: auto;
+    }
+    .pong-exit-btn {
+      display: none; position: absolute; top: 0.5rem; right: 0.5rem;
+      z-index: 10002; background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; font-size: 1.2rem; line-height: 1;
+      width: 36px; height: 36px; border-radius: 50%;
+      cursor: pointer; backdrop-filter: blur(4px);
+    }
+    .pong-section.pong-fullscreen .pong-exit-btn { display: flex; align-items: center; justify-content: center; }
+    /* Rotate overlay */
+    .pong-rotate-overlay {
+      display: none; position: fixed; inset: 0; z-index: 10003;
+      background: var(--navy);
+      flex-direction: column; align-items: center; justify-content: center;
+      color: #fff; text-align: center; gap: 1.5rem;
+    }
+    .pong-rotate-overlay.visible { display: flex; }
+    .pong-rotate-icon {
+      width: 60px; height: 60px;
+      animation: rotate-phone 1.5s ease-in-out infinite;
+    }
+    @keyframes rotate-phone {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(90deg); }
+    }
+    .pong-rotate-overlay p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.8);
+    }
+
     /* ─── CONTACT ───────────────────────────────────────────── */
     #contact { background: var(--navy); }
     #contact .section-title { color: var(--white); }
@@ -2359,8 +2415,19 @@
       </div>
     </div>
 
+    <!-- Rotate phone overlay (mobile pong) -->
+    <div class="pong-rotate-overlay" id="pongRotateOverlay">
+      <svg class="pong-rotate-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="16" y="6" width="32" height="52" rx="4" stroke="white" stroke-width="2.5" fill="none"/>
+        <circle cx="32" cy="50" r="2.5" fill="white"/>
+        <path d="M50 32l6-6M50 32l6 6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <p>Rotate your phone to play</p>
+    </div>
+
     <!-- PONG -->
-    <div class="pong-section reveal">
+    <div class="pong-section reveal" id="pongSection">
+      <button class="pong-exit-btn" id="pongExitBtn" onclick="exitPongFullscreen()" aria-label="Exit fullscreen">&times;</button>
       <div class="pong-header">
         <h3>🐾 Cat Laser Pong</h3>
         <p>Play as Elie or Juneau and swipe at the laser dot. Choose your cat, then start!</p>
@@ -2528,8 +2595,9 @@ const overlay = document.getElementById('pongOverlay');
 
 // Retina / HiDPI support — keeps logical coords unchanged
 const dpr = window.devicePixelRatio || 1;
-const W = canvas.width;
-const H = canvas.height;
+const ORIG_W = 700, ORIG_H = 400;
+let W = canvas.width;
+let H = canvas.height;
 canvas.width  = W * dpr;
 canvas.height = H * dpr;
 canvas.style.width  = W + 'px';
@@ -2648,11 +2716,26 @@ function resetGame() {
 
 function startGame() {
   if (!selectedCat) {
-    overlay.innerHTML = '<h4>Pick a cat first! 🐱</h4><p>Choose Juneau or Elie above</p>';
+    // This is a static, hardcoded string — no user input involved (safe)
+    overlay.innerHTML = '<h4>Pick a cat first! \u{1F431}</h4><p>Choose Juneau or Elie above</p>';
     overlay.style.display = 'flex';
     return;
   }
   if (gameRunning) return;
+
+  // On mobile, enter fullscreen first
+  if (isMobileDevice() && !pongIsFullscreen) {
+    enterPongFullscreen();
+    // Wait for resize to settle, then start the actual game
+    setTimeout(function() {
+      launchGame();
+    }, 300);
+    return;
+  }
+  launchGame();
+}
+
+function launchGame() {
   if (idleAnimId) { cancelAnimationFrame(idleAnimId); idleAnimId = null; }
   gameOver = false;
   gameRunning = true;
@@ -2861,7 +2944,7 @@ function drawWinScreen(winnerCat, youWon) {
     // "Press Reset" hint at bottom
     ctx.fillStyle = 'rgba(255,255,255,0.28)';
     ctx.font      = '400 11px "DM Sans", sans-serif';
-    ctx.fillText('Press Reset to play again', W / 2, textY3);
+    ctx.fillText(pongIsFullscreen ? 'Tap Reset to play again or X to exit' : 'Press Reset to play again', W / 2, textY3);
 
     ctx.restore();
     ctx.textAlign = 'left';
@@ -3183,6 +3266,123 @@ canvas.addEventListener('touchmove', e => {
   touchStartY = e.touches[0].clientY;
   e.preventDefault();
 }, { passive: false });
+
+/* ───── Mobile Fullscreen Pong ───── */
+let pongIsFullscreen = false;
+const pongSection = document.getElementById('pongSection');
+const rotateOverlay = document.getElementById('pongRotateOverlay');
+
+function isMobileDevice() {
+  return 'ontouchstart' in window && window.innerWidth <= 1024;
+}
+
+function resizeCanvasTo(w, h) {
+  W = w; H = h;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
+}
+
+function enterPongFullscreen() {
+  if (pongIsFullscreen) return;
+  pongIsFullscreen = true;
+  pongSection.classList.add('pong-fullscreen');
+  document.body.style.overflow = 'hidden';
+
+  // Try native fullscreen (Android)
+  if (pongSection.requestFullscreen) {
+    pongSection.requestFullscreen().catch(function(){});
+  } else if (pongSection.webkitRequestFullscreen) {
+    pongSection.webkitRequestFullscreen();
+  }
+
+  // Try to lock orientation (Android)
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(function(){});
+  }
+
+  checkOrientationForPong();
+  window.addEventListener('resize', onPongResize);
+}
+
+function exitPongFullscreen() {
+  if (!pongIsFullscreen) return;
+  pongIsFullscreen = false;
+  pongSection.classList.remove('pong-fullscreen');
+  rotateOverlay.classList.remove('visible');
+  document.body.style.overflow = '';
+
+  // Exit native fullscreen
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(function(){});
+  } else if (document.webkitFullscreenElement) {
+    document.webkitExitFullscreen();
+  }
+
+  // Unlock orientation
+  if (screen.orientation && screen.orientation.unlock) {
+    screen.orientation.unlock();
+  }
+
+  window.removeEventListener('resize', onPongResize);
+
+  // Restore original canvas size
+  resizeCanvasTo(ORIG_W, ORIG_H);
+  resetGame();
+}
+
+function checkOrientationForPong() {
+  if (!pongIsFullscreen) return;
+  var isLandscape = window.innerWidth > window.innerHeight;
+  if (isLandscape) {
+    rotateOverlay.classList.remove('visible');
+    fitCanvasToScreen();
+  } else {
+    rotateOverlay.classList.add('visible');
+  }
+}
+
+function fitCanvasToScreen() {
+  if (!pongIsFullscreen) return;
+  // Use viewport size minus some space for controls
+  var controlsH = 90; // score row + buttons
+  var availW = window.innerWidth - 16;
+  var availH = window.innerHeight - controlsH;
+  // Maintain 7:4 aspect ratio
+  var aspect = 7 / 4;
+  var newW, newH;
+  if (availW / availH > aspect) {
+    newH = availH;
+    newW = Math.round(newH * aspect);
+  } else {
+    newW = availW;
+    newH = Math.round(newW / aspect);
+  }
+  resizeCanvasTo(newW, newH);
+  // Reinit game positions for new dimensions
+  if (!gameRunning && !gameOver) {
+    resetGame();
+  }
+}
+
+function onPongResize() {
+  checkOrientationForPong();
+}
+
+// Listen for orientation/resize changes
+window.addEventListener('orientationchange', function() {
+  setTimeout(checkOrientationForPong, 100);
+});
+
+// Exit fullscreen if native fullscreen is exited (e.g. swipe down on Android)
+document.addEventListener('fullscreenchange', function() {
+  if (!document.fullscreenElement && pongIsFullscreen) {
+    exitPongFullscreen();
+  }
+});
 
 // Init — resetGame() calls startIdleLoop() internally
 resetGame();
