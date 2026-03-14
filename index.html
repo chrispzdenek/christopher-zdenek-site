@@ -590,16 +590,23 @@
     }
     .essay-hero {
       position: relative;
-      background: url('images/Essay Photo/Pool Parties Photo.jpg') center/cover no-repeat;
+      overflow: hidden;
       padding: 4rem 3rem 3rem;
       display: flex; flex-direction: column; justify-content: flex-end;
       min-height: 220px;
+    }
+    .essay-hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
     }
     .essay-hero::before {
       content: '';
       position: absolute; inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 100%);
       pointer-events: none;
+      z-index: 1;
     }
     .essay-card-body {
       padding: 2rem 3rem 3rem;
@@ -2197,6 +2204,9 @@
 
     <div class="essay-card reveal reveal-delay-3" id="essayCard">
       <div class="essay-hero">
+        <video class="essay-hero-video" autoplay muted loop playsinline>
+          <source src="images/Essay Photo/Pool Parties Video.mp4" type="video/mp4">
+        </video>
         <div class="essay-title">I Hate Pool Parties</div>
         <div class="essay-meta">Personal Essay &nbsp;·&nbsp; Christopher Zdenek</div>
       </div>
@@ -3676,6 +3686,26 @@ resetGame();
     if (e.key === 'ArrowLeft')  lbShow(lbCurrent - 1);
     if (e.key === 'ArrowRight') lbShow(lbCurrent + 1);
   });
+
+  // Touch swipe for lightbox
+  (function () {
+    var startX = 0, startY = 0, swiped = false;
+    lbOv.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      swiped = false;
+    }, { passive: true });
+    lbOv.addEventListener('touchmove', function (e) {
+      if (swiped) return;
+      var dx = e.touches[0].clientX - startX;
+      var dy = e.touches[0].clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        swiped = true;
+        if (dx > 0) lbShow(lbCurrent - 1);
+        else lbShow(lbCurrent + 1);
+      }
+    }, { passive: true });
+  })();
 })();
 </script>
 
@@ -3710,14 +3740,14 @@ var albumData = [
   { title: "Abraxas", artist: "Santana", year: "1970", img: "images/albums/abraxas---santana.jpg", spotify: "https://open.spotify.com/album/4WnGJlFMREhvenQxPMKPkh", apple: "https://music.apple.com/us/album/abraxas/1440825963" },
   { title: "Short n' Sweet", artist: "Sabrina Carpenter", year: "2024", img: "images/albums/short-n-sweet---sabrina-carpenter.jpg", spotify: "https://open.spotify.com/album/4SFvFyoJOoaHPRQJkMz6VL", apple: "https://music.apple.com/us/album/short-n-sweet/1750307880" },
   { title: "What's Going On", artist: "Marvin Gaye", year: "1971", img: "images/albums/whats-going-on---marvin-gaye.jpg", spotify: "https://open.spotify.com/album/2v6ANhDOADD1s9rNpfVEsR", apple: "https://music.apple.com/us/album/whats-going-on/1440756739" },
-  { title: "A Larum", artist: "Johnny Flynn", year: "2008", img: "images/albums/a-larum---johnny-flynn.jpg", spotify: "https://open.spotify.com/album/3gqXK23hO6CYP2nMGnCPnH", apple: "https://music.apple.com/us/album/a-larum/277458268" },
+  { title: "A Larum", artist: "Johnny Flynn", year: "2008", img: "images/albums/a-larum---johnny-flynn.jpg", spotify: "https://open.spotify.com/album/4si1HNK1gPFAYfONE19eih", apple: "https://music.apple.com/us/album/a-larum/1440749445" },
   { title: "Gypsy", artist: "2024 Broadway Cast", year: "2024", img: "images/albums/gypsy---2024-broadway-cast.jpg", spotify: "https://open.spotify.com/album/5DMHkCrIMxGkXWbcqVe1ng", apple: "https://music.apple.com/us/album/gypsy-2024-broadway-cast-recording/1783063912" },
   { title: "3 Feet High and Rising", artist: "De La Soul", year: "1989", img: "images/albums/3-feet-high-and-rising---de-la-soul.jpeg", spotify: "https://open.spotify.com/album/6Hv04HMkJYMr32FJwsdMpo", apple: "https://music.apple.com/us/album/3-feet-high-and-rising/1634347775" },
-  { title: "Sketches of Spain", artist: "Miles Davis", year: "1960", img: "images/albums/sketches-in-spain---miles-davis.jpg", spotify: "https://open.spotify.com/album/3sHbcVAHFkczGnifMM0each", apple: "https://music.apple.com/us/album/sketches-of-spain/268685468" },
+  { title: "Sketches of Spain", artist: "Miles Davis", year: "1960", img: "images/albums/sketches-in-spain---miles-davis.jpg", spotify: "https://open.spotify.com/album/56WqCnM5giX57Jr3aAN2aK", apple: "https://music.apple.com/us/album/sketches-of-spain/832060615" },
   { title: "Buzzkill", artist: "Lyn Lapid", year: "2023", img: "images/albums/buzzkill---lyn-lapid.jpeg", spotify: "https://open.spotify.com/album/6kOGqAdAj2cGJbNXpOOP3n", apple: "https://music.apple.com/us/album/buzzkill/1704629839" },
   { title: "Speaking in Tongues", artist: "Talking Heads", year: "1983", img: "images/albums/speaking-in-tongues---talking-heads.jpg", spotify: "https://open.spotify.com/album/4FR8Z2e0I9RjOzROHzJOcQ", apple: "https://music.apple.com/us/album/speaking-in-tongues/281770050" },
   { title: "Cowboy Carter", artist: "Beyonce", year: "2024", img: "images/albums/beyonce---cowboy-carter.jpg", spotify: "https://open.spotify.com/album/6BzxX6zkDsYKFJ04ziU5xQ", apple: "https://music.apple.com/us/album/cowboy-carter/1738363766" },
-  { title: "Next to Normal", artist: "Original London Cast", year: "2009", img: "images/albums/next-to-normal---original-london-cast.jpeg", spotify: "https://open.spotify.com/album/6eLFgGRuBYlGWutqP8FLv", apple: "https://music.apple.com/us/album/next-to-normal-original-broadway-cast-recording/312026869" },
+  { title: "Next to Normal", artist: "Original Broadway Cast", year: "2009", img: "images/albums/next-to-normal---original-london-cast.jpeg", spotify: "https://open.spotify.com/album/0HLCM1PkLwDz5NLr5Kl4a4", apple: "https://music.apple.com/us/album/next-to-normal-original-broadway-cast-recording/1271833957" },
   { title: "Can't Buy a Thrill", artist: "Steely Dan", year: "1972", img: "images/albums/cant-buy-a-thrill---steely-dan.jpg", spotify: "https://open.spotify.com/album/0FnSrOxFlkIUqjJLvJe8D8", apple: "https://music.apple.com/us/album/cant-buy-a-thrill/580707218" },
   { title: "The Art of Loving", artist: "Olivia Dean", year: "2024", img: "images/albums/the-art-of-loving---olivia-dean.jpg", spotify: "https://open.spotify.com/album/0i4fCcFOCkUXcjwSv9LoA3", apple: "https://music.apple.com/us/album/the-art-of-loving/1773753888" },
   { title: "Maybe Happy Ending", artist: "Original Broadway Cast", year: "2024", img: "images/albums/maybe-happy-ending---original-broadway-cast.jpg", spotify: "https://open.spotify.com/album/62xwTDcNr3BnfjMq7MIjkj", apple: "https://music.apple.com/us/album/maybe-happy-ending-original-broadway-cast-recording/1778591624" },
@@ -3879,27 +3909,44 @@ var interestData = [
       }
     });
 
-    // Touch support
+    // Touch support with momentum tracking
+    var touchHistory = [];
     marqueeEl.addEventListener('touchstart', function(e) {
       isDragging = true;
       didDrag = false;
       dragStartX = e.touches[0].clientX;
       dragStartOffset = offset;
       velocity = 0;
+      touchHistory = [{ x: e.touches[0].clientX, t: Date.now() }];
     }, { passive: true });
 
     marqueeEl.addEventListener('touchmove', function(e) {
       if (!isDragging) return;
       var dx = e.touches[0].clientX - dragStartX;
       if (Math.abs(dx) > 4) didDrag = true;
-      velocity = (dragStartOffset + dx) - offset;
       offset = dragStartOffset + dx;
       wrapOffset();
       applyTransform();
+      var now = Date.now();
+      touchHistory.push({ x: e.touches[0].clientX, t: now });
+      // Keep only last 80ms of touch history for velocity calc
+      while (touchHistory.length > 1 && now - touchHistory[0].t > 80) touchHistory.shift();
     }, { passive: true });
 
     marqueeEl.addEventListener('touchend', function() {
       isDragging = false;
+      // Calculate flick velocity from recent touch history
+      if (touchHistory.length >= 2) {
+        var first = touchHistory[0];
+        var last = touchHistory[touchHistory.length - 1];
+        var dt = last.t - first.t;
+        if (dt > 0 && dt < 200) {
+          velocity = (last.x - first.x) / dt * 16; // scale to per-frame (~16ms)
+          // Cap velocity for a controlled feel
+          velocity = Math.max(-25, Math.min(25, velocity));
+        }
+      }
+      touchHistory = [];
       setTimeout(function() { didDrag = false; }, 10);
     });
 
@@ -3918,7 +3965,7 @@ var interestData = [
       if (!isDragging) {
         if (Math.abs(velocity) > 0.3) {
           offset += velocity;
-          velocity *= 0.93;
+          velocity *= 0.95;
         } else {
           velocity = 0;
           offset -= (isHovering ? currentSpeed : speed);
@@ -4176,6 +4223,25 @@ var interestData = [
     if (e.key === 'ArrowLeft' && currentCategory !== 'interest') navigateProjectModal(-1);
     if (e.key === 'ArrowRight' && currentCategory !== 'interest') navigateProjectModal(1);
   });
+
+  // Touch swipe for project modal (films & albums)
+  (function () {
+    var startX = 0, startY = 0, swiped = false;
+    modal.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      swiped = false;
+    }, { passive: true });
+    modal.addEventListener('touchmove', function (e) {
+      if (swiped || currentCategory === 'interest') return;
+      var dx = e.touches[0].clientX - startX;
+      var dy = e.touches[0].clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        swiped = true;
+        navigateProjectModal(dx > 0 ? -1 : 1);
+      }
+    }, { passive: true });
+  })();
 
   // Wire interest cards
   var cards = document.querySelectorAll('.interest-card');
