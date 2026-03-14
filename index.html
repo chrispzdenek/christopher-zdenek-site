@@ -1123,12 +1123,18 @@
       align-items: center; justify-content: center;
     }
     .lb-overlay.open { display: flex; }
-    .lb-img-wrap { position: relative; max-width: 90vw; max-height: 84vh; }
+    .lb-img-wrap {
+      position: relative; max-width: 90vw; max-height: 84vh;
+      will-change: transform, opacity;
+    }
+    .lb-img-wrap.dragging { transition: none; }
+    .lb-img-wrap.snapping { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; }
     .lb-img-wrap img {
       max-width: 90vw; max-height: 84vh;
       border-radius: 6px; display: block;
       object-fit: contain;
       box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+      user-select: none; -webkit-user-drag: none;
     }
     .lb-caption {
       position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
@@ -1209,7 +1215,10 @@
       max-width: 900px; width: 90%;
       transform: translateY(30px) scale(0.97);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
+    .project-modal-content.dragging { transition: none; }
+    .project-modal-content.snapping { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; }
     .project-modal-overlay.open .project-modal-content {
       transform: translateY(0) scale(1);
     }
@@ -3687,24 +3696,67 @@ resetGame();
     if (e.key === 'ArrowRight') lbShow(lbCurrent + 1);
   });
 
-  // Touch swipe for lightbox
+  // Touch drag for lightbox — image follows your finger
   (function () {
-    var startX = 0, startY = 0, swiped = false;
+    var wrap = document.querySelector('.lb-img-wrap');
+    var startX = 0, startY = 0, dragging = false, locked = false, dx = 0;
     lbOv.addEventListener('touchstart', function (e) {
+      if (!lbOv.classList.contains('open')) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      swiped = false;
+      dragging = false; locked = false; dx = 0;
+      wrap.classList.remove('snapping');
+      wrap.classList.add('dragging');
     }, { passive: true });
     lbOv.addEventListener('touchmove', function (e) {
-      if (swiped) return;
-      var dx = e.touches[0].clientX - startX;
-      var dy = e.touches[0].clientY - startY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-        swiped = true;
-        if (dx > 0) lbShow(lbCurrent - 1);
-        else lbShow(lbCurrent + 1);
+      if (locked) return;
+      var cx = e.touches[0].clientX, cy = e.touches[0].clientY;
+      var rawDx = cx - startX, rawDy = cy - startY;
+      // Lock direction on first significant move
+      if (!dragging && (Math.abs(rawDx) > 8 || Math.abs(rawDy) > 8)) {
+        if (Math.abs(rawDy) > Math.abs(rawDx)) { locked = true; wrap.classList.remove('dragging'); return; }
+        dragging = true;
       }
-    }, { passive: true });
+      if (!dragging) return;
+      e.preventDefault();
+      dx = rawDx;
+      var progress = Math.min(Math.abs(dx) / window.innerWidth, 1);
+      var opacity = 1 - progress * 0.4;
+      wrap.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.02) + 'deg)';
+      wrap.style.opacity = opacity;
+    }, { passive: false });
+    lbOv.addEventListener('touchend', function () {
+      wrap.classList.remove('dragging');
+      if (!dragging) return;
+      var threshold = window.innerWidth * 0.15;
+      if (Math.abs(dx) > threshold) {
+        // Fling off screen, then show next
+        var dir = dx > 0 ? -1 : 1;
+        wrap.classList.add('snapping');
+        wrap.style.transform = 'translateX(' + (dx > 0 ? '100vw' : '-100vw') + ')';
+        wrap.style.opacity = '0';
+        setTimeout(function () {
+          lbShow(lbCurrent + dir);
+          // Reset and slide in from opposite side
+          wrap.classList.remove('snapping');
+          wrap.style.transform = 'translateX(' + (dir > 0 ? '80px' : '-80px') + ')';
+          wrap.style.opacity = '0.5';
+          // Force reflow
+          wrap.offsetHeight;
+          wrap.classList.add('snapping');
+          wrap.style.transform = 'translateX(0)';
+          wrap.style.opacity = '1';
+          setTimeout(function () { wrap.classList.remove('snapping'); wrap.style.transform = ''; wrap.style.opacity = ''; }, 300);
+        }, 250);
+      } else {
+        // Snap back
+        wrap.classList.add('snapping');
+        wrap.style.transform = 'translateX(0)';
+        wrap.style.opacity = '1';
+        setTimeout(function () { wrap.classList.remove('snapping'); wrap.style.transform = ''; wrap.style.opacity = ''; }, 300);
+      }
+      dragging = false;
+    });
   })();
 })();
 </script>
@@ -3747,7 +3799,7 @@ var albumData = [
   { title: "Buzzkill", artist: "Lyn Lapid", year: "2023", img: "images/albums/buzzkill---lyn-lapid.jpeg", spotify: "https://open.spotify.com/album/6kOGqAdAj2cGJbNXpOOP3n", apple: "https://music.apple.com/us/album/buzzkill/1704629839" },
   { title: "Speaking in Tongues", artist: "Talking Heads", year: "1983", img: "images/albums/speaking-in-tongues---talking-heads.jpg", spotify: "https://open.spotify.com/album/4FR8Z2e0I9RjOzROHzJOcQ", apple: "https://music.apple.com/us/album/speaking-in-tongues/281770050" },
   { title: "Cowboy Carter", artist: "Beyonce", year: "2024", img: "images/albums/beyonce---cowboy-carter.jpg", spotify: "https://open.spotify.com/album/6BzxX6zkDsYKFJ04ziU5xQ", apple: "https://music.apple.com/us/album/cowboy-carter/1738363766" },
-  { title: "Next to Normal", artist: "Original Broadway Cast", year: "2009", img: "images/albums/next-to-normal---original-london-cast.jpeg", spotify: "https://open.spotify.com/album/0HLCM1PkLwDz5NLr5Kl4a4", apple: "https://music.apple.com/us/album/next-to-normal-original-broadway-cast-recording/1271833957" },
+  { title: "Next to Normal", artist: "Original London Cast", year: "2025", img: "images/albums/next-to-normal---original-london-cast.jpeg", spotify: "https://open.spotify.com/album/5IWkvoiJdAJgbebPS47Uy6", apple: "https://music.apple.com/us/album/next-to-normal-original-london-cast-recording/1815393191" },
   { title: "Can't Buy a Thrill", artist: "Steely Dan", year: "1972", img: "images/albums/cant-buy-a-thrill---steely-dan.jpg", spotify: "https://open.spotify.com/album/0FnSrOxFlkIUqjJLvJe8D8", apple: "https://music.apple.com/us/album/cant-buy-a-thrill/580707218" },
   { title: "The Art of Loving", artist: "Olivia Dean", year: "2024", img: "images/albums/the-art-of-loving---olivia-dean.jpg", spotify: "https://open.spotify.com/album/0i4fCcFOCkUXcjwSv9LoA3", apple: "https://music.apple.com/us/album/the-art-of-loving/1773753888" },
   { title: "Maybe Happy Ending", artist: "Original Broadway Cast", year: "2024", img: "images/albums/maybe-happy-ending---original-broadway-cast.jpg", spotify: "https://open.spotify.com/album/62xwTDcNr3BnfjMq7MIjkj", apple: "https://music.apple.com/us/album/maybe-happy-ending-original-broadway-cast-recording/1778591624" },
@@ -4224,23 +4276,61 @@ var interestData = [
     if (e.key === 'ArrowRight' && currentCategory !== 'interest') navigateProjectModal(1);
   });
 
-  // Touch swipe for project modal (films & albums)
+  // Touch drag for project modal — content follows your finger
   (function () {
-    var startX = 0, startY = 0, swiped = false;
+    var startX = 0, startY = 0, dragging = false, locked = false, dx = 0;
     modal.addEventListener('touchstart', function (e) {
+      if (!modal.classList.contains('open') || currentCategory === 'interest') return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      swiped = false;
+      dragging = false; locked = false; dx = 0;
+      modalContent.classList.remove('snapping');
+      modalContent.classList.add('dragging');
     }, { passive: true });
     modal.addEventListener('touchmove', function (e) {
-      if (swiped || currentCategory === 'interest') return;
-      var dx = e.touches[0].clientX - startX;
-      var dy = e.touches[0].clientY - startY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-        swiped = true;
-        navigateProjectModal(dx > 0 ? -1 : 1);
+      if (locked || currentCategory === 'interest') return;
+      var cx = e.touches[0].clientX, cy = e.touches[0].clientY;
+      var rawDx = cx - startX, rawDy = cy - startY;
+      if (!dragging && (Math.abs(rawDx) > 8 || Math.abs(rawDy) > 8)) {
+        if (Math.abs(rawDy) > Math.abs(rawDx)) { locked = true; modalContent.classList.remove('dragging'); return; }
+        dragging = true;
       }
-    }, { passive: true });
+      if (!dragging) return;
+      e.preventDefault();
+      dx = rawDx;
+      var progress = Math.min(Math.abs(dx) / window.innerWidth, 1);
+      var opacity = 1 - progress * 0.4;
+      modalContent.style.transform = 'translateX(' + dx + 'px)';
+      modalContent.style.opacity = opacity;
+    }, { passive: false });
+    modal.addEventListener('touchend', function () {
+      modalContent.classList.remove('dragging');
+      if (!dragging) return;
+      var threshold = window.innerWidth * 0.15;
+      if (Math.abs(dx) > threshold) {
+        var dir = dx > 0 ? -1 : 1;
+        modalContent.classList.add('snapping');
+        modalContent.style.transform = 'translateX(' + (dx > 0 ? '100vw' : '-100vw') + ')';
+        modalContent.style.opacity = '0';
+        setTimeout(function () {
+          navigateProjectModal(dir);
+          modalContent.classList.remove('snapping');
+          modalContent.style.transform = 'translateX(' + (dir > 0 ? '80px' : '-80px') + ')';
+          modalContent.style.opacity = '0.5';
+          modalContent.offsetHeight;
+          modalContent.classList.add('snapping');
+          modalContent.style.transform = 'translateX(0)';
+          modalContent.style.opacity = '1';
+          setTimeout(function () { modalContent.classList.remove('snapping'); modalContent.style.transform = ''; modalContent.style.opacity = ''; }, 300);
+        }, 250);
+      } else {
+        modalContent.classList.add('snapping');
+        modalContent.style.transform = 'translateX(0)';
+        modalContent.style.opacity = '1';
+        setTimeout(function () { modalContent.classList.remove('snapping'); modalContent.style.transform = ''; modalContent.style.opacity = ''; }, 300);
+      }
+      dragging = false;
+    });
   })();
 
   // Wire interest cards
