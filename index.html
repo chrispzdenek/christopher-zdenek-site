@@ -385,7 +385,17 @@
     }
 
     /* ─── ABOUT ─────────────────────────────────────────────── */
-    #about { background: var(--white); }
+    #about { background: var(--white); perspective: 1200px; }
+    .about-3d-entrance {
+      transform-origin: center top;
+      will-change: transform, opacity;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .about-3d-entrance {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
     .about-grid {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -1767,10 +1777,10 @@
 
 <!-- ── ABOUT ────────────────────────────────────────────────── -->
 <section id="about">
-  <div class="container">
+  <div class="container about-3d-entrance">
     <div class="about-grid">
       <!-- Left: headshot + stat boxes -->
-      <div class="about-visual reveal">
+      <div class="about-visual">
         <div class="headshot-wrap">
           <img
             src="images/headshot.jpg"
@@ -1802,7 +1812,7 @@
         </div>
       </div>
       <!-- Right: text -->
-      <div class="about-text reveal reveal-delay-1">
+      <div class="about-text">
         <p class="section-label">About Me</p>
         <h2 class="section-title">A few things worth<br>knowing about me</h2>
         <div class="divider"></div>
@@ -4960,6 +4970,54 @@ var interestData = [
       card.style.setProperty('--glow-opacity', '0');
     });
   });
+})();
+</script>
+
+<!-- ── About 3D Scroll Entrance ── -->
+<script>
+(function() {
+  if ('ontouchstart' in window) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var about = document.getElementById('about');
+  var container = about ? about.querySelector('.about-3d-entrance') : null;
+  if (!container) return;
+
+  // Set initial state
+  container.style.transform = 'rotateX(8deg) scale(0.97) translateY(40px)';
+  container.style.opacity = '0.4';
+
+  var done = false;
+
+  function onScroll() {
+    if (done) return;
+
+    var rect = about.getBoundingClientRect();
+    var windowH = window.innerHeight;
+    var start = windowH * 0.8;
+    var end = windowH * 0.3;
+
+    if (rect.top > start) {
+      container.style.transform = 'rotateX(8deg) scale(0.97) translateY(40px)';
+      container.style.opacity = '0.4';
+    } else if (rect.top < end) {
+      container.style.transform = 'rotateX(0deg) scale(1) translateY(0px)';
+      container.style.opacity = '1';
+      done = true;
+      window.removeEventListener('scroll', onScroll);
+    } else {
+      var progress = 1 - (rect.top - end) / (start - end);
+      var rotateX = 8 * (1 - progress);
+      var scale = 0.97 + 0.03 * progress;
+      var translateY = 40 * (1 - progress);
+      var opacity = 0.4 + 0.6 * progress;
+      container.style.transform = 'rotateX(' + rotateX + 'deg) scale(' + scale + ') translateY(' + translateY + 'px)';
+      container.style.opacity = opacity;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
 </script>
 
