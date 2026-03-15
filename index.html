@@ -801,6 +801,9 @@
       position: relative;
       z-index: 2;
     }
+    @media (prefers-reduced-motion: reduce) {
+      .interest-card::before { opacity: 0 !important; transition: none; }
+    }
 
     /* ─── TASTE MARQUEES ───────────────────────────────────── */
     .taste-marquee-section { margin-top: 3.5rem; }
