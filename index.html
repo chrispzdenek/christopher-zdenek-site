@@ -2385,7 +2385,7 @@
 
     <div class="essay-card reveal reveal-delay-3" id="essayCard">
       <div class="essay-hero">
-        <video class="essay-hero-video" autoplay muted loop playsinline>
+        <video class="essay-hero-video" autoplay muted loop playsinline id="poolVideo">
           <source src="images/Essay Photo/Pool Parties Video.mp4" type="video/mp4">
         </video>
         <div class="essay-title">I Hate Pool Parties</div>
@@ -3971,23 +3971,23 @@ var filmData = [
 
 var albumData = [
   { title: "Blonde", artist: "Frank Ocean", year: "2016", img: "images/albums/blonde---frank-ocean.jpg", spotify: "https://open.spotify.com/album/3mH6qwIy9crq0I9YQbOuDf", apple: "https://music.apple.com/us/album/blonde/1146195596" },
-  { title: "Dookie", artist: "Green Day", year: "1994", img: "images/albums/dookie---green-day.jpg", spotify: "https://open.spotify.com/album/4uG8q3GPuWHQlRbswMIRS6", apple: "https://music.apple.com/us/album/dookie/1161887504" },
-  { title: "Hadestown", artist: "Original Broadway Cast", year: "2019", img: "images/albums/hadestown---original-broadway-cast.jpg", spotify: "https://open.spotify.com/album/6pULcs8O3elJH03sLPMJFk", apple: "https://music.apple.com/us/album/hadestown-original-broadway-cast-recording/1458474547" },
-  { title: "Abraxas", artist: "Santana", year: "1970", img: "images/albums/abraxas---santana.jpg", spotify: "https://open.spotify.com/album/4WnGJlFMREhvenQxPMKPkh", apple: "https://music.apple.com/us/album/abraxas/1440825963" },
-  { title: "Short n' Sweet", artist: "Sabrina Carpenter", year: "2024", img: "images/albums/short-n-sweet---sabrina-carpenter.jpg", spotify: "https://open.spotify.com/album/4SFvFyoJOoaHPRQJkMz6VL", apple: "https://music.apple.com/us/album/short-n-sweet/1750307880" },
-  { title: "What's Going On", artist: "Marvin Gaye", year: "1971", img: "images/albums/whats-going-on---marvin-gaye.jpg", spotify: "https://open.spotify.com/album/2v6ANhDOADD1s9rNpfVEsR", apple: "https://music.apple.com/us/album/whats-going-on/1440756739" },
+  { title: "Dookie", artist: "Green Day", year: "1994", img: "images/albums/dookie---green-day.jpg", spotify: "https://open.spotify.com/album/4uG8q3GPuWHQlRbswMIRS6", apple: "https://music.apple.com/us/album/dookie/1160081985" },
+  { title: "Hadestown", artist: "Original Broadway Cast", year: "2019", img: "images/albums/hadestown---original-broadway-cast.jpg", spotify: "https://open.spotify.com/album/1J1yxODbNlqKbwRqJxYJUP", apple: "https://music.apple.com/us/album/hadestown-original-broadway-cast-recording/1466351033" },
+  { title: "Abraxas", artist: "Santana", year: "1970", img: "images/albums/abraxas---santana.jpg", spotify: "https://open.spotify.com/album/1CHUXwuge9A7L2KiA3vnR6", apple: "https://music.apple.com/us/album/abraxas/871146591" },
+  { title: "Short n' Sweet", artist: "Sabrina Carpenter", year: "2024", img: "images/albums/short-n-sweet---sabrina-carpenter.jpg", spotify: "https://open.spotify.com/album/3iPSVi54hsacKKl1xIR2eH", apple: "https://music.apple.com/us/album/short-n-sweet/1750307020" },
+  { title: "What's Going On", artist: "Marvin Gaye", year: "1971", img: "images/albums/whats-going-on---marvin-gaye.jpg", spotify: "https://open.spotify.com/album/2v6ANhWhZBUKkg6pJJBs3B", apple: "https://music.apple.com/us/album/whats-going-on/1538081586" },
   { title: "A Larum", artist: "Johnny Flynn", year: "2008", img: "images/albums/a-larum---johnny-flynn.jpg", spotify: "https://open.spotify.com/album/4si1HNK1gPFAYfONE19eih", apple: "https://music.apple.com/us/album/a-larum/1440749445" },
-  { title: "Gypsy", artist: "2024 Broadway Cast", year: "2024", img: "images/albums/gypsy---2024-broadway-cast.jpg", spotify: "https://open.spotify.com/album/5DMHkCrIMxGkXWbcqVe1ng", apple: "https://music.apple.com/us/album/gypsy-2024-broadway-cast-recording/1783063912" },
-  { title: "3 Feet High and Rising", artist: "De La Soul", year: "1989", img: "images/albums/3-feet-high-and-rising---de-la-soul.jpeg", spotify: "https://open.spotify.com/album/6Hv04HMkJYMr32FJwsdMpo", apple: "https://music.apple.com/us/album/3-feet-high-and-rising/1634347775" },
+  { title: "Gypsy", artist: "2024 Broadway Cast", year: "2024", img: "images/albums/gypsy---2024-broadway-cast.jpg", spotify: "https://open.spotify.com/album/5PA6UdeWgZ5B3308hc7X0S", apple: "https://music.apple.com/us/album/gypsy-starring-audra-mcdonald-2024-broadway-cast-recording/1806741745" },
+  { title: "3 Feet High and Rising", artist: "De La Soul", year: "1989", img: "images/albums/3-feet-high-and-rising---de-la-soul.jpeg", spotify: "https://open.spotify.com/album/34LxHI9x14qXUOS8AWRrYD", apple: "https://music.apple.com/us/album/3-feet-high-and-rising/1657705063" },
   { title: "Sketches of Spain", artist: "Miles Davis", year: "1960", img: "images/albums/sketches-in-spain---miles-davis.jpg", spotify: "https://open.spotify.com/album/56WqCnM5giX57Jr3aAN2aK", apple: "https://music.apple.com/us/album/sketches-of-spain/832060615" },
-  { title: "Buzzkill", artist: "Lyn Lapid", year: "2023", img: "images/albums/buzzkill---lyn-lapid.jpeg", spotify: "https://open.spotify.com/album/6kOGqAdAj2cGJbNXpOOP3n", apple: "https://music.apple.com/us/album/buzzkill/1704629839" },
-  { title: "Speaking in Tongues", artist: "Talking Heads", year: "1983", img: "images/albums/speaking-in-tongues---talking-heads.jpg", spotify: "https://open.spotify.com/album/4FR8Z2e0I9RjOzROHzJOcQ", apple: "https://music.apple.com/us/album/speaking-in-tongues/281770050" },
+  { title: "Buzzkill", artist: "Lyn Lapid", year: "2023", img: "images/albums/buzzkill---lyn-lapid.jpeg", spotify: "https://open.spotify.com/album/41oBhRyeuyMHkVdp2LYVJE", apple: "https://music.apple.com/us/album/buzzkill/1797221214" },
+  { title: "Speaking in Tongues", artist: "Talking Heads", year: "1983", img: "images/albums/speaking-in-tongues---talking-heads.jpg", spotify: "https://open.spotify.com/album/78MM8HrabEGPLVWaJkM2t1", apple: "https://music.apple.com/us/album/speaking-in-tongues/300202199" },
   { title: "Cowboy Carter", artist: "Beyonce", year: "2024", img: "images/albums/beyonce---cowboy-carter.jpg", spotify: "https://open.spotify.com/album/6BzxX6zkDsYKFJ04ziU5xQ", apple: "https://music.apple.com/us/album/cowboy-carter/1738363766" },
   { title: "Next to Normal", artist: "Original London Cast", year: "2025", img: "images/albums/next-to-normal---original-london-cast.jpeg", spotify: "https://open.spotify.com/album/5IWkvoiJdAJgbebPS47Uy6", apple: "https://music.apple.com/us/album/next-to-normal-original-london-cast-recording/1815393191" },
-  { title: "Can't Buy a Thrill", artist: "Steely Dan", year: "1972", img: "images/albums/cant-buy-a-thrill---steely-dan.jpg", spotify: "https://open.spotify.com/album/0FnSrOxFlkIUqjJLvJe8D8", apple: "https://music.apple.com/us/album/cant-buy-a-thrill/580707218" },
-  { title: "The Art of Loving", artist: "Olivia Dean", year: "2024", img: "images/albums/the-art-of-loving---olivia-dean.jpg", spotify: "https://open.spotify.com/album/0i4fCcFOCkUXcjwSv9LoA3", apple: "https://music.apple.com/us/album/the-art-of-loving/1773753888" },
-  { title: "Maybe Happy Ending", artist: "Original Broadway Cast", year: "2024", img: "images/albums/maybe-happy-ending---original-broadway-cast.jpg", spotify: "https://open.spotify.com/album/62xwTDcNr3BnfjMq7MIjkj", apple: "https://music.apple.com/us/album/maybe-happy-ending-original-broadway-cast-recording/1778591624" },
-  { title: "Eternal Sunshine", artist: "Ariana Grande", year: "2024", img: "images/albums/eternal-sunshine---ariana-grande.jpeg", spotify: "https://open.spotify.com/album/5EYKrEDnKhhcNxGedaRQeK", apple: "https://music.apple.com/us/album/eternal-sunshine/1732231867" }
+  { title: "Can't Buy a Thrill", artist: "Steely Dan", year: "1972", img: "images/albums/cant-buy-a-thrill---steely-dan.jpg", spotify: "https://open.spotify.com/album/6DlSUW5gmq6Byc3osKDJ2p", apple: "https://music.apple.com/us/album/cant-buy-a-thrill/1650885288" },
+  { title: "The Art of Loving", artist: "Olivia Dean", year: "2024", img: "images/albums/the-art-of-loving---olivia-dean.jpg", spotify: "https://open.spotify.com/album/0l8zYqoUeBYg47Gmevq9HZ", apple: "https://music.apple.com/us/album/the-art-of-loving/1817609404" },
+  { title: "Maybe Happy Ending", artist: "Original Broadway Cast", year: "2024", img: "images/albums/maybe-happy-ending---original-broadway-cast.jpg", spotify: "https://open.spotify.com/album/6wy7RABc6fzVw6kEzQOkYd", apple: "https://music.apple.com/us/album/maybe-happy-ending-original-broadway-cast-recording/1796379586" },
+  { title: "Eternal Sunshine", artist: "Ariana Grande", year: "2024", img: "images/albums/eternal-sunshine---ariana-grande.jpeg", spotify: "https://open.spotify.com/album/5EYKrEDnKhhcNxGedaRQeK", apple: "https://music.apple.com/us/album/eternal-sunshine/1725877944" }
 ];
 
 var interestData = [
@@ -4760,6 +4760,14 @@ var interestData = [
 })();
 </script>
 
+
+<!-- ── Pool Video Playback Speed ── -->
+<script>
+(function() {
+  var v = document.getElementById('poolVideo');
+  if (v) v.playbackRate = 0.6;
+})();
+</script>
 
 <!-- ── Magnetic Hero Buttons ── -->
 <script>
