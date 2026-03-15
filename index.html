@@ -1672,7 +1672,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-particle-canvas { display: none; }
-  .hero-gradient-mesh { display: block; animation: none; opacity: 0.5; }
+  .hero-gradient-mesh { display: block; }
 }
   </style>
 </head>
@@ -4756,12 +4756,24 @@ var interestData = [
   var MOUSE_RADIUS = 150;
   var REPEL_RADIUS = 40;
 
+  var resizeTimer;
   function resize() {
     canvas.width = hero.offsetWidth;
     canvas.height = hero.offsetHeight;
+    // Reinitialize particle positions for new dimensions
+    for (var i = 0; i < particles.length; i++) {
+      var p = createParticle(i);
+      particles[i].baseX = p.baseX;
+      particles[i].baseY = p.baseY;
+      particles[i].x = p.x;
+      particles[i].y = p.y;
+    }
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  });
 
   function createParticle(i) {
     var angle = Math.random() * Math.PI * 2;
@@ -4807,8 +4819,17 @@ var interestData = [
     return 0.2 + 0.8 * Math.min(dist / 0.6, 1);
   }
 
+  var isVisible = true;
+  var animId;
+  var observer = new IntersectionObserver(function(entries) {
+    isVisible = entries[0].isIntersecting;
+    if (isVisible && !animId) animate();
+  }, { threshold: 0 });
+  observer.observe(hero);
+
   var time = 0;
   function animate() {
+    if (!isVisible) { animId = null; return; }
     time++;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -4863,7 +4884,7 @@ var interestData = [
       ctx.fill();
     }
 
-    requestAnimationFrame(animate);
+    animId = requestAnimationFrame(animate);
   }
   animate();
 })();
