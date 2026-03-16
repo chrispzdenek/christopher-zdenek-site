@@ -1053,7 +1053,7 @@
     .pong-section.pong-fullscreen .pong-score-num { font-size: 2rem; }
     .pong-section.pong-fullscreen .pong-canvas-wrap {
       flex: 1; display: flex; align-items: center; justify-content: center;
-      padding: 0 0.5rem 0.5rem;
+      padding: 0 0.5rem 1rem;
     }
     .pong-section.pong-fullscreen #pongCanvas {
       max-width: 100%; max-height: 100%;
@@ -1068,7 +1068,7 @@
       cursor: pointer; backdrop-filter: blur(4px);
     }
     .pong-section.pong-fullscreen .pong-exit-btn { display: flex; align-items: center; justify-content: center; }
-    /* Rotate overlay */
+    /* Orientation choice overlay */
     .pong-rotate-overlay {
       display: none; position: fixed; inset: 0; z-index: 10003;
       background: var(--navy);
@@ -1076,18 +1076,18 @@
       color: #fff; text-align: center; gap: 1.5rem;
     }
     .pong-rotate-overlay.visible { display: flex; }
-    .pong-rotate-icon {
-      width: 60px; height: 60px;
-      animation: rotate-phone 1.5s ease-in-out infinite;
-    }
-    @keyframes rotate-phone {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(90deg); }
-    }
     .pong-rotate-overlay p {
       font-family: 'DM Sans', sans-serif;
       font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.8);
     }
+    .pong-orient-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; padding: 1.2rem 1.5rem; border-radius: 12px;
+      cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .pong-orient-btn:hover, .pong-orient-btn:active { background: rgba(255,255,255,0.2); }
 
     /* ─── CONTACT ───────────────────────────────────────────── */
     #contact { background: var(--navy); }
@@ -2824,14 +2824,25 @@
       </div>
     </div>
 
-    <!-- Rotate phone overlay (mobile pong) -->
+    <!-- Orientation choice overlay (mobile pong) -->
     <div class="pong-rotate-overlay" id="pongRotateOverlay">
-      <svg class="pong-rotate-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="16" y="6" width="32" height="52" rx="4" stroke="white" stroke-width="2.5" fill="none"/>
-        <circle cx="32" cy="50" r="2.5" fill="white"/>
-        <path d="M50 32l6-6M50 32l6 6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <p>Rotate your phone to play</p>
+      <p style="font-size:1.3rem;font-weight:400;margin-bottom:0.5rem;">How do you want to play?</p>
+      <div style="display:flex;gap:1.5rem;">
+        <button class="pong-orient-btn" onclick="choosePongOrientation('landscape')">
+          <svg viewBox="0 0 64 40" width="64" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="60" height="36" rx="4" stroke="white" stroke-width="2" fill="none"/>
+            <circle cx="55" cy="20" r="2" fill="white"/>
+          </svg>
+          <span>Horizontal</span>
+        </button>
+        <button class="pong-orient-btn" onclick="choosePongOrientation('portrait')">
+          <svg viewBox="0 0 40 64" width="40" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="36" height="60" rx="4" stroke="white" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="55" r="2" fill="white"/>
+          </svg>
+          <span>Vertical</span>
+        </button>
+      </div>
     </div>
 
     <!-- PONG -->
@@ -3134,13 +3145,10 @@ function startGame() {
   }
   if (gameRunning) return;
 
-  // On mobile, enter fullscreen first
+  // On mobile, enter fullscreen and show orientation choice
   if (isMobileDevice() && !pongIsFullscreen) {
     enterPongFullscreen();
-    // Wait for resize to settle, then start the actual game
-    setTimeout(function() {
-      launchGame();
-    }, 300);
+    // Game will launch after user picks orientation via choosePongOrientation()
     return;
   }
   launchGame();
@@ -3697,6 +3705,24 @@ function resizeCanvasTo(w, h) {
   ctx.scale(dpr, dpr);
 }
 
+var pongOrientChoice = null; // 'landscape' or 'portrait'
+
+function choosePongOrientation(orient) {
+  pongOrientChoice = orient;
+  rotateOverlay.classList.remove('visible');
+  if (orient === 'landscape') {
+    // Try to lock orientation (Android)
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(function(){});
+    }
+  }
+  fitCanvasToScreen();
+  launchGame();
+}
+
+// Expose to onclick
+window.choosePongOrientation = choosePongOrientation;
+
 function enterPongFullscreen() {
   if (pongIsFullscreen) return;
   pongIsFullscreen = true;
@@ -3710,18 +3736,15 @@ function enterPongFullscreen() {
     pongSection.webkitRequestFullscreen();
   }
 
-  // Try to lock orientation (Android)
-  if (screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock('landscape').catch(function(){});
-  }
-
-  checkOrientationForPong();
+  // Show orientation choice
+  rotateOverlay.classList.add('visible');
   window.addEventListener('resize', onPongResize);
 }
 
 function exitPongFullscreen() {
   if (!pongIsFullscreen) return;
   pongIsFullscreen = false;
+  pongOrientChoice = null;
   pongSection.classList.remove('pong-fullscreen');
   rotateOverlay.classList.remove('visible');
   document.body.style.overflow = '';
@@ -3747,23 +3770,26 @@ function exitPongFullscreen() {
 
 function checkOrientationForPong() {
   if (!pongIsFullscreen) return;
-  var isLandscape = window.innerWidth > window.innerHeight;
-  if (isLandscape) {
-    rotateOverlay.classList.remove('visible');
+  // If user already chose an orientation, just refit canvas on resize
+  if (pongOrientChoice) {
     fitCanvasToScreen();
-  } else {
-    rotateOverlay.classList.add('visible');
   }
+  // Otherwise the choice overlay is showing — don't interfere
 }
 
 function fitCanvasToScreen() {
   if (!pongIsFullscreen) return;
-  // Use viewport size minus some space for controls
-  var controlsH = 90; // score row + buttons
+  // Use viewport size minus space for controls + bottom padding
+  var controlsH = 100; // score row + buttons + bottom breathing room
   var availW = window.innerWidth - 16;
   var availH = window.innerHeight - controlsH;
-  // Maintain 7:4 aspect ratio
-  var aspect = 7 / 4;
+  // Aspect ratio depends on orientation choice
+  var aspect;
+  if (pongOrientChoice === 'portrait') {
+    aspect = 4 / 7; // tall
+  } else {
+    aspect = 7 / 4; // wide (default)
+  }
   var newW, newH;
   if (availW / availH > aspect) {
     newH = availH;
