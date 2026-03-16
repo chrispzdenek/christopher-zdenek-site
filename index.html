@@ -3109,7 +3109,9 @@ function selectCat(key) {
 function initBall(towardsPlayer) {
   ballX = W / 2;
   ballY = H / 2;
-  const speed = 4.5;
+  var speed = 4.5;
+  // Slow down 15% in vertical mobile mode
+  if (pongOrientChoice === 'portrait') speed *= 0.85;
   const angle = (Math.random() * 0.8 - 0.4); // radians
   const dir = towardsPlayer ? -1 : 1;
   ballVX = dir * speed * Math.cos(angle);
