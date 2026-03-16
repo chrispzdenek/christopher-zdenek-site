@@ -1043,17 +1043,18 @@
     .pong-section.pong-fullscreen .pong-header { display: none; }
     .pong-section.pong-fullscreen .pong-instructions { display: none; }
     .pong-section.pong-fullscreen .pong-controls-row {
-      padding: 0.5rem 1rem; margin-bottom: 0.5rem;
-      gap: 0.5rem;
+      padding: 0.3rem 1rem; margin-bottom: 0.2rem;
+      gap: 0.4rem;
     }
-    .pong-section.pong-fullscreen .pong-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+    .pong-section.pong-fullscreen .pong-btn { padding: 0.3rem 0.7rem; font-size: 0.7rem; }
     .pong-section.pong-fullscreen .pong-score-row {
-      margin-bottom: 0.5rem; gap: 1rem;
+      margin-bottom: 0.2rem; gap: 0.8rem;
     }
-    .pong-section.pong-fullscreen .pong-score-num { font-size: 2rem; }
+    .pong-section.pong-fullscreen .pong-score-num { font-size: 1.6rem; }
+    .pong-section.pong-fullscreen .pong-score-name { font-size: 0.55rem; }
     .pong-section.pong-fullscreen .pong-canvas-wrap {
       flex: 1; display: flex; align-items: center; justify-content: center;
-      padding: 0 0.5rem 1rem;
+      padding: 0 0.5rem 0.5rem;
     }
     .pong-section.pong-fullscreen #pongCanvas {
       max-width: 100%; max-height: 100%;
@@ -3026,9 +3027,10 @@ canvas.style.width  = W + 'px';
 canvas.style.height = H + 'px';
 ctx.scale(dpr, dpr);
 
-const PAD_W = 36;
-const PAD_H = 96;
-const BALL_R = 8;
+var PAD_W = 36;
+var PAD_H = 96;
+var BALL_R = 8;
+const PAD_W_ORIG = 36, PAD_H_ORIG = 96, BALL_R_ORIG = 8;
 const WIN_SCORE = 7;
 
 // Preload cat sprites
@@ -3765,7 +3767,8 @@ function exitPongFullscreen() {
 
   window.removeEventListener('resize', onPongResize);
 
-  // Restore original canvas size
+  // Restore original canvas and element sizes
+  PAD_W = PAD_W_ORIG; PAD_H = PAD_H_ORIG; BALL_R = BALL_R_ORIG;
   resizeCanvasTo(ORIG_W, ORIG_H);
   resetGame();
 }
@@ -3781,17 +3784,14 @@ function checkOrientationForPong() {
 
 function fitCanvasToScreen() {
   if (!pongIsFullscreen) return;
-  // Use viewport size minus space for controls + bottom padding
-  var controlsH = 100; // score row + buttons + bottom breathing room
-  var availW = window.innerWidth - 16;
-  var availH = window.innerHeight - controlsH;
+  var isLandscape = pongOrientChoice !== 'portrait';
+  // Minimize controls overhead in landscape to maximize play area
+  var controlsH = isLandscape ? 70 : 100;
+  var bottomPad = 8; // sliver of space so user sees full court
+  var availW = window.innerWidth - 12;
+  var availH = window.innerHeight - controlsH - bottomPad;
   // Aspect ratio depends on orientation choice
-  var aspect;
-  if (pongOrientChoice === 'portrait') {
-    aspect = 4 / 7; // tall
-  } else {
-    aspect = 7 / 4; // wide (default)
-  }
+  var aspect = isLandscape ? (7 / 4) : (4 / 7);
   var newW, newH;
   if (availW / availH > aspect) {
     newH = availH;
@@ -3801,6 +3801,17 @@ function fitCanvasToScreen() {
     newH = Math.round(newW / aspect);
   }
   resizeCanvasTo(newW, newH);
+  // Scale game elements for mobile landscape — slightly smaller for traditional feel
+  if (isLandscape && isMobileDevice()) {
+    var scale = 0.8;
+    PAD_W = Math.round(PAD_W_ORIG * scale);
+    PAD_H = Math.round(PAD_H_ORIG * scale);
+    BALL_R = Math.round(BALL_R_ORIG * scale);
+  } else {
+    PAD_W = PAD_W_ORIG;
+    PAD_H = PAD_H_ORIG;
+    BALL_R = BALL_R_ORIG;
+  }
   // Reinit game positions for new dimensions
   if (!gameRunning && !gameOver) {
     resetGame();
