@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <meta name="description" content="Chris Zdenek (Christopher Zdenek) — creativity meets strategy. Entertainment entrepreneur, storyteller, and improv performer based in Los Angeles. Syracuse Newhouse & Whitman grad working at the intersection of strategy, technology, and creativity.">
   <meta name="keywords" content="Chris Zdenek, Christopher Zdenek, entertainment entrepreneur, improv performer, Los Angeles, Gotham Group, Paramount, Nickelodeon, Syracuse University">
   <link rel="canonical" href="https://chriszdenek.com/">
@@ -53,9 +55,12 @@
     ]
   }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap"></noscript>
   <style>
     /* ─── FONTS ─────────────────────────────────────────────── */
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap');
 
     /* ─── RESET / BASE ──────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -655,6 +660,16 @@
       filter: grayscale(100%) opacity(0.38);
       transition: filter 0.3s ease;
     }
+    /* Logo size variants (replaces inline styles) */
+    .company-logo--xs  { height: 26px; }
+    .company-logo--sm  { height: 30px; }
+    .company-logo--md  { height: 42px; }
+    .company-logo--lg  { height: 60px; }
+    .company-logo--xl  { height: 76px; }
+    .company-logo--xxl { height: 84px; }
+    .company-logo--100 { height: 100px; }
+    .company-logo--tall { height: 90px; }
+    .franchise-logo--lg { height: 60px; }
     .timeline-item:hover .company-logo {
       filter: grayscale(0%) opacity(0.9);
     }
@@ -693,12 +708,13 @@
       display: flex; flex-wrap: wrap;
       gap: 2.25rem 3.5rem; align-items: center; justify-content: center;
     }
+    .franchise-grid a { cursor: pointer; }
     .franchise-logo {
       height: 44px; width: auto; max-width: 150px;
       object-fit: contain; display: block;
       filter: grayscale(100%) opacity(0.3);
       transition: filter 0.35s ease, transform 0.2s ease;
-      cursor: default;
+      cursor: pointer;
     }
     .franchise-logo:hover {
       filter: grayscale(0%) opacity(1);
@@ -1512,6 +1528,19 @@
       border-radius: 8px; border: none;
       box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     }
+    .interest-modal-gallery {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 1.2rem; justify-content: center;
+    }
+    .interest-modal-photo {
+      width: calc(50% - 5px); border-radius: 8px;
+      object-fit: cover; box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      cursor: pointer; transition: transform 0.2s;
+    }
+    .interest-modal-photo:hover { transform: scale(1.03); }
+    @media (max-width: 480px) {
+      .interest-modal-photo { width: 100%; }
+    }
 
     /* Modal responsive */
     @media (max-width: 768px) {
@@ -1917,7 +1946,7 @@
             <div class="timeline-company">The Groundlings School &nbsp;·&nbsp; Hollywood, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/groundlings.webp" class="company-logo" alt="The Groundlings" style="height:100px;" loading="lazy">
+            <img src="images/logos/groundlings.webp" class="company-logo company-logo--100" alt="The Groundlings" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -1945,7 +1974,7 @@
             <div class="timeline-company">Paramount &amp; Nickelodeon &nbsp;·&nbsp; Los Angeles, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/paramount.svg" class="company-logo" alt="Paramount" style="height:44px;" loading="lazy">
+            <img src="images/logos/paramount.svg" class="company-logo company-logo--md" alt="Paramount" loading="lazy">
             <img src="images/logos/nickelodeon.png" class="company-logo" alt="Nickelodeon" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
@@ -2010,6 +2039,12 @@
               <div class="photo-thumb" data-lb="1" data-gallery="gotham2122" title="Click to enlarge">
                 <img src="images/work/gotham-event.jpg" alt="The Gotham Group at event" loading="lazy">
               </div>
+              <div class="photo-thumb" data-lb="2" data-gallery="gotham2122" title="Click to enlarge">
+                <img src="images/work/gotham-chris-siobhan.png" alt="Chris & Siobhan at The Gotham Group" loading="lazy">
+              </div>
+              <div class="photo-thumb" data-lb="3" data-gallery="gotham2122" title="Click to enlarge">
+                <img src="images/work/gotham-halloween.jpeg" alt="Halloween Contest at The Gotham Group" loading="lazy">
+              </div>
             </div>
             <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
           </div>
@@ -2024,7 +2059,7 @@
             <div class="timeline-company">Syracuse University &nbsp;·&nbsp; Syracuse, NY</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/syracuse-seal.webp" class="company-logo" alt="Syracuse University" style="height:60px;" loading="lazy">
+            <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2051,7 +2086,7 @@
             <div class="timeline-company">Syracuse University &nbsp;·&nbsp; Syracuse, NY</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/syracuse-new.png" class="company-logo" alt="Syracuse University" style="height:42px;" loading="lazy">
+            <img src="images/logos/syracuse-new.png" class="company-logo company-logo--md" alt="Syracuse University" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2086,7 +2121,7 @@
             <div class="timeline-company">DC Point Productions, LLC &nbsp;·&nbsp; New York, NY</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/dc-point.png" class="company-logo" alt="DC Point Productions" style="height:68px;" loading="lazy">
+            <img src="images/logos/dc-point.png" class="company-logo company-logo--lg" alt="DC Point Productions" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2114,6 +2149,12 @@
               </div>
               <div class="yt-thumb-label">▶ Watch on YouTube</div>
             </a>
+            <div class="photo-thumb-grid">
+              <div class="photo-thumb" data-lb="0" data-gallery="dcpoint" title="Click to enlarge">
+                <img src="images/work/dcpoint-gettin-to-the-point.png" alt="Gettin to the Point — DC Point Productions" loading="lazy">
+              </div>
+            </div>
+            <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
           </div>
         </div>
       </div>
@@ -2126,7 +2167,7 @@
             <div class="timeline-company">Sunrun &nbsp;·&nbsp; San Francisco, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/sunrun.png" class="company-logo" alt="Sunrun" style="height:84px;" onerror="this.style.display=’none’" loading="lazy">
+            <img src="images/logos/sunrun.png" class="company-logo company-logo--xxl" alt="Sunrun" onerror="this.style.display=’none’" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2153,7 +2194,7 @@
             <div class="timeline-company">Illumination &nbsp;·&nbsp; Santa Monica, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/illumination.png" class="company-logo" alt="Illumination" style="height:76px;" loading="lazy">
+            <img src="images/logos/illumination.png" class="company-logo company-logo--xl" alt="Illumination" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2167,6 +2208,12 @@
               <span class="timeline-tag">Development</span>
               <span class="timeline-tag">Script Coverage</span>
             </div>
+            <div class="photo-thumb-grid">
+              <div class="photo-thumb" data-lb="0" data-gallery="illumination" title="Click to enlarge">
+                <img src="images/work/illumination-annie-awards.png" alt="Annie Awards — Illumination" loading="lazy">
+              </div>
+            </div>
+            <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
           </div>
         </div>
       </div>
@@ -2179,7 +2226,7 @@
             <div class="timeline-company">Cartoon Network Studios &nbsp;·&nbsp; Burbank, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/cartoon-network.png" class="company-logo" alt="Cartoon Network" style="height:90px;" onerror="this.style.display=’none’" loading="lazy">
+            <img src="images/logos/cartoon-network.png" class="company-logo company-logo--tall" alt="Cartoon Network" onerror="this.style.display=’none’" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2206,8 +2253,8 @@
             <div class="timeline-company">The Walt Disney Company &nbsp;·&nbsp; Burbank, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/disney.png" class="company-logo" alt="Disney" style="height:30px;" loading="lazy">
-            <img src="images/logos/abc.png" class="company-logo" alt="ABC" style="height:34px;" loading="lazy">
+            <img src="images/logos/disney.png" class="company-logo company-logo--sm" alt="Disney" loading="lazy">
+            <img src="images/logos/abc.png" class="company-logo company-logo--sm" alt="ABC" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2233,9 +2280,9 @@
             <div class="timeline-company">Warner Bros. Discovery &nbsp;·&nbsp; Burbank, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/warner-bros.png" class="company-logo" alt="Warner Bros." style="height:32px;" loading="lazy">
-            <img src="images/logos/tbs.png" class="company-logo" alt="TBS" style="height:26px;" loading="lazy">
-            <img src="images/logos/tnt.svg" class="company-logo" alt="TNT" style="height:28px;" loading="lazy">
+            <img src="images/logos/warner-bros.png" class="company-logo company-logo--sm" alt="Warner Bros." loading="lazy">
+            <img src="images/logos/tbs.png" class="company-logo company-logo--xs" alt="TBS" loading="lazy">
+            <img src="images/logos/tnt.svg" class="company-logo company-logo--xs" alt="TNT" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2261,7 +2308,7 @@
             <div class="timeline-company">Sunrun &nbsp;·&nbsp; San Francisco, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/sunrun.png" class="company-logo" alt="Sunrun" style="height:84px;" onerror="this.style.display='none'" loading="lazy">
+            <img src="images/logos/sunrun.png" class="company-logo company-logo--xxl" alt="Sunrun" onerror="this.style.display='none'" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2300,7 +2347,7 @@
               <div class="timeline-company">Syracuse University</div>
             </div>
             <div class="company-logos">
-              <img src="images/logos/syracuse-seal.webp" class="company-logo" alt="Syracuse University" style="height:60px;" loading="lazy">
+              <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" loading="lazy">
             </div>
             <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
           </div>
@@ -2318,6 +2365,15 @@
                 <span class="timeline-tag">Digital Marketing</span>
                 <span class="timeline-tag">Beta Gamma Sigma</span>
               </div>
+              <div class="photo-thumb-grid">
+                <div class="photo-thumb" data-lb="0" data-gallery="grad" title="Click to enlarge">
+                  <img src="images/education/grad-graduation.png" alt="Grad School Graduation" loading="lazy">
+                </div>
+                <div class="photo-thumb" data-lb="1" data-gallery="grad" title="Click to enlarge">
+                  <img src="images/education/grad-headmodels.png" alt="Head Models — Grad School" loading="lazy">
+                </div>
+              </div>
+              <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
             </div>
           </div>
         </div>
@@ -2330,7 +2386,7 @@
               <div class="timeline-company">Syracuse University</div>
             </div>
             <div class="company-logos">
-              <img src="images/logos/syracuse-seal.webp" class="company-logo" alt="Syracuse University" style="height:60px;" loading="lazy">
+              <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" loading="lazy">
             </div>
             <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
           </div>
@@ -2351,6 +2407,21 @@
                 <span class="timeline-tag">NBCUniversal PitchNY</span>
                 <span class="timeline-tag">Student TV Producer</span>
               </div>
+              <div class="photo-thumb-grid">
+                <div class="photo-thumb" data-lb="0" data-gallery="undergrad" title="Click to enlarge">
+                  <img src="images/education/undergrad-nice.png" alt="Syracuse University" loading="lazy">
+                </div>
+                <div class="photo-thumb" data-lb="1" data-gallery="undergrad" title="Click to enlarge">
+                  <img src="images/education/undergrad-fun.png" alt="Syracuse University" loading="lazy">
+                </div>
+                <div class="photo-thumb" data-lb="2" data-gallery="undergrad" title="Click to enlarge">
+                  <img src="images/education/undergrad-review-crew.png" alt="Review Crew Producing" loading="lazy">
+                </div>
+                <div class="photo-thumb" data-lb="3" data-gallery="undergrad" title="Click to enlarge">
+                  <img src="images/education/undergrad-radio.png" alt="Syracuse Undergrad Radio" loading="lazy">
+                </div>
+              </div>
+              <div class="photo-thumb-hint">Click any photo to enlarge · ← → to navigate</div>
             </div>
           </div>
         </div>
@@ -2363,7 +2434,7 @@
               <div class="timeline-company">The Friends School of Baltimore &nbsp;·&nbsp; Baltimore, MD</div>
             </div>
             <div class="company-logos">
-              <img src="images/Friends School Logo/Friends School of Baltimore Logo.png.webp" class="company-logo" alt="The Friends School of Baltimore" style="height:60px;" loading="lazy">
+              <img src="images/Friends School Logo/Friends School of Baltimore Logo.png.webp" class="company-logo company-logo--lg" alt="The Friends School of Baltimore" loading="lazy">
             </div>
             <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
           </div>
@@ -2404,7 +2475,7 @@
       <a href="https://en.wikipedia.org/wiki/Black-ish" target="_blank" rel="noopener"><img src="images/franchises/blackish-logo.png" class="franchise-logo" alt="Black-ish" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
       <a href="https://en.wikipedia.org/wiki/Minions_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/minions-logo.webp" class="franchise-logo" alt="Minions" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
       <a href="https://en.wikipedia.org/wiki/The_Rookie_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/the-rookie-logo.svg" class="franchise-logo" alt="The Rookie" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Blue%27s_Clues" target="_blank" rel="noopener"><img src="images/franchises/blues-clues-logo.png" class="franchise-logo" alt="Blue's Clues" style="height:60px;" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Blue%27s_Clues" target="_blank" rel="noopener"><img src="images/franchises/blues-clues-logo.png" class="franchise-logo franchise-logo--lg" alt="Blue's Clues" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
       <a href="https://en.wikipedia.org/wiki/Claws_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/claws-logo.png" class="franchise-logo" alt="Claws" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
       <a href="https://en.wikipedia.org/wiki/The_Loud_House_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/loud-house-logo.png" class="franchise-logo" alt="The Loud House" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
       <a href="https://en.wikipedia.org/wiki/Snowpiercer_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/snowpiercer-logo.webp" class="franchise-logo" alt="Snowpiercer" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
@@ -2532,7 +2603,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM60,72.17A87.2,87.2,0,0,1,79.63,120H40.37A87.54,87.54,0,0,1,60,72.17ZM136,120V40.37a87.59,87.59,0,0,1,48.68,20.37A103.06,103.06,0,0,0,160.3,120Zm-16,0H95.7A103.06,103.06,0,0,0,71.32,60.74,87.59,87.59,0,0,1,120,40.37ZM79.63,136A87.2,87.2,0,0,1,60,183.83,87.54,87.54,0,0,1,40.37,136Zm16.07,0H120v79.63a87.59,87.59,0,0,1-48.68-20.37A103.09,103.09,0,0,0,95.7,136Zm40.3,0h24.3a103.09,103.09,0,0,0,24.38,59.26A87.59,87.59,0,0,1,136,215.63Zm40.37,0h39.26A87.54,87.54,0,0,1,196,183.83,87.2,87.2,0,0,1,176.37,136Zm0-16A87.2,87.2,0,0,1,196,72.17,87.54,87.54,0,0,1,215.63,120Z"/></svg>
         </div>
         <div>
-          <h3>Playing Basketball</h3>
+          <h3>Playing Basketball &amp; Tennis</h3>
           <p>My go-to way to decompress and stay competitive</p>
         </div>
       </div>
@@ -2559,11 +2630,11 @@
 
       <div class="interest-card reveal">
         <div class="interest-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M227.32,73.37,182.63,28.69a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H216a8,8,0,0,0,0-16H115.32l112-112A16,16,0,0,0,227.32,73.37ZM136,75.31,152.69,92,68,176.69,51.31,160ZM48,208V179.31L76.69,208Zm48-3.31L79.32,188,164,103.31,180.69,120Zm96-96L147.32,64l24-24L216,84.69Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="var(--accent)"><path d="M48,56a8,8,0,0,1,8-8,40,40,0,0,1,34.9,20.5A88.09,88.09,0,0,1,128,64a88.09,88.09,0,0,1,37.1,4.5A40,40,0,0,1,200,48a8,8,0,0,1,0,16,24,24,0,0,0-19.4,9.9A88,88,0,0,1,216,128c0,21.5-7.8,41.2-20.7,55.6L212.7,201a8,8,0,1,1-11.3,11.3l-17.5-17.5A87.4,87.4,0,0,1,128,216a87.4,87.4,0,0,1-55.9-21.2L54.6,212.3A8,8,0,1,1,43.3,201l17.4-17.4C47.8,169.2,40,149.5,40,128a88,88,0,0,1,35.4-54.1A24,24,0,0,0,56,64a8,8,0,0,1-8-8ZM128,80a72,72,0,1,0,72,72A72,72,0,0,0,128,80Zm-20,56a12,12,0,1,0,12,12A12,12,0,0,0,108,136Zm52-12a12,12,0,1,0,12,12A12,12,0,0,0,160,124Z"/></svg>
         </div>
         <div>
-          <h3>Writing</h3>
-          <p>Personal essays that make sense of the world</p>
+          <h3>Old Bay Seasoning</h3>
+          <p>Baltimore in a can — I put it on everything I cook</p>
         </div>
       </div>
 
@@ -2594,45 +2665,45 @@
       <p class="taste-marquee-label">A selection of some of my favorite films</p>
       <div class="taste-marquee">
         <div class="marquee-track" style="--marquee-duration:50s">
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Do_the_Right_Thing" target="_blank" rel="noopener"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Eternal_Sunshine_of_the_Spotless_Mind" target="_blank" rel="noopener"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Everything_Everywhere_All_at_Once" target="_blank" rel="noopener"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Finding_Nemo" target="_blank" rel="noopener"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Hairspray_(2007_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/High_and_Low_(1963_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Spider-Man:_Into_the_Spider-Verse" target="_blank" rel="noopener"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/L.A._Confidential_(film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Little_Miss_Sunshine" target="_blank" rel="noopener"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/The_Mitchells_vs._the_Machines" target="_blank" rel="noopener"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Moonlight_(2016_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Parasite_(2019_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Point_Break" target="_blank" rel="noopener"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Harry_Potter_and_the_Prisoner_of_Azkaban_(film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Rear_Window" target="_blank" rel="noopener"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Spider-Man_2" target="_blank" rel="noopener"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Spirited_Away" target="_blank" rel="noopener"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/The_Thing_(1982_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Up_(2009_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></a></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></span>
           <!-- duplicate for seamless loop -->
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Do_the_Right_Thing" target="_blank" rel="noopener"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Eternal_Sunshine_of_the_Spotless_Mind" target="_blank" rel="noopener"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Everything_Everywhere_All_at_Once" target="_blank" rel="noopener"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Finding_Nemo" target="_blank" rel="noopener"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Hairspray_(2007_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/High_and_Low_(1963_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Spider-Man:_Into_the_Spider-Verse" target="_blank" rel="noopener"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/L.A._Confidential_(film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Little_Miss_Sunshine" target="_blank" rel="noopener"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/The_Mitchells_vs._the_Machines" target="_blank" rel="noopener"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Moonlight_(2016_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Parasite_(2019_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Point_Break" target="_blank" rel="noopener"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Harry_Potter_and_the_Prisoner_of_Azkaban_(film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Rear_Window" target="_blank" rel="noopener"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Spider-Man_2" target="_blank" rel="noopener"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Spirited_Away" target="_blank" rel="noopener"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/The_Thing_(1982_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></a></span>
-          <span class="marquee-item"><a href="https://en.wikipedia.org/wiki/Up_(2009_film)" target="_blank" rel="noopener"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></a></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></span>
         </div>
       </div>
     </div>
@@ -2868,7 +2939,7 @@
         </div>
         <div class="pong-score-sep">:</div>
         <div>
-          <div class="pong-score-name ai-label" id="aiLabel">AI</div>
+          <div class="pong-score-name ai-label" id="aiLabel">COM</div>
           <div class="pong-score-num" id="scoreAI">0</div>
         </div>
       </div>
@@ -3360,7 +3431,7 @@ function drawWinScreen(winnerCat, youWon) {
     ctx.font      = '400 12px "DM Sans", sans-serif';
     ctx.fillText(
       youWon ? 'Impressive paw work. The laser never stood a chance.'
-             : 'The AI cat got you this time… practice your swipe.',
+             : 'The COM cat got you this time… practice your swipe.',
       W / 2, textY2
     );
 
@@ -3910,11 +3981,29 @@ resetGame();
     ],
     gotham2122: [
       { src: 'images/work/gotham-team.jpg',  alt: 'The Gotham Group team' },
-      { src: 'images/work/gotham-event.jpg', alt: 'The Gotham Group at event' }
+      { src: 'images/work/gotham-event.jpg', alt: 'The Gotham Group at event' },
+      { src: 'images/work/gotham-chris-siobhan.png', alt: 'Chris & Siobhan at The Gotham Group' },
+      { src: 'images/work/gotham-halloween.jpeg', alt: 'Halloween Contest at The Gotham Group' }
     ],
     syracuse: [
       { src: 'images/work/syracuse-popquiz.jpg',  alt: 'Pop Quiz — Syracuse Screenwriting class' },
       { src: 'images/work/syracuse-roasted.jpg',  alt: 'Rob Edwards — Syracuse Screenwriting class' }
+    ],
+    dcpoint: [
+      { src: 'images/work/dcpoint-gettin-to-the-point.png', alt: 'Gettin to the Point — DC Point Productions' }
+    ],
+    illumination: [
+      { src: 'images/work/illumination-annie-awards.png', alt: 'Annie Awards — Illumination' }
+    ],
+    grad: [
+      { src: 'images/education/grad-graduation.png', alt: 'Grad School Graduation' },
+      { src: 'images/education/grad-headmodels.png', alt: 'Head Models — Grad School' }
+    ],
+    undergrad: [
+      { src: 'images/education/undergrad-nice.png', alt: 'Syracuse University' },
+      { src: 'images/education/undergrad-fun.png', alt: 'Syracuse University' },
+      { src: 'images/education/undergrad-review-crew.png', alt: 'Review Crew Producing' },
+      { src: 'images/education/undergrad-radio.png', alt: 'Syracuse Undergrad Radio' }
     ]
   };
 
@@ -4075,6 +4164,11 @@ var interestData = [
   {
     id: "musical-theater",
     title: "Musical Theater",
+    images: [
+      { src: "images/interests/musical-hamilton.jpeg", alt: "Hamilton at Pantages" },
+      { src: "images/interests/musical-legally-blonde.png", alt: "Legally Blonde The Musical" },
+      { src: "images/interests/musical-mousetrap.jpeg", alt: "The Mousetrap" }
+    ],
     body: "From Sondheim's intricate puzzle-box lyrics to Howard Ashman's gift for making animated characters feel painfully human, musical theater is where music and storytelling fuse into something neither can achieve alone. There's nothing quite like a well-constructed eleven o'clock number that recontextualizes everything you've seen.",
     video: null
   },
@@ -4097,27 +4191,46 @@ var interestData = [
     video: "https://www.youtube.com/embed/BQCPj-bGYro"
   },
   {
-    id: "basketball",
-    title: "Playing Basketball",
+    id: "basketball-tennis",
+    title: "Playing Basketball & Tennis",
+    images: [
+      { src: "images/interests/basketball-dad.png", alt: "Basketball with Dad" },
+      { src: "images/interests/tennis-lisa.png", alt: "Tennis with Lisa" }
+    ],
     body: "On the court, not just from the couch. Basketball demands your full presence \u2014 there's no time to think about anything else when someone's driving to the hoop. It's meditation through movement, and the pickup game community is one of the most democratic spaces in American life.",
     video: null
   },
   {
     id: "cat-dad",
     title: "Cat Dad Extraordinaire",
+    images: [
+      { src: "images/interests/cat-elie.jpg", alt: "Chris and Baby Elie" },
+      { src: "images/interests/cat-juneau.png", alt: "Chris Facetime with Juneau" }
+    ],
     body: "Elie and Juneau are Balinese cats. They are perfect. Elie is a seal-point diva who believes she runs the household (she does). Juneau is a blue-point sweetheart who follows me from room to room. All other pets are fine, I suppose.",
     video: null
   },
   {
     id: "sports",
     title: "Sports Fanatic",
+    images: [
+      { src: "images/interests/sports-baby-football.png", alt: "Baby Football" },
+      { src: "images/interests/sports-dodgers.png", alt: "Chris and Dad at Dodgers Game" },
+      { src: "images/interests/sports-soccer.png", alt: "Chris playing soccer" },
+      { src: "images/interests/sports-orioles.png", alt: "Lisa and Chris at Orioles Game" }
+    ],
     body: "Orioles. Dodgers. Lakers. Ravens. Yes, all four. My allegiances are multifaceted and I stand by them. Sports fandom is about community, narrative, and the rare thrill of watching something unfold that no screenwriter could have planned.",
     video: null
   },
   {
-    id: "writing",
-    title: "Writing",
-    body: "Personal essays, criticism, storytelling \u2014 finding the right words for things that matter. Writing is how I process the world. Whether it's a piece of cultural criticism or a personal essay, the act of putting thoughts into precise language forces a clarity that thinking alone can't achieve.",
+    id: "old-bay",
+    title: "Old Bay Seasoning",
+    images: [
+      { src: "images/interests/oldbay-collection.png", alt: "My personal Old Bay Collection" },
+      { src: "images/interests/oldbay-beanie.png", alt: "My Old Bay Beanie" },
+      { src: "images/interests/oldbay-plush.png", alt: "Old Bay Plush" }
+    ],
+    body: "Baltimore in a can. I put Old Bay on almost everything I cook — eggs, fries, popcorn, pasta, you name it. It reminds me of home. I even make a homemade Old Bay Caramel Ice Cream that has earned genuine testimonials from people who were fully prepared to hate it. The obsession is real, and I stand by every shake.",
     video: null
   },
   {
@@ -4493,6 +4606,20 @@ var interestData = [
       iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       iframe.allowFullscreen = true;
       modalContent.appendChild(iframe);
+    }
+
+    if (item.images && item.images.length) {
+      var gallery = document.createElement('div');
+      gallery.className = 'interest-modal-gallery';
+      item.images.forEach(function(img) {
+        var imgEl = document.createElement('img');
+        imgEl.src = img.src;
+        imgEl.alt = img.alt;
+        imgEl.loading = 'lazy';
+        imgEl.className = 'interest-modal-photo';
+        gallery.appendChild(imgEl);
+      });
+      modalContent.appendChild(gallery);
     }
 
     // Hide nav for interests
