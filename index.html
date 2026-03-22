@@ -105,8 +105,8 @@
     :root {
       --navy:    #1D1D1F;   /* Apple near-black                */
       --deep:    #3A3A3C;   /* Apple dark gray                 */
-      --gold:    #1D1D1F;   /* accent = near-black (clean)     */
-      --gold2:   #3A3A3C;
+      --dark:    #1D1D1F;   /* accent = near-black (clean)     */
+      --dark2:   #3A3A3C;
       --cream:   #F5F5F7;   /* Apple's signature off-white     */
       --white:   #ffffff;
       --muted:   #6E6E73;   /* Apple secondary text            */
@@ -235,16 +235,14 @@
     /* Cursor glow */
     .hero-cursor-glow {
       position: absolute; z-index: 1;
+      left: 0; top: 0;
       width: 400px; height: 400px; border-radius: 50%;
       background: radial-gradient(circle, rgba(0,102,204,0.08) 0%, rgba(100,120,200,0.04) 40%, transparent 70%);
       pointer-events: none;
-      transform: translate(-50%, -50%);
       opacity: 0;
       transition: opacity 0.4s ease;
       will-change: transform;
     }
-    .hero-bg-pattern { display: none; }
-    .hero-shape      { display: none; }
     .hero-content { position: relative; z-index: 2; max-width: 760px; }
 
     /* Hero entrance animations */
@@ -295,7 +293,7 @@
     }
     .hero-tagline {
       font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--muted); font-weight: 300; line-height: 1.7;
+      color: #555558; font-weight: 300; line-height: 1.7;
       max-width: 540px; margin: 0 auto 2.5rem;
     }
     .hero-tags {
@@ -336,7 +334,7 @@
     .btn {
       padding: 0.8rem 2rem; border-radius: 980px; font-size: 0.88rem;
       font-weight: 500; letter-spacing: 0.2px; cursor: pointer;
-      transition: all 0.2s; text-decoration: none; display: inline-block;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s; text-decoration: none; display: inline-block;
       border: 1px solid transparent;
     }
     .btn-gold {
@@ -377,8 +375,8 @@
       animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,199,89,0.4); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(52,199,89,0); }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.6); }
     }
 
     /* ── Film grain overlay ── */
@@ -396,8 +394,9 @@
     .scroll-progress {
       position: fixed; top: 0; left: 0; height: 2px;
       background: linear-gradient(90deg, var(--accent), #5b4fbf);
-      width: 0%; z-index: 1001;
-      transition: width 0.1s linear;
+      width: 100%; z-index: 1001;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.1s linear;
     }
 
     /* ── Active nav link ── */
@@ -423,11 +422,15 @@
     nav.nav-dark .nav-links a:hover,
     nav.nav-dark .nav-links a.nav-active { color: var(--white); }
     nav.nav-dark .nav-hamburger span { background: var(--white); }
+    @media (max-width: 768px) {
+      .nav-dark .nav-links { background: rgba(29,29,31,0.96); }
+      .nav-dark .nav-links a { color: rgba(255,255,255,0.85); }
+    }
 
     /* ── Back to top ── */
     .back-to-top {
       position: fixed; bottom: 2rem; right: 2rem;
-      width: 40px; height: 40px; border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       background: var(--navy); color: var(--white);
       border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
@@ -531,7 +534,7 @@
       padding: 1.5rem; border: 1px solid rgba(0,0,0,0.06);
       display: flex; flex-direction: column; justify-content: flex-end;
       backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      transition: border-color 0.25s, box-shadow 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
     .stat-card:hover {
       border-color: rgba(0,102,204,0.15);
@@ -543,32 +546,6 @@
       color: var(--navy); line-height: 1;
     }
     .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; font-weight: 400; }
-    .about-card-stack { position: relative; height: 420px; }
-    .about-card {
-      position: absolute; border-radius: 12px; padding: 2rem;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    }
-    .about-card-main {
-      top: 0; left: 0; right: 0;
-      background: var(--navy);
-      color: var(--white); z-index: 2;
-    }
-    .about-card-accent {
-      bottom: 0; right: -20px; width: 75%;
-      background: var(--cream); color: var(--navy);
-      border: 1px solid rgba(0,0,0,0.08); z-index: 1;
-    }
-    .about-card-main h3 {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1.4rem; font-weight: 300; margin-bottom: 0.75rem;
-      color: rgba(255,255,255,0.9);
-    }
-    .about-card-main p { font-size: 0.9rem; line-height: 1.7; opacity: 0.85; }
-    .about-card-accent h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem; margin-bottom: 0.5rem;
-    }
-    .about-card-accent p { font-size: 0.85rem; opacity: 0.8; }
     .interest-chips {
       display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
     }
@@ -723,13 +700,14 @@
     }
     .timeline-badge::after {
       content: ''; position: absolute;
-      top: 0; left: -100%; width: 60%; height: 100%;
+      top: 0; left: 0; width: 60%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
       animation: badge-shine 3s ease-in-out infinite;
+      transform: translateX(-100%);
     }
     @keyframes badge-shine {
-      0%, 100% { left: -100%; }
-      50% { left: 150%; }
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(250%); }
     }
     @media (prefers-reduced-motion: reduce) {
       .timeline-badge::after { animation: none; }
@@ -750,7 +728,7 @@
     .franchise-logo {
       height: 44px; width: auto; max-width: 150px;
       object-fit: contain; display: block;
-      filter: grayscale(100%) opacity(0.3);
+      filter: grayscale(100%) opacity(0.55);
       transition: filter 0.35s ease, transform 0.2s ease;
       cursor: pointer;
     }
@@ -798,9 +776,9 @@
     }
     .essay-card::before {
       content: '"';
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: sans-serif;
       font-size: 12rem; line-height: 1;
-      color: var(--gold); opacity: 0.08;
+      color: var(--dark); opacity: 0.08;
       position: absolute; top: -1.5rem; left: 1rem;
       pointer-events: none;
     }
@@ -833,7 +811,7 @@
     .essay-toggle {
       display: block; margin: 1.5rem auto 0;
       background: transparent; border: 1px solid rgba(255,255,255,0.3);
-      color: rgba(255,255,255,0.85); padding: 0.6rem 1.5rem; border-radius: 4px;
+      color: rgba(255,255,255,0.85); padding: 0.6rem 1.5rem; border-radius: 100px;
       cursor: pointer; font-size: 0.85rem; font-weight: 600;
       letter-spacing: 0.5px; transition: all 0.2s;
     }
@@ -877,6 +855,8 @@
       color: var(--navy); line-height: 1.3;
     }
     .interest-card p { font-size: 0.78rem; line-height: 1.55; color: rgba(0,0,0,0.65); margin: 0; }
+    .interest-hint { font-size: 0.7rem; color: var(--accent); opacity: 0.6; margin-top: 0.3rem; transition: opacity 0.2s; }
+    .interest-card:hover .interest-hint { opacity: 1; }
 
     /* ─── INTEREST CARD GLOW EFFECT ───────────────────────── */
     .interest-card::before {
@@ -979,7 +959,7 @@
       border: 2px solid transparent; transition: border-color 0.2s;
       display: flex; gap: 1rem; align-items: flex-start;
     }
-    .cat-profile:hover { border-color: var(--gold); }
+    .cat-profile:hover { border-color: var(--dark); }
     .cat-juneau { background: linear-gradient(135deg, #c8e6f7 0%, #e0f2fe 100%); }
     .cat-elie   { background: linear-gradient(135deg, #e8d5c4 0%, #f5ede4 100%); }
     .cat-photo-col {
@@ -987,7 +967,7 @@
     }
     .cat-text-col { flex: 1; min-width: 0; }
     .cat-name {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: sans-serif;
       font-size: 1.25rem; font-weight: 900; margin-bottom: 0.15rem;
     }
     .cat-juneau .cat-name { color: #1e6fa0; }
@@ -1017,7 +997,7 @@
     .pong-btn {
       padding: 0.6rem 1.4rem; border-radius: 6px; border: none;
       cursor: pointer; font-size: 0.85rem; font-weight: 700;
-      letter-spacing: 0.5px; transition: all 0.2s;
+      letter-spacing: 0.5px; transition: background 0.2s, color 0.2s, transform 0.2s;
     }
     .pong-btn-juneau {
       background: var(--cat-blue); color: var(--white);
@@ -1082,7 +1062,7 @@
     }
     .pong-canvas-wrap { position: relative; width: fit-content; margin: 0 auto; }
     .pong-overlay h4 {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: sans-serif;
       font-size: 1.6rem; color: var(--white); margin-bottom: 0.5rem;
     }
     .pong-overlay p { color: var(--muted); font-size: 0.9rem; }
@@ -1161,7 +1141,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px; padding: 1.75rem 1.5rem;
       text-decoration: none; color: inherit;
-      transition: all 0.25s; display: flex;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex;
       flex-direction: column; align-items: flex-start;
       min-height: 140px;
       position: relative; overflow: hidden;
@@ -1226,7 +1206,7 @@
     .headshot-accent {
       position: absolute; bottom: -16px; right: -16px;
       width: 80%; height: 80%; border-radius: 12px;
-      border: 3px solid var(--gold); z-index: 1; opacity: 0.5;
+      border: 3px solid var(--dark); z-index: 1; opacity: 0.5;
     }
     .headshot-placeholder {
       width: 100%; max-width: 380px; aspect-ratio: 4/5;
@@ -1791,7 +1771,6 @@
       transform: translateY(32px);
       transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
                   transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-      will-change: opacity, transform;
     }
     .reveal.visible {
       opacity: 1;
@@ -1807,6 +1786,7 @@
         transition: none;
       }
       .essay-title { animation: none; }
+      .hero-name span { animation: none; }
     }
 /* ─── HERO PARTICLE CANVAS ────────────────────────────── */
 .hero-particle-canvas {
@@ -1828,6 +1808,7 @@
   .hero-gradient-mesh { display: block; }
 }
   </style>
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 <body>
 
@@ -1837,7 +1818,7 @@
 <!-- ── NAV ─────────────────────────────────────────────────── -->
 <nav role="navigation" aria-label="Main navigation">
   <a class="nav-logo" href="#hero">CZ</a>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="navLinks">
@@ -1894,8 +1875,10 @@
         <div class="headshot-wrap">
           <img
             src="images/headshot.jpg"
-            alt="Christopher Zdenek"
+            alt="Christopher Zdenek - entertainment entrepreneur and emerging technology consultant in Los Angeles"
             class="headshot-img"
+            width="1200"
+            height="1384"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           >
           <div class="headshot-placeholder" style="display:none;">
@@ -1956,7 +1939,7 @@
             <div class="timeline-company">The Gotham Group &nbsp;·&nbsp; West Hollywood, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/gotham-group.png" class="company-logo" alt="The Gotham Group" loading="lazy">
+            <img src="images/logos/gotham-group.png" class="company-logo" alt="The Gotham Group" width="1200" height="898" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -1984,7 +1967,7 @@
             <div class="timeline-company">The Groundlings School &nbsp;·&nbsp; Hollywood, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/groundlings.webp" class="company-logo company-logo--100" alt="The Groundlings" loading="lazy">
+            <img src="images/logos/groundlings.webp" class="company-logo company-logo--100" alt="The Groundlings" width="350" height="350" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2012,8 +1995,8 @@
             <div class="timeline-company">Paramount &amp; Nickelodeon &nbsp;·&nbsp; Los Angeles, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/paramount.svg" class="company-logo company-logo--md" alt="Paramount" loading="lazy">
-            <img src="images/logos/nickelodeon.png" class="company-logo" alt="Nickelodeon" loading="lazy">
+            <img src="images/logos/paramount.svg" class="company-logo company-logo--md" alt="Paramount" width="1000" height="787" loading="lazy">
+            <img src="images/logos/nickelodeon.png" class="company-logo" alt="Nickelodeon" width="1280" height="1001" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2055,7 +2038,7 @@
             <div class="timeline-company">The Gotham Group &nbsp;·&nbsp; West Hollywood, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/gotham-group.png" class="company-logo" alt="The Gotham Group" loading="lazy">
+            <img src="images/logos/gotham-group.png" class="company-logo" alt="The Gotham Group" width="1200" height="898" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2097,7 +2080,7 @@
             <div class="timeline-company">Syracuse University &nbsp;·&nbsp; Syracuse, NY</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" loading="lazy">
+            <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" width="512" height="388" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2124,7 +2107,7 @@
             <div class="timeline-company">Syracuse University &nbsp;·&nbsp; Syracuse, NY</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/syracuse-new.png" class="company-logo company-logo--md" alt="Syracuse University" loading="lazy">
+            <img src="images/logos/syracuse-new.png" class="company-logo company-logo--md" alt="Syracuse University" width="450" height="155" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2159,7 +2142,7 @@
             <div class="timeline-company">DC Point Productions, LLC &nbsp;·&nbsp; New York, NY</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/dc-point.png" class="company-logo company-logo--lg" alt="DC Point Productions" loading="lazy">
+            <img src="images/logos/dc-point.png" class="company-logo company-logo--lg" alt="DC Point Productions" width="900" height="900" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2205,7 +2188,7 @@
             <div class="timeline-company">Sunrun &nbsp;·&nbsp; San Francisco, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/sunrun.png" class="company-logo company-logo--xxl" alt="Sunrun" onerror="this.style.display=’none’" loading="lazy">
+            <img src="images/logos/sunrun.png" class="company-logo company-logo--xxl" alt="Sunrun" width="1000" height="600" onerror="this.style.display=’none’" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2232,7 +2215,7 @@
             <div class="timeline-company">Illumination &nbsp;·&nbsp; Santa Monica, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/illumination.png" class="company-logo company-logo--xl" alt="Illumination" loading="lazy">
+            <img src="images/logos/illumination.png" class="company-logo company-logo--xl" alt="Illumination" width="3840" height="2160" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2264,7 +2247,7 @@
             <div class="timeline-company">Cartoon Network Studios &nbsp;·&nbsp; Burbank, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/cartoon-network.png" class="company-logo company-logo--tall" alt="Cartoon Network" onerror="this.style.display=’none’" loading="lazy">
+            <img src="images/logos/cartoon-network.png" class="company-logo company-logo--tall" alt="Cartoon Network" width="2400" height="2400" onerror="this.style.display=’none’" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2291,8 +2274,8 @@
             <div class="timeline-company">The Walt Disney Company &nbsp;·&nbsp; Burbank, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/disney.png" class="company-logo company-logo--sm" alt="Disney" loading="lazy">
-            <img src="images/logos/abc.png" class="company-logo company-logo--sm" alt="ABC" loading="lazy">
+            <img src="images/logos/disney.png" class="company-logo company-logo--sm" alt="Disney" width="2520" height="1200" loading="lazy">
+            <img src="images/logos/abc.png" class="company-logo company-logo--sm" alt="ABC" width="3840" height="2160" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2318,9 +2301,9 @@
             <div class="timeline-company">Warner Bros. Discovery &nbsp;·&nbsp; Burbank, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/warner-bros.png" class="company-logo company-logo--sm" alt="Warner Bros." loading="lazy">
-            <img src="images/logos/tbs.png" class="company-logo company-logo--xs" alt="TBS" loading="lazy">
-            <img src="images/logos/tnt.svg" class="company-logo company-logo--xs" alt="TNT" loading="lazy">
+            <img src="images/logos/warner-bros.png" class="company-logo company-logo--sm" alt="Warner Bros." width="3840" height="2160" loading="lazy">
+            <img src="images/logos/tbs.png" class="company-logo company-logo--xs" alt="TBS" width="1142" height="612" loading="lazy">
+            <img src="images/logos/tnt.svg" class="company-logo company-logo--xs" alt="TNT" width="620" height="620" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2346,7 +2329,7 @@
             <div class="timeline-company">Sunrun &nbsp;·&nbsp; San Francisco, CA</div>
           </div>
           <div class="company-logos">
-            <img src="images/logos/sunrun.png" class="company-logo company-logo--xxl" alt="Sunrun" onerror="this.style.display='none'" loading="lazy">
+            <img src="images/logos/sunrun.png" class="company-logo company-logo--xxl" alt="Sunrun" width="1000" height="600" onerror="this.style.display='none'" loading="lazy">
           </div>
           <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </div>
@@ -2385,7 +2368,7 @@
               <div class="timeline-company">Syracuse University</div>
             </div>
             <div class="company-logos">
-              <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" loading="lazy">
+              <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" width="512" height="388" loading="lazy">
             </div>
             <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
           </div>
@@ -2424,7 +2407,7 @@
               <div class="timeline-company">Syracuse University</div>
             </div>
             <div class="company-logos">
-              <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" loading="lazy">
+              <img src="images/logos/syracuse-seal.webp" class="company-logo company-logo--lg" alt="Syracuse University" width="512" height="388" loading="lazy">
             </div>
             <svg class="timeline-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
           </div>
@@ -2503,23 +2486,23 @@
     <p class="section-label reveal">IP &amp; Franchises</p>
     <p class="franchise-intro reveal reveal-delay-1">A few of the properties and franchises I've had the chance to work on.</p>
     <div class="franchise-grid reveal reveal-delay-2">
-      <a href="https://en.wikipedia.org/wiki/SpongeBob_SquarePants" target="_blank" rel="noopener"><img src="images/franchises/spongebob-logo.png" class="franchise-logo" alt="SpongeBob SquarePants" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Grey%27s_Anatomy" target="_blank" rel="noopener"><img src="images/franchises/greys-anatomy-logo.png" class="franchise-logo" alt="Grey's Anatomy" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles" target="_blank" rel="noopener"><img src="images/franchises/tmnt-logo.png" class="franchise-logo" alt="Teenage Mutant Ninja Turtles" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Modern_Family" target="_blank" rel="noopener"><img src="images/franchises/modern-family-logo.png" class="franchise-logo" alt="Modern Family" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Shrek_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/shrek-logo.webp" class="franchise-logo" alt="Shrek" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Agents_of_S.H.I.E.L.D." target="_blank" rel="noopener"><img src="images/franchises/agents-of-shield-logo.png" class="franchise-logo" alt="Agents of S.H.I.E.L.D." onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Avatar:_The_Last_Airbender" target="_blank" rel="noopener"><img src="images/franchises/avatar-logo.png" class="franchise-logo" alt="Avatar: The Last Airbender" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Black-ish" target="_blank" rel="noopener"><img src="images/franchises/blackish-logo.png" class="franchise-logo" alt="Black-ish" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Minions_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/minions-logo.webp" class="franchise-logo" alt="Minions" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/The_Rookie_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/the-rookie-logo.svg" class="franchise-logo" alt="The Rookie" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Blue%27s_Clues" target="_blank" rel="noopener"><img src="images/franchises/blues-clues-logo.png" class="franchise-logo franchise-logo--lg" alt="Blue's Clues" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Claws_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/claws-logo.png" class="franchise-logo" alt="Claws" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/The_Loud_House_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/loud-house-logo.png" class="franchise-logo" alt="The Loud House" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Snowpiercer_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/snowpiercer-logo.webp" class="franchise-logo" alt="Snowpiercer" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Apple_%26_Onion" target="_blank" rel="noopener"><img src="images/franchises/apple--onion-logo.webp" class="franchise-logo" alt="Apple &amp; Onion" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/The_Secret_Life_of_Pets_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/secret-life-of-pets-logo.png" class="franchise-logo" alt="The Secret Life of Pets" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
-      <a href="https://en.wikipedia.org/wiki/Max_%26_the_Midknights_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/max-and-the-midknights-logo.webp" class="franchise-logo" alt="Max and the Midknights" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/SpongeBob_SquarePants" target="_blank" rel="noopener"><img src="images/franchises/spongebob-logo.png" class="franchise-logo" alt="SpongeBob SquarePants" width="1280" height="682" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Grey%27s_Anatomy" target="_blank" rel="noopener"><img src="images/franchises/greys-anatomy-logo.png" class="franchise-logo" alt="Grey's Anatomy" width="1280" height="280" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles" target="_blank" rel="noopener"><img src="images/franchises/tmnt-logo.png" class="franchise-logo" alt="Teenage Mutant Ninja Turtles" width="400" height="225" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Modern_Family" target="_blank" rel="noopener"><img src="images/franchises/modern-family-logo.png" class="franchise-logo" alt="Modern Family" width="1280" height="824" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Shrek_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/shrek-logo.webp" class="franchise-logo" alt="Shrek" width="800" height="310" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Agents_of_S.H.I.E.L.D." target="_blank" rel="noopener"><img src="images/franchises/agents-of-shield-logo.png" class="franchise-logo" alt="Agents of S.H.I.E.L.D." width="1280" height="720" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Avatar:_The_Last_Airbender" target="_blank" rel="noopener"><img src="images/franchises/avatar-logo.png" class="franchise-logo" alt="Avatar: The Last Airbender" width="1104" height="426" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Black-ish" target="_blank" rel="noopener"><img src="images/franchises/blackish-logo.png" class="franchise-logo" alt="Black-ish" width="2355" height="419" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Minions_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/minions-logo.webp" class="franchise-logo" alt="Minions" width="800" height="310" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/The_Rookie_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/the-rookie-logo.svg" class="franchise-logo" alt="The Rookie" width="700" height="234" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Blue%27s_Clues" target="_blank" rel="noopener"><img src="images/franchises/blues-clues-logo.png" class="franchise-logo franchise-logo--lg" alt="Blue's Clues" width="3840" height="2160" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Claws_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/claws-logo.png" class="franchise-logo" alt="Claws" width="508" height="196" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/The_Loud_House_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/loud-house-logo.png" class="franchise-logo" alt="The Loud House" width="250" height="220" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Snowpiercer_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/snowpiercer-logo.webp" class="franchise-logo" alt="Snowpiercer" width="800" height="310" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Apple_%26_Onion" target="_blank" rel="noopener"><img src="images/franchises/apple--onion-logo.webp" class="franchise-logo" alt="Apple &amp; Onion" width="1200" height="318" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/The_Secret_Life_of_Pets_(franchise)" target="_blank" rel="noopener"><img src="images/franchises/secret-life-of-pets-logo.png" class="franchise-logo" alt="The Secret Life of Pets" width="250" height="220" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
+      <a href="https://en.wikipedia.org/wiki/Max_%26_the_Midknights_(TV_series)" target="_blank" rel="noopener"><img src="images/franchises/max-and-the-midknights-logo.webp" class="franchise-logo" alt="Max and the Midknights" width="828" height="655" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
     </div>
   </div>
 </section>
@@ -2537,7 +2520,7 @@
 
     <div class="essay-card reveal reveal-delay-3" id="essayCard">
       <div class="essay-hero">
-        <video class="essay-hero-video" autoplay muted loop playsinline id="poolVideo">
+        <video class="essay-hero-video" muted loop playsinline preload="none" id="poolVideo">
           <source src="images/Essay Photo/Pool Parties Video.mp4" type="video/mp4">
         </video>
         <div class="essay-title">I Hate Pool Parties</div>
@@ -2603,6 +2586,7 @@
         <div>
           <h3>Musical Theater</h3>
           <p>From Hadestown to Hamilton — the stories that move me most</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2613,6 +2597,7 @@
         <div>
           <h3>Film &amp; Television</h3>
           <p>A lifelong cinephile tracking everything on Letterboxd</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2623,6 +2608,7 @@
         <div>
           <h3>Animation</h3>
           <p>Fascinated by the craft from Pixar to Miyazaki</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2633,6 +2619,7 @@
         <div>
           <h3>Professional Wrestling</h3>
           <p>A storytelling art form — drama, athletics, and spectacle</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2643,6 +2630,7 @@
         <div>
           <h3>Playing Basketball &amp; Tennis</h3>
           <p>My go-to way to decompress and stay competitive</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2653,6 +2641,7 @@
         <div>
           <h3>Cat Dad Extraordinaire</h3>
           <p>Elie and Juneau run this household</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2663,6 +2652,7 @@
         <div>
           <h3>Sports Fanatic</h3>
           <p>Dodgers, Ravens, Orioles, Lakers — loyalty runs deep</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2673,6 +2663,7 @@
         <div>
           <h3>Old Bay Seasoning</h3>
           <p>Baltimore in a can — I put it on everything I cook</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2683,6 +2674,7 @@
         <div>
           <h3>Guitar, Trumpet &amp; Ukulele</h3>
           <p>Multi-instrumentalist since middle school</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2693,6 +2685,7 @@
         <div>
           <h3>Karaoke</h3>
           <p>Always ready to grab the mic — no warm-up needed</p>
+          <span class="interest-hint">Learn more →</span>
         </div>
       </div>
 
@@ -2703,45 +2696,45 @@
       <p class="taste-marquee-label">A selection of some of my favorite films</p>
       <div class="taste-marquee">
         <div class="marquee-track" style="--marquee-duration:50s">
-          <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" width="669" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" width="400" height="579" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" width="675" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" width="403" height="600" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" width="400" height="607" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" width="670" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" width="2000" height="3000" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" width="690" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" width="669" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" width="400" height="590" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" width="400" height="585" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" width="400" height="548" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" width="810" height="1200" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" width="1000" height="1500" loading="lazy"></span>
+          <span class="marquee-item"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" width="400" height="571" loading="lazy"></span>
           <!-- duplicate for seamless loop -->
-          <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="Everything Everywhere All at Once" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="Finding Nemo" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/hairspray-2007.jpg" alt="Hairspray" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/high-and-low.jpg" alt="High and Low" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="Into the Spider-Verse" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/la-confidential.jpg" alt="L.A. Confidential" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="Little Miss Sunshine" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="The Mitchells vs. the Machines" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/moonlight.jpg" alt="Moonlight" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/parasite.jpg" alt="Parasite" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/point-break.jpg" alt="Point Break" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/rear-window.jpg" alt="Rear Window" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/spider-man-2.jpg" alt="Spider-Man 2" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/spirited-away.jpg" alt="Spirited Away" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/the-thing.jpg" alt="The Thing" loading="lazy"></span>
-          <span class="marquee-item"><img class="film-poster" src="images/films/up.jpg.webp" alt="Up" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/do-the-right-thing.jpg" alt="" width="669" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/everything-everywhere-all-at-once.jpg" alt="" width="400" height="579" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/finding-nemo-poster.jpg" alt="" width="675" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/hairspray-2007.jpg" alt="" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/high-and-low.jpg" alt="" width="403" height="600" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/into-the-spiderverse.jpg" alt="" width="400" height="607" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/la-confidential.jpg" alt="" width="670" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/little-miss-sunshine-poster.jpg.webp" alt="" width="2000" height="3000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/mitchells-vs-the-machines.jpg" alt="" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/moonlight.jpg" alt="" width="690" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/parasite.jpg" alt="" width="400" height="592" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/point-break.jpg" alt="" width="669" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/prisoner-of-azkaban.jpg" alt="" width="400" height="590" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/rear-window.jpg" alt="" width="400" height="585" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/spider-man-2.jpg" alt="" width="400" height="548" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/spirited-away.jpg" alt="" width="810" height="1200" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/the-thing.jpg" alt="" width="1000" height="1500" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="film-poster" src="images/films/up.jpg.webp" alt="" width="400" height="571" loading="lazy"></span>
         </div>
       </div>
     </div>
@@ -2751,43 +2744,43 @@
       <p class="taste-marquee-label">Albums on rotation right now</p>
       <div class="taste-marquee">
         <div class="marquee-track" style="--marquee-duration:56s">
-          <span class="marquee-item"><img class="album-cover" src="images/albums/blonde---frank-ocean.jpg" alt="Blonde — Frank Ocean" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/dookie---green-day.jpg" alt="Dookie — Green Day" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/hadestown---original-broadway-cast.jpg" alt="Hadestown — Original Broadway Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/abraxas---santana.jpg" alt="Abraxas — Santana" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/short-n-sweet---sabrina-carpenter.jpg" alt="Short n' Sweet — Sabrina Carpenter" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/whats-going-on---marvin-gaye.jpg" alt="What's Going On — Marvin Gaye" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/a-larum---johnny-flynn.jpg" alt="A Larum — Johnny Flynn" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/gypsy---2024-broadway-cast.jpg" alt="Gypsy — 2024 Broadway Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/3-feet-high-and-rising---de-la-soul.jpeg" alt="3 Feet High and Rising — De La Soul" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/sketches-in-spain---miles-davis.jpg" alt="Sketches of Spain — Miles Davis" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/buzzkill---lyn-lapid.jpeg" alt="Buzzkill — Lyn Lapid" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/speaking-in-tongues---talking-heads.jpg" alt="Speaking in Tongues — Talking Heads" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/beyonce---cowboy-carter.jpg" alt="Cowboy Carter — Beyoncé" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/next-to-normal---original-london-cast.jpeg" alt="Next to Normal — Original London Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/cant-buy-a-thrill---steely-dan.jpg" alt="Can't Buy a Thrill — Steely Dan" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/the-art-of-loving---olivia-dean.jpg" alt="The Art of Loving — Olivia Dean" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/maybe-happy-ending---original-broadway-cast.jpg" alt="Maybe Happy Ending — Original Broadway Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/eternal-sunshine---ariana-grande.jpeg" alt="Eternal Sunshine — Ariana Grande" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/blonde---frank-ocean.jpg" alt="Blonde — Frank Ocean" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/dookie---green-day.jpg" alt="Dookie — Green Day" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/hadestown---original-broadway-cast.jpg" alt="Hadestown — Original Broadway Cast" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/abraxas---santana.jpg" alt="Abraxas — Santana" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/short-n-sweet---sabrina-carpenter.jpg" alt="Short n' Sweet — Sabrina Carpenter" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/whats-going-on---marvin-gaye.jpg" alt="What's Going On — Marvin Gaye" width="981" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/a-larum---johnny-flynn.jpg" alt="A Larum — Johnny Flynn" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/gypsy---2024-broadway-cast.jpg" alt="Gypsy — 2024 Broadway Cast" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/3-feet-high-and-rising---de-la-soul.jpeg" alt="3 Feet High and Rising — De La Soul" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/sketches-in-spain---miles-davis.jpg" alt="Sketches of Spain — Miles Davis" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/buzzkill---lyn-lapid.jpeg" alt="Buzzkill — Lyn Lapid" width="225" height="225" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/speaking-in-tongues---talking-heads.jpg" alt="Speaking in Tongues — Talking Heads" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/beyonce---cowboy-carter.jpg" alt="Cowboy Carter — Beyoncé" width="1000" height="940" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/next-to-normal---original-london-cast.jpeg" alt="Next to Normal — Original London Cast" width="640" height="640" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/cant-buy-a-thrill---steely-dan.jpg" alt="Can't Buy a Thrill — Steely Dan" width="400" height="405" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/the-art-of-loving---olivia-dean.jpg" alt="The Art of Loving — Olivia Dean" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/maybe-happy-ending---original-broadway-cast.jpg" alt="Maybe Happy Ending — Original Broadway Cast" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item"><img class="album-cover" src="images/albums/eternal-sunshine---ariana-grande.jpeg" alt="Eternal Sunshine — Ariana Grande" width="225" height="225" loading="lazy"></span>
           <!-- duplicate for seamless loop -->
-          <span class="marquee-item"><img class="album-cover" src="images/albums/blonde---frank-ocean.jpg" alt="Blonde — Frank Ocean" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/dookie---green-day.jpg" alt="Dookie — Green Day" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/hadestown---original-broadway-cast.jpg" alt="Hadestown — Original Broadway Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/abraxas---santana.jpg" alt="Abraxas — Santana" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/short-n-sweet---sabrina-carpenter.jpg" alt="Short n' Sweet — Sabrina Carpenter" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/whats-going-on---marvin-gaye.jpg" alt="What's Going On — Marvin Gaye" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/a-larum---johnny-flynn.jpg" alt="A Larum — Johnny Flynn" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/gypsy---2024-broadway-cast.jpg" alt="Gypsy — 2024 Broadway Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/3-feet-high-and-rising---de-la-soul.jpeg" alt="3 Feet High and Rising — De La Soul" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/sketches-in-spain---miles-davis.jpg" alt="Sketches of Spain — Miles Davis" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/buzzkill---lyn-lapid.jpeg" alt="Buzzkill — Lyn Lapid" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/speaking-in-tongues---talking-heads.jpg" alt="Speaking in Tongues — Talking Heads" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/beyonce---cowboy-carter.jpg" alt="Cowboy Carter — Beyoncé" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/next-to-normal---original-london-cast.jpeg" alt="Next to Normal — Original London Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/cant-buy-a-thrill---steely-dan.jpg" alt="Can't Buy a Thrill — Steely Dan" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/the-art-of-loving---olivia-dean.jpg" alt="The Art of Loving — Olivia Dean" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/maybe-happy-ending---original-broadway-cast.jpg" alt="Maybe Happy Ending — Original Broadway Cast" loading="lazy"></span>
-          <span class="marquee-item"><img class="album-cover" src="images/albums/eternal-sunshine---ariana-grande.jpeg" alt="Eternal Sunshine — Ariana Grande" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/blonde---frank-ocean.jpg" alt="" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/dookie---green-day.jpg" alt="" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/hadestown---original-broadway-cast.jpg" alt="" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/abraxas---santana.jpg" alt="" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/short-n-sweet---sabrina-carpenter.jpg" alt="" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/whats-going-on---marvin-gaye.jpg" alt="" width="981" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/a-larum---johnny-flynn.jpg" alt="" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/gypsy---2024-broadway-cast.jpg" alt="" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/3-feet-high-and-rising---de-la-soul.jpeg" alt="" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/sketches-in-spain---miles-davis.jpg" alt="" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/buzzkill---lyn-lapid.jpeg" alt="" width="225" height="225" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/speaking-in-tongues---talking-heads.jpg" alt="" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/beyonce---cowboy-carter.jpg" alt="" width="1000" height="940" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/next-to-normal---original-london-cast.jpeg" alt="" width="640" height="640" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/cant-buy-a-thrill---steely-dan.jpg" alt="" width="400" height="405" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/the-art-of-loving---olivia-dean.jpg" alt="" width="1000" height="1000" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/maybe-happy-ending---original-broadway-cast.jpg" alt="" width="400" height="400" loading="lazy"></span>
+          <span class="marquee-item" aria-hidden="true"><img aria-hidden="true" class="album-cover" src="images/albums/eternal-sunshine---ariana-grande.jpeg" alt="" width="225" height="225" loading="lazy"></span>
         </div>
       </div>
     </div>
@@ -2851,7 +2844,7 @@
           </div>
         </div>
         <div class="volunteer-media">
-          <video controls playsinline muted
+          <video controls playsinline muted preload="none"
                  onerror="this.parentElement.style.display='none'">
             <source src="images/coaching-video.mp4" type="video/mp4">
           </video>
@@ -2888,7 +2881,7 @@
 <section id="cats">
   <div class="container">
     <p class="section-label reveal">You Made It to the Bottom</p>
-    <h2 class="section-title reveal reveal-delay-1">Meet Elie &amp; Juneau<br><span style="font-size:0.65em; color:var(--muted); font-family:'Plus Jakarta Sans',sans-serif; font-weight:400;">Your reward for scrolling this far</span></h2>
+    <h2 class="section-title reveal reveal-delay-1">Meet Elie &amp; Juneau<br><span style="font-size:0.65em; color:var(--muted); font-family:sans-serif; font-weight:400;">Your reward for scrolling this far</span></h2>
     <div class="divider reveal reveal-delay-2"></div>
 
     <div class="cats-intro reveal reveal-delay-3">
@@ -2953,6 +2946,7 @@
           <span>Vertical</span>
         </button>
       </div>
+      <button class="pong-orient-btn" id="pongOrientCancel" style="margin-top:0.5rem;background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);font-size:0.85rem;padding:0.7rem 1.5rem;">Cancel</button>
     </div>
 
     <!-- PONG -->
@@ -2983,7 +2977,7 @@
       </div>
 
       <div class="pong-canvas-wrap">
-        <canvas id="pongCanvas" width="700" height="400"></canvas>
+        <canvas id="pongCanvas" width="700" height="400" aria-label="Cat Laser Pong game"></canvas>
         <div class="pong-overlay" id="pongOverlay">
           <h4>Cat Laser Pong</h4>
           <p>Choose your cat and press Start</p>
@@ -3042,7 +3036,7 @@
       </a>
       <a href="https://letterboxd.com/chriszdenek/" target="_blank" class="contact-card">
         <div class="contact-card-icon">
-          <img src="images/logos/letterboxd.png" alt="Letterboxd" style="height:28px;width:auto;filter:brightness(0) invert(1) opacity(0.85);" loading="lazy">
+          <img src="images/logos/letterboxd.png" alt="Letterboxd" width="500" height="500" style="height:28px;width:auto;filter:brightness(0) invert(1) opacity(0.85);" loading="lazy">
         </div>
         <div class="contact-card-label">Letterboxd</div>
         <div class="contact-card-value">chriszdenek</div>
@@ -3142,13 +3136,29 @@ var BALL_R = 8;
 const PAD_W_ORIG = 36, PAD_H_ORIG = 96, BALL_R_ORIG = 8;
 const WIN_SCORE = 7;
 
-// Preload cat sprites
+// Defer cat sprite loading until #cats section is near viewport
 const CAT_SPRITES = {};
-['juneau', 'elie'].forEach(key => {
-  const img = new Image();
-  img.src = `images/${key}-sprite.png`;
-  CAT_SPRITES[key] = img;
-});
+var catSpritesLoaded = false;
+function loadCatSprites() {
+  if (catSpritesLoaded) return;
+  catSpritesLoaded = true;
+  ['juneau', 'elie'].forEach(key => {
+    const img = new Image();
+    img.src = `images/${key}-sprite.png`;
+    CAT_SPRITES[key] = img;
+  });
+}
+(function() {
+  var catsEl = document.getElementById('cats');
+  if (!catsEl || !('IntersectionObserver' in window)) { loadCatSprites(); return; }
+  var spriteObs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      loadCatSprites();
+      spriteObs.disconnect();
+    }
+  }, { rootMargin: '200px' });
+  spriteObs.observe(catsEl);
+})();
 
 // Cat themes — Balinese colorpoint accurate palettes
 const CATS = {
@@ -3758,7 +3768,18 @@ function startIdleLoop() {
   if (idleAnimId) { cancelAnimationFrame(idleAnimId); idleAnimId = null; }
   idleAnimId = requestAnimationFrame(drawIdleFrame);
 }
+var pongIdleVisible = true;
+(function() {
+  var catsSection = document.getElementById('cats');
+  if (catsSection && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries) {
+      pongIdleVisible = entries[0].isIntersecting;
+      if (pongIdleVisible && !gameRunning && !gameOver && !idleAnimId) { startIdleLoop(); }
+    }, { threshold: 0 }).observe(catsSection);
+  }
+})();
 function drawIdleFrame() {
+  if (!pongIdleVisible && !gameRunning) { idleAnimId = null; return; }
   ctx.clearRect(0, 0, W, H);
   drawCourt();
   const cat   = selectedCat ? CATS[selectedCat] : CATS.juneau;
@@ -3835,6 +3856,17 @@ function choosePongOrientation(orient) {
 
 // Expose to onclick
 window.choosePongOrientation = choosePongOrientation;
+
+// Cancel button on orientation overlay
+(function() {
+  var cancelBtn = document.getElementById('pongOrientCancel');
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', function() {
+      rotateOverlay.classList.remove('visible');
+      exitPongFullscreen();
+    });
+  }
+})();
 
 function enterPongFullscreen() {
   if (pongIsFullscreen) return;
@@ -3946,7 +3978,7 @@ document.addEventListener('fullscreenchange', function() {
 // Init — resetGame() calls startIdleLoop() internally
 resetGame();
 
-/* ── Photo Lightbox initialised after DOM in separate <script> below ── */
+/* ── Photo Lightbox initialised after DOM in separate block below ── */
 </script>
 
 <!-- ── Lightbox overlay ── -->
@@ -3979,6 +4011,7 @@ resetGame();
     btn.classList.toggle('open');
     links.classList.toggle('open');
     document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+    btn.setAttribute('aria-expanded', links.classList.contains('open'));
   });
   links.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', function () {
@@ -4296,6 +4329,9 @@ var interestData = [
     // Remove any CSS animation
     track.style.animation = 'none';
 
+    var marqueeVisible = true;
+    var marqueeAnimId = null;
+
     var offset = 0;
     var speed = 0.5;
     var currentSpeed = speed;
@@ -4421,15 +4457,26 @@ var interestData = [
     // Click handler for items
     var items = track.querySelectorAll('.marquee-item');
     items.forEach(function(item, idx) {
+      var realIndex = idx % dataArray.length;
+      var title = dataArray[realIndex] ? dataArray[realIndex].title : '';
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      if (title) item.setAttribute('aria-label', title);
       item.addEventListener('click', function() {
         if (didDrag) return;
-        var realIndex = idx % dataArray.length;
-        openProjectModal(category, realIndex);
+        openProjectModal(category, idx % dataArray.length);
+      });
+      item.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openProjectModal(category, idx % dataArray.length);
+        }
       });
     });
 
     // Animation loop
     function tick() {
+      if (!marqueeVisible) { marqueeAnimId = null; return; }
       if (!isDragging) {
         if (Math.abs(velocity) > 0.3) {
           offset += velocity;
@@ -4441,9 +4488,18 @@ var interestData = [
         wrapOffset();
         applyTransform();
       }
-      requestAnimationFrame(tick);
+      marqueeAnimId = requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
+    marqueeAnimId = requestAnimationFrame(tick);
+
+    // Pause marquee when offscreen
+    var marqueeSection = marqueeEl.closest('.taste-marquee-section');
+    if (marqueeSection && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries) {
+        marqueeVisible = entries[0].isIntersecting;
+        if (marqueeVisible && !marqueeAnimId) { marqueeAnimId = requestAnimationFrame(tick); }
+      }, { threshold: 0 }).observe(marqueeSection);
+    }
   }
 
   // Initialize both carousels
@@ -4815,6 +4871,18 @@ var interestData = [
   }
 
   timer = setInterval(advance, 2400);
+
+  // Pause rotation when hero is offscreen
+  var heroEl = document.getElementById('hero');
+  if (heroEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        if (!timer) timer = setInterval(advance, 2400);
+      } else {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+    }, { threshold: 0 }).observe(heroEl);
+  }
 })();
 </script>
 
@@ -4866,12 +4934,23 @@ var interestData = [
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (isMobile || prefersReduced) return;
 
-  hero.addEventListener('mousemove', function(e) {
+  var tiltRafPending = false;
+  var tiltMouseX = 0, tiltMouseY = 0;
+  function updateTilt() {
+    tiltRafPending = false;
     var rect = hero.getBoundingClientRect();
-    var x = (e.clientX - rect.left) / rect.width - 0.5;
-    var y = (e.clientY - rect.top) / rect.height - 0.5;
+    var x = (tiltMouseX - rect.left) / rect.width - 0.5;
+    var y = (tiltMouseY - rect.top) / rect.height - 0.5;
     var maxTilt = 3;
     name.style.transform = 'perspective(800px) rotateY(' + (x * maxTilt) + 'deg) rotateX(' + (-y * maxTilt) + 'deg)';
+  }
+  hero.addEventListener('mousemove', function(e) {
+    tiltMouseX = e.clientX;
+    tiltMouseY = e.clientY;
+    if (!tiltRafPending) {
+      tiltRafPending = true;
+      requestAnimationFrame(updateTilt);
+    }
   });
 
   hero.addEventListener('mouseleave', function() {
@@ -4890,10 +4969,14 @@ var interestData = [
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (isMobile || prefersReduced) return;
 
+  glow.style.left = '0';
+  glow.style.top = '0';
+
   hero.addEventListener('mousemove', function(e) {
     var rect = hero.getBoundingClientRect();
-    glow.style.left = (e.clientX - rect.left) + 'px';
-    glow.style.top = (e.clientY - rect.top) + 'px';
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    glow.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0) translate(-50%, -50%)';
     glow.style.opacity = '1';
   });
 
@@ -4928,11 +5011,12 @@ var interestData = [
     if (section) sections.push({ el: section, link: link });
   });
 
+  var scrollTicking = false;
   function onScroll() {
     var scrollTop = window.scrollY;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    if (progressBar) progressBar.style.width = progress + '%';
+    var fraction = docHeight > 0 ? scrollTop / docHeight : 0;
+    if (progressBar) progressBar.style.transform = 'scaleX(' + fraction + ')';
 
     // Active nav
     var current = '';
@@ -4955,9 +5039,15 @@ var interestData = [
     // Back to top
     var backBtn = document.getElementById('backToTop');
     if (backBtn) backBtn.classList.toggle('visible', scrollTop > window.innerHeight);
+    scrollTicking = false;
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', function() {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(onScroll);
+    }
+  }, { passive: true });
   onScroll();
 })();
 </script>
@@ -5013,11 +5103,21 @@ var interestData = [
 </script>
 
 
-<!-- ── Pool Video Playback Speed ── -->
+<!-- ── Pool Video Playback Speed + Defer ── -->
 <script>
 (function() {
   var v = document.getElementById('poolVideo');
-  if (v) v.playbackRate = 0.75;
+  if (!v) return;
+  v.playbackRate = 0.75;
+  var writingSection = document.getElementById('writing');
+  if (writingSection && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) { v.play().catch(function(){}); }
+      else { v.pause(); }
+    }, { threshold: 0 }).observe(writingSection);
+  } else {
+    v.play().catch(function(){});
+  }
 })();
 </script>
 
@@ -5028,11 +5128,22 @@ var interestData = [
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   document.querySelectorAll('.hero-cta .btn').forEach(function(btn) {
-    btn.addEventListener('mousemove', function(e) {
+    var magRafPending = false;
+    var magMouseX = 0, magMouseY = 0;
+    function updateMagnetic() {
+      magRafPending = false;
       var rect = btn.getBoundingClientRect();
-      var x = e.clientX - rect.left - rect.width / 2;
-      var y = e.clientY - rect.top - rect.height / 2;
+      var x = magMouseX - rect.left - rect.width / 2;
+      var y = magMouseY - rect.top - rect.height / 2;
       btn.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
+    }
+    btn.addEventListener('mousemove', function(e) {
+      magMouseX = e.clientX;
+      magMouseY = e.clientY;
+      if (!magRafPending) {
+        magRafPending = true;
+        requestAnimationFrame(updateMagnetic);
+      }
     });
     btn.addEventListener('mouseleave', function() {
       btn.style.transform = '';
@@ -5204,14 +5315,28 @@ var interestData = [
   if (!cards.length) return;
 
   var PROXIMITY = 250;
+  var cardRects = [];
+  var glowRafPending = false;
+  var glowMouseX = 0, glowMouseY = 0;
 
-  document.addEventListener('mousemove', function(e) {
+  function cacheCardRects() {
+    cardRects = [];
     cards.forEach(function(card) {
-      var rect = card.getBoundingClientRect();
+      cardRects.push(card.getBoundingClientRect());
+    });
+  }
+  cacheCardRects();
+  window.addEventListener('resize', cacheCardRects);
+
+  function updateGlow() {
+    glowRafPending = false;
+    cards.forEach(function(card, i) {
+      var rect = cardRects[i];
+      if (!rect) return;
       var cx = rect.left + rect.width / 2;
       var cy = rect.top + rect.height / 2;
-      var dx = e.clientX - cx;
-      var dy = e.clientY - cy;
+      var dx = glowMouseX - cx;
+      var dy = glowMouseY - cy;
       var dist = Math.sqrt(dx * dx + dy * dy);
 
       if (dist < PROXIMITY) {
@@ -5223,7 +5348,19 @@ var interestData = [
         card.style.setProperty('--glow-opacity', '0');
       }
     });
+  }
+
+  document.addEventListener('mousemove', function(e) {
+    glowMouseX = e.clientX;
+    glowMouseY = e.clientY;
+    if (!glowRafPending) {
+      glowRafPending = true;
+      requestAnimationFrame(updateGlow);
+    }
   });
+
+  // Recache rects on scroll (since getBoundingClientRect is viewport-relative)
+  window.addEventListener('scroll', cacheCardRects, { passive: true });
 
   document.addEventListener('mouseleave', function() {
     cards.forEach(function(card) {
