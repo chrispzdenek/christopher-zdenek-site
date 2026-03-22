@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <title>I Hate Pool Parties — Christopher Zdenek</title>
+  <meta name="description" content="A personal essay by Christopher Zdenek about epilepsy, pool parties, and the friendship that changed everything.">
+  <meta name="author" content="Christopher Zdenek">
+  <link rel="canonical" href="https://chriszdenek.com/pool-parties.html">
+  <meta property="og:title" content="I Hate Pool Parties — Christopher Zdenek">
+  <meta property="og:description" content="A personal essay about epilepsy, pool parties, and the friendship that changed everything.">
+  <meta property="og:image" content="https://chriszdenek.com/images/og-image.png">
+  <meta property="og:url" content="https://chriszdenek.com/pool-parties.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Chris Zdenek">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="I Hate Pool Parties — Christopher Zdenek">
+  <meta name="twitter:description" content="A personal essay about epilepsy, pool parties, and the friendship that changed everything.">
+  <meta name="twitter:image" content="https://chriszdenek.com/images/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "I Hate Pool Parties",
+    "author": {
+      "@type": "Person",
+      "name": "Christopher Zdenek",
+      "url": "https://chriszdenek.com"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Christopher Zdenek"
+    },
+    "description": "A personal essay about epilepsy, pool parties, and the friendship that changed everything.",
+    "mainEntityOfPage": "https://chriszdenek.com/pool-parties.html",
+    "genre": "Personal Essay"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1D1D1F;
+      --cream: #F5F5F7;
+      --white: #ffffff;
+      --muted: #6E6E73;
+      --accent: #0066CC;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: rgba(255,255,255,0.88);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    .essay-nav {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      width: min(92%, 720px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem 1.25rem;
+      background: rgba(29,29,31,0.85);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 980px;
+      z-index: 100;
+    }
+    .essay-nav a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .essay-nav a:hover { color: #fff; }
+    .essay-nav .nav-logo {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ─── HERO ─── */
+    .essay-page-hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+      padding: 6rem 1.5rem 3rem;
+    }
+    .essay-page-hero video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+    .essay-page-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, var(--navy) 0%, transparent 60%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .hero-content .essay-byline {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+    }
+
+    /* ─── BODY ─── */
+    .essay-page-body {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+    .essay-page-body p {
+      font-size: clamp(1rem, 2.2vw, 1.12rem);
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 1.75rem;
+      font-weight: 300;
+      line-height: 1.85;
+    }
+    .essay-page-body p:first-child::first-letter {
+      font-size: 3.2em;
+      float: left;
+      line-height: 0.8;
+      margin: 0.08em 0.12em 0 0;
+      font-weight: 500;
+      color: rgba(255,255,255,0.95);
+    }
+    .essay-page-body em {
+      color: #f0d078;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* ─── FOOTER ─── */
+    .essay-page-footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      text-align: center;
+    }
+    .essay-page-footer .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid rgba(0,102,204,0.3);
+      border-radius: 980px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .essay-page-footer .back-link:hover {
+      background: rgba(0,102,204,0.08);
+      border-color: rgba(0,102,204,0.5);
+    }
+    .essay-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 0 auto 2.5rem;
+      max-width: 120px;
+    }
+    .essay-author-note {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 480px) {
+      .essay-page-hero { min-height: 40vh; padding: 5rem 1.25rem 2.5rem; }
+      .essay-page-body { padding: 2rem 1.25rem 4rem; }
+    }
+
+    /* ─── ANIMATION ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .fade-in-delay { animation-delay: 0.3s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="essay-nav">
+    <a href="/" class="nav-logo">CZ</a>
+    <a href="/#writing">Back to site</a>
+  </nav>
+
+  <header class="essay-page-hero">
+    <video muted loop playsinline autoplay>
+      <source src="images/Essay Photo/Pool Parties Video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content fade-in">
+      <h1>I Hate Pool Parties</h1>
+      <div class="essay-byline">Personal Essay &nbsp;&middot;&nbsp; Christopher Zdenek</div>
+    </div>
+  </header>
+
+  <main class="essay-page-body fade-in fade-in-delay">
+    <p>I hate pool parties. Don't get me wrong, I've always enjoyed a good party, and I've loved swimming since I was young. So what makes that combo so dreadful? Epilepsy and water don't go too well together.</p>
+
+    <p>To provide some quick exposition, I had my first seizure at the end of a fifth-grade school day. I barely remember the experience. I was talking to Sarai, my crush, and my heart rate suddenly rose (unrelated to my romantic endeavors, I assure you), and everything went black. I woke up just a few minutes later to a sea of children's eyes in abject horror, and learning that an ambulance was on its way. What was possibly the safest place to have my first seizure from a physical standpoint was the worst from a social standpoint. So much for my plan to win Sarai's heart... When I came back to school, everything had changed. It was as if I had a "SEIZURE KID" plastered on my forehead for everyone to see. I felt othered. I felt alone. Don't get me wrong, it's not like my friends from school stopped hanging out with me. It's just that things were different.</p>
+
+    <p>Now that the exposition is out of the way, back to pool parties.</p>
+
+    <p>Every time my mom dropped me off at a pool party, she would walk me up to the door. She would knock on the door and introduce herself to the parents at the party, as I would prepare myself for the show. They would always engage in light-hearted banter and would then hit them with something along the lines of, "I just wanted to let you know that Chris has epilepsy, and while it shouldn't be a problem at all, he might have a seizure and drown in your pool." The light always left the other parent's eyes at that moment, as they wished they had done their recon. My mom always ended by telling me to "Have fun!" when she left. Bless her heart. It should go without saying that I wasn't allowed in pools at other friends' houses. I watched all my friends splash around, as I was relegated to talking to parents about the weather.</p>
+
+    <p>I ended up changing schools for seventh grade, and I had a plan. I went into the year with the goal of not letting any classmates know I had epilepsy. I knew no one from the school and saw it as a perfect chance to start over and be <em>normal</em>. And honestly, it worked. No one knew who I really was, and I loved that. I made a ton of friends and even became remotely popular. Remotely popular enough that I was invited to a start-of-the-year pool party at Cecily D'Amore's house.</p>
+
+    <p>It just had to be a pool party. It's not like I had any choice of going; it's middle school. It's life or death, and I needed to make a plan. I strategically went home that night and began planting the seeds of deception. I told my mother it was a board game party and packed my swimsuit and a small towel into an empty board game box. When we arrived at the house, my mom let me even go to the door myself. Mission accomplished.</p>
+
+    <p>Once inside, I got changed and went toward the pool. This was the moment I had been dreaming of since 5th grade. I cannonballed in, and couldn't tell if the chill came from the temperature of the pool or the ecstasy of middle-school conformity. My classmates and I began playing all sorts of aquatic games.</p>
+
+    <p>In between games, something caught my eye. It was Sahil, a kid from my homeroom. Fully clothed. Sitting next to Cecily's mom. I asked a classmate what he was doing outside of the pool, and they responded, "oh yeah, he has seizures. His mom doesn't let him swim. I don't really know why he comes to these things." When the next game started, everything continued as before. Well, except for the fact that I wasn't playing. I was sitting with Sahil. I was having my first real conversation with the person who would become my best friend. The first conversation that year where I felt comfortable letting down my facade. And that was better than any pool cannonball could have ever been.</p>
+
+    <p>After I met Sahil, I wasn't afraid of being the seizure kid since I was now <em>a</em> seizure kid. After I met Sahil, I didn't feel alone anymore. I no longer hated sitting on the side of pool parties, since I wasn't sitting alone.</p>
+  </main>
+
+  <footer class="essay-page-footer">
+    <hr class="essay-divider">
+    <p class="essay-author-note">Christopher Zdenek is an entertainment entrepreneur and emerging technology consultant based in Los Angeles.</p>
+    <a href="/" class="back-link">&larr; Back to chriszdenek.com</a>
+  </footer>
+
+</body>
+</html>
