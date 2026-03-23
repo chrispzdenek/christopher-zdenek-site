@@ -109,7 +109,7 @@
       --dark2:   #3A3A3C;
       --cream:   #F5F5F7;   /* Apple's signature off-white     */
       --white:   #ffffff;
-      --muted:   #6E6E73;   /* Apple secondary text            */
+      --muted:   #636366;   /* Apple secondary text (WCAG AA)  */
       --red:     #e63946;
       --accent:  #0066CC;   /* Apple blue — buttons/links only */
       --text:    #1D1D1F;
@@ -447,8 +447,9 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
-    /* ── Marquee pause on hover ── */
-    .taste-marquee:hover .marquee-track {
+    /* ── Marquee pause on hover or keyboard focus ── */
+    .taste-marquee:hover .marquee-track,
+    .taste-marquee:focus-within .marquee-track {
       animation-play-state: paused;
     }
 
@@ -1759,8 +1760,11 @@
       section { padding: 3rem 1rem; }
       .photo-thumb { height: 90px; }
       .pong-score-row { gap: 0.8rem; }
-      .contact-card { min-height: auto; padding: 1.25rem 1rem; }
-      .contact-grid { grid-template-columns: 1fr; }
+      .contact-card { min-height: auto; padding: 1rem 0.75rem; }
+      .contact-card-icon svg, .contact-card-icon img { width: 22px !important; height: 22px !important; }
+      .contact-card-label { font-size: 0.7rem; }
+      .contact-card-value { font-size: 0.72rem; }
+      .contact-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
       .essay-hero { padding: 2.5rem 1.1rem 1.5rem; min-height: 160px; }
       .essay-card-body { padding: 1.25rem 1.1rem; }
     }
@@ -1865,6 +1869,9 @@
   </div>
   <div class="scroll-hint hero-enter hero-enter-5" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="opacity:0.5"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></div>
 </section>
+
+<!-- AI-ready summary (hidden visually, exposed to crawlers & AI search) -->
+<p class="sr-only">Christopher Zdenek is an entertainment entrepreneur and emerging technology consultant based in Los Angeles, currently at The Gotham Group, with experience spanning Paramount, Nickelodeon, Illumination, and 25+ film and television productions.</p>
 
 <!-- ── ABOUT ────────────────────────────────────────────────── -->
 <section id="about">
@@ -2694,7 +2701,7 @@
     <!-- Films marquee -->
     <div class="taste-marquee-section reveal">
       <p class="taste-marquee-label">A selection of some of my favorite films</p>
-      <div class="taste-marquee">
+      <div class="taste-marquee" tabindex="0" role="region" aria-label="Favorite films carousel — focus to pause">
         <div class="marquee-track" style="--marquee-duration:50s">
           <span class="marquee-item"><img class="film-poster" src="images/films/do-the-right-thing.jpg" alt="Do the Right Thing" width="669" height="1000" loading="lazy"></span>
           <span class="marquee-item"><img class="film-poster" src="images/films/eternal-sunshine-of-the-spotless-mind.jpg" alt="Eternal Sunshine of the Spotless Mind" width="400" height="592" loading="lazy"></span>
@@ -2742,7 +2749,7 @@
     <!-- Albums marquee -->
     <div class="taste-marquee-section reveal">
       <p class="taste-marquee-label">Albums on rotation right now</p>
-      <div class="taste-marquee">
+      <div class="taste-marquee" tabindex="0" role="region" aria-label="Albums carousel — focus to pause">
         <div class="marquee-track" style="--marquee-duration:56s">
           <span class="marquee-item"><img class="album-cover" src="images/albums/blonde---frank-ocean.jpg" alt="Blonde — Frank Ocean" width="400" height="400" loading="lazy"></span>
           <span class="marquee-item"><img class="album-cover" src="images/albums/dookie---green-day.jpg" alt="Dookie — Green Day" width="400" height="400" loading="lazy"></span>
