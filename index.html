@@ -97,6 +97,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap"></noscript>
+  <script>
+  (function(){
+    var t = localStorage.getItem('theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+  </script>
   <style>
     /* ─── FONTS ─────────────────────────────────────────────── */
 
@@ -116,6 +123,132 @@
       --cat-blue: #7ab3d4;
       --cat-seal: #8b6f52;
     }
+
+    /* ─── DARK MODE ──────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --navy: #F5F5F7;
+      --deep: #C7C7CC;
+      --dark: #F5F5F7;
+      --dark2: #C7C7CC;
+      --cream: #1C1C1E;
+      --white: #141414;
+      --muted: rgba(255,255,255,0.55);
+      --red: #FF6B6B;
+      --accent: #4DA3FF;
+      --text: rgba(255,255,255,0.92);
+      --cat-blue: #7ab3d4;
+      --cat-seal: #8b6f52;
+    }
+    [data-theme="dark"] body { background: #141414; color: rgba(255,255,255,0.92); }
+    [data-theme="dark"] #writing,
+    [data-theme="dark"] #contact { background: #0A0A0A; }
+    [data-theme="dark"] #experience,
+    [data-theme="dark"] #volunteer,
+    [data-theme="dark"] #cats { background: #1C1C1E; }
+    [data-theme="dark"] #hero,
+    [data-theme="dark"] #about,
+    [data-theme="dark"] #franchises,
+    [data-theme="dark"] #interests { background: #141414; }
+
+    /* Nav always dark in dark mode */
+    [data-theme="dark"] nav {
+      background: rgba(20,20,20,0.85);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    [data-theme="dark"] .nav-logo { color: #fff; }
+    [data-theme="dark"] .nav-logo::after { background: rgba(255,255,255,0.5); }
+    [data-theme="dark"] .nav-links a { color: rgba(255,255,255,0.6); }
+    [data-theme="dark"] .nav-links a:hover,
+    [data-theme="dark"] .nav-links a.nav-active { color: #fff; }
+    [data-theme="dark"] .nav-hamburger span { background: #fff; }
+
+    /* Cards, stat-cards, timeline items */
+    [data-theme="dark"] .stat-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
+    [data-theme="dark"] .timeline-item { border-color: rgba(255,255,255,0.08); }
+    [data-theme="dark"] .timeline-header { border-color: rgba(255,255,255,0.06); }
+    [data-theme="dark"] .interest-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
+    [data-theme="dark"] .volunteer-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
+    [data-theme="dark"] .contact-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
+
+    /* Buttons */
+    [data-theme="dark"] .btn-primary { background: #fff; color: #141414; }
+    [data-theme="dark"] .btn-primary:hover { background: #E8E8ED; }
+    [data-theme="dark"] .btn-secondary { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.85); }
+    [data-theme="dark"] .btn-secondary:hover { background: rgba(255,255,255,0.06); }
+
+    /* Modals and lightbox */
+    [data-theme="dark"] .modal-content,
+    [data-theme="dark"] .interest-modal-content { background: #1C1C1E; color: rgba(255,255,255,0.92); }
+
+    /* Show all button */
+    [data-theme="dark"] .show-all-btn { background: #1C1C1E; border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
+
+    /* Back to top */
+    [data-theme="dark"] .back-to-top { background: rgba(255,255,255,0.9); color: #141414; }
+
+    /* Focus states */
+    [data-theme="dark"] *:focus-visible { outline-color: #4DA3FF; }
+
+    /* Tag pills in hero */
+    [data-theme="dark"] .current-badge { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.12); }
+    [data-theme="dark"] .hero-tags { color: rgba(255,255,255,0.45); }
+
+    /* Headshot shadow */
+    [data-theme="dark"] .headshot-img,
+    [data-theme="dark"] .about-visual .headshot-img { box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+    /* Theme toggle transition */
+    .theme-transitioning,
+    .theme-transitioning *,
+    .theme-transitioning *::before,
+    .theme-transitioning *::after {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+      color: var(--muted);
+    }
+    .theme-toggle:hover { background: rgba(128,128,128,0.1); }
+    .theme-toggle svg { width: 18px; height: 18px; transition: transform 0.3s ease, opacity 0.3s ease; }
+    [data-theme="dark"] .theme-toggle { color: rgba(255,255,255,0.6); }
+    [data-theme="dark"] .theme-toggle:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    [data-theme="dark"] .theme-icon-moon { display: none !important; }
+    [data-theme="dark"] .theme-icon-sun { display: block !important; }
+
+    /* Hero border */
+    [data-theme="dark"] #hero { border-bottom-color: rgba(255,255,255,0.06); }
+
+    /* Hero currently badge */
+    [data-theme="dark"] .hero-currently { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+
+    /* Timeline tags */
+    [data-theme="dark"] .timeline-tag { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); }
+
+    /* Timeline show more button */
+    [data-theme="dark"] .timeline-show-more { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); }
+    [data-theme="dark"] .timeline-show-more:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.25); }
+
+    /* Volunteer photo-event in dark */
+    [data-theme="dark"] #volunteer .photo-event-feature { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
+    [data-theme="dark"] .volunteer-media { border-top-color: rgba(255,255,255,0.06); }
+
+    /* Dark mode mobile nav dropdown */
+    @media (max-width: 768px) {
+      [data-theme="dark"] .nav-links { background: rgba(20,20,20,0.96); }
+      [data-theme="dark"] .nav-links a { color: rgba(255,255,255,0.85); }
+    }
+
     html { scroll-behavior: smooth; }
     body {
       font-family: 'DM Sans', sans-serif;
@@ -1824,6 +1957,10 @@
 <!-- ── NAV ─────────────────────────────────────────────────── -->
 <nav role="navigation" aria-label="Main navigation">
   <a class="nav-logo" href="#hero">CZ</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
+    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.65,190.57A88,88,0,0,1,65.43,67.35,89.45,89.45,0,0,1,96,49.21,104.12,104.12,0,0,0,206.79,160,89.3,89.3,0,0,1,188.65,190.57Z"/></svg>
+    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="display:none"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg>
+  </button>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -5043,7 +5180,13 @@ var interestData = [
       var rect = section.getBoundingClientRect();
       if (rect.top <= 60 && rect.bottom >= 60) isDark = true;
     });
-    if (nav) nav.classList.toggle('nav-dark', isDark);
+    if (nav) {
+      if (document.documentElement.getAttribute('data-theme') === 'dark') {
+        nav.classList.add('nav-dark');
+      } else {
+        nav.classList.toggle('nav-dark', isDark);
+      }
+    }
 
     // Back to top
     var backBtn = document.getElementById('backToTop');
@@ -5424,6 +5567,42 @@ var interestData = [
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+})();
+</script>
+
+<!-- ── Dark Mode Toggle ── -->
+<script>
+(function() {
+  var toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+
+  function getTheme() {
+    return document.documentElement.getAttribute('data-theme') || 'light';
+  }
+
+  function setTheme(theme) {
+    document.documentElement.classList.add('theme-transitioning');
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    setTimeout(function() {
+      document.documentElement.classList.remove('theme-transitioning');
+    }, 350);
+  }
+
+  // Set initial aria-label
+  toggle.setAttribute('aria-label', getTheme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+
+  toggle.addEventListener('click', function() {
+    setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+  });
+
+  // Listen for OS theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
 })();
 </script>
 
