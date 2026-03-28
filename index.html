@@ -488,7 +488,7 @@
       display: grid;
       grid-template-columns: 220px 1fr;
       gap: 3.5rem;
-      align-items: stretch;
+      align-items: start;
     }
     /* ── Left column: headshot stacked above stat boxes ── */
     .about-visual {
@@ -496,10 +496,11 @@
     }
     .about-visual .headshot-wrap {
       width: 100%; flex-shrink: 0;
+      overflow: hidden; border-radius: 12px;
     }
     .about-visual .headshot-img {
-      width: 100%; border-radius: 12px;
-      display: block; object-fit: cover; aspect-ratio: 4/5;
+      width: 100%; height: auto; border-radius: 12px;
+      display: block;
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
     .about-visual .about-stats {
@@ -1200,7 +1201,8 @@
     }
     .headshot-img {
       width: 100%; max-width: 380px; border-radius: 12px;
-      display: block; object-fit: cover; aspect-ratio: 4/5;
+      display: block; object-fit: cover; aspect-ratio: 6/7;
+      object-position: top;
       box-shadow: 0 30px 80px rgba(0,0,0,0.18);
       position: relative; z-index: 2;
     }
@@ -1737,7 +1739,7 @@
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .about-visual { flex-direction: row; flex-wrap: wrap; gap: 0.75rem; }
       .about-visual .headshot-wrap { width: 140px; flex-shrink: 0; }
-      .about-visual .headshot-img { aspect-ratio: 4/5; }
+      .about-visual .headshot-img { aspect-ratio: 6/7; }
       .about-visual .about-stats { flex: 1; min-width: 160px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0.5rem; }
       .about-visual .stat-card { padding: 0.5rem 0.6rem; }
       .about-visual .stat-number { font-size: 1.2rem; }
