@@ -167,6 +167,7 @@
     [data-theme="dark"] .stat-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
     [data-theme="dark"] .timeline-item { border-color: rgba(255,255,255,0.08); }
     [data-theme="dark"] .timeline-header { border-color: rgba(255,255,255,0.06); }
+    [data-theme="dark"] .timeline-item .photo-thumb-grid { border-top-color: rgba(255,255,255,0.08); }
     [data-theme="dark"] .interest-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
     [data-theme="dark"] .volunteer-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
     [data-theme="dark"] .contact-card { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
@@ -211,7 +212,9 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 6px;
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -327,7 +330,9 @@
     /* ─── HAMBURGER MENU ──────────────────────────────────── */
     .nav-hamburger {
       display: none; background: none; border: none; cursor: pointer;
-      padding: 0.4rem; margin-right: -0.4rem;
+      padding: 0.65rem; margin-right: -0.65rem;
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
     }
     .nav-hamburger span {
       display: block; width: 22px; height: 2px;
