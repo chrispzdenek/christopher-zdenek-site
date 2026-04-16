@@ -1,0 +1,12 @@
+# Netlify cache headers — revalidate assets with ETag on each visit
+# so browsers cache them but pick up changes immediately on deploy.
+
+/styles.css
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/scripts/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# HTML: always revalidate (Netlify's default is fine; explicit for clarity)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
