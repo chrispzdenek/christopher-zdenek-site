@@ -157,7 +157,7 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.3);
     }
     [data-theme="dark"] .nav-logo { color: #fff; }
-    [data-theme="dark"] .nav-logo::after { background: rgba(255,255,255,0.5); }
+    [data-theme="dark"] .nav-logo-text::after { background: rgba(255,255,255,0.5); }
     [data-theme="dark"] .nav-links a { color: rgba(255,255,255,0.6); }
     [data-theme="dark"] .nav-links a:hover,
     [data-theme="dark"] .nav-links a.nav-active { color: #fff; }
@@ -246,10 +246,48 @@
     [data-theme="dark"] #volunteer .photo-event-feature { background: #1C1C1E; border-color: rgba(255,255,255,0.06); }
     [data-theme="dark"] .volunteer-media { border-top-color: rgba(255,255,255,0.06); }
 
-    /* Dark mode mobile nav dropdown */
+    /* Contact section — always-white text in dark mode (overrides var(--white) flip) */
+    [data-theme="dark"] .contact-card-value,
+    [data-theme="dark"] .contact-location-value { color: rgba(255,255,255,0.92); }
+    [data-theme="dark"] .contact-location-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
+    [data-theme="dark"] #contact .section-title { color: rgba(255,255,255,0.92); }
+    [data-theme="dark"] #contact .section-label { color: rgba(255,255,255,0.55); }
+    [data-theme="dark"] .contact-subtitle { color: rgba(255,255,255,0.75); }
+
+    /* Writing section headline keeps contrast in dark mode */
+    [data-theme="dark"] #writing .section-title { color: rgba(255,255,255,0.92); }
+    [data-theme="dark"] .essay-title { color: rgba(255,255,255,0.96); }
+
+    /* Outline button border visible in dark mode */
+    [data-theme="dark"] .btn-outline { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.92); }
+    [data-theme="dark"] .btn-outline:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.5); }
+
+    /* Franchise + company logos invert to stay visible on dark bg */
+    [data-theme="dark"] .franchise-logo,
+    [data-theme="dark"] .company-logo { filter: invert(1) grayscale(1) opacity(0.7); }
+    [data-theme="dark"] .franchise-logo:hover,
+    [data-theme="dark"] .company-logo:hover { filter: invert(1) grayscale(0) opacity(0.95); }
+
+    /* Always-white text elements on permanently-dark surfaces (pong, overlays, volunteer card) */
+    [data-theme="dark"] .pong-header h3,
+    [data-theme="dark"] .pong-score-num,
+    [data-theme="dark"] .pong-overlay h4,
+    [data-theme="dark"] .photo-event-title,
+    [data-theme="dark"] nav.nav-dark .nav-links a.nav-active { color: rgba(255,255,255,0.92); }
+
+    /* Dark-text intros on light sections need a flip in dark mode */
+    [data-theme="dark"] .franchise-intro,
+    [data-theme="dark"] .interest-card p,
+    [data-theme="dark"] .interest-modal-body,
+    [data-theme="dark"] .volunteer-desc,
+    [data-theme="dark"] #volunteer .photo-event-desc,
+    [data-theme="dark"] #volunteer .writing-intro { color: rgba(255,255,255,0.75); }
+    [data-theme="dark"] #volunteer .photo-thumb-hint { color: rgba(255,255,255,0.5); }
+
+    /* Dark mode mobile nav overlay */
     @media (max-width: 768px) {
-      [data-theme="dark"] .nav-links { background: rgba(20,20,20,0.96); }
-      [data-theme="dark"] .nav-links a { color: rgba(255,255,255,0.85); }
+      [data-theme="dark"] .nav-links { background: rgba(20,20,20,0.98); }
+      [data-theme="dark"] .nav-links a { color: rgba(255,255,255,0.92); }
     }
 
     html { scroll-behavior: smooth; }
@@ -306,19 +344,23 @@
       letter-spacing: 2px;
       text-decoration: none;
       position: relative;
-      padding-bottom: 2px;
+      display: inline-flex; align-items: center;
+      min-width: 44px; min-height: 44px;
+      padding: 0 0.4rem; /* widen hit target around glyph */
     }
-    .nav-logo::after {
+    .nav-logo .nav-logo-text {
+      position: relative; display: inline-block; padding-bottom: 2px;
+    }
+    .nav-logo .nav-logo-text::after {
       content: '';
-      position: absolute; bottom: -1px; left: 0;
-      width: 100%; height: 2px;
+      position: absolute; bottom: -1px; left: 0; right: 0; height: 2px;
       background: var(--accent);
       border-radius: 1px;
       transform: scaleX(0.6);
       transform-origin: left;
       transition: transform 0.25s ease;
     }
-    .nav-logo:hover::after { transform: scaleX(1); }
+    .nav-logo:hover .nav-logo-text::after { transform: scaleX(1); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       color: var(--muted); font-size: 0.82rem; font-weight: 400;
@@ -435,15 +477,12 @@
       max-width: 540px; margin: 0 auto 2.5rem;
     }
     .hero-tags {
-      display: flex; flex-wrap: wrap; gap: 0.15rem 0;
+      display: flex; flex-wrap: wrap; column-gap: 1.5rem; row-gap: 0.2rem;
       justify-content: center; margin-bottom: 3rem;
       color: var(--muted); font-size: 0.82rem; font-weight: 400;
       letter-spacing: 0.3px;
     }
     .hero-tag { padding: 0.2rem 0; }
-    .hero-tag:not(:last-child)::after {
-      content: '·'; margin: 0 0.6rem; opacity: 0.5;
-    }
     .hero-tag-rotate {
       display: block; position: relative;
       width: 100%; text-align: center;
@@ -452,12 +491,13 @@
     }
     .hero-tag-rotate span {
       display: block;
+      position: absolute;
+      left: 0; right: 0; top: 0;
       transition: opacity 0.4s ease, transform 0.4s ease;
       white-space: nowrap;
     }
     .hero-tag-rotate span.exiting {
-      opacity: 0; transform: translateY(-110%); position: absolute;
-      left: 0; right: 0; top: 0;
+      opacity: 0; transform: translateY(-110%);
     }
     .hero-tag-rotate span.entering {
       opacity: 0; transform: translateY(110%);
@@ -554,8 +594,8 @@
       border-color: rgba(255,255,255,0.08);
       box-shadow: 0 4px 24px rgba(0,0,0,0.2);
     }
-    nav.nav-dark .nav-logo { color: var(--white); }
-    nav.nav-dark .nav-logo::after { background: rgba(255,255,255,0.5); }
+    nav.nav-dark .nav-logo { color: #fff; }
+    nav.nav-dark .nav-logo-text::after { background: rgba(255,255,255,0.5); }
     nav.nav-dark .nav-links a { color: rgba(255,255,255,0.6); }
     nav.nav-dark .nav-links a:hover,
     nav.nav-dark .nav-links a.nav-active { color: var(--white); }
@@ -798,6 +838,22 @@
     .company-logos {
       display: flex; align-items: center; gap: 0.85rem; flex-shrink: 0;
     }
+    @media (max-width: 640px) {
+      .timeline-header {
+        flex-wrap: wrap;
+      }
+      .timeline-header > div:first-child {
+        flex: 1 1 100%;
+      }
+      .company-logos {
+        order: 2; margin-top: 0.5rem;
+      }
+      .company-logos .company-logo { max-height: 28px !important; }
+      .timeline-chevron {
+        position: absolute; top: 1rem; right: 0;
+      }
+      .timeline-header { position: relative; padding-right: 2rem; }
+    }
     @media (min-width: 769px) {
       .timeline-header {
         align-items: center; /* vertically center logos with text block */
@@ -861,8 +917,9 @@
       max-width: 500px; line-height: 1.7; margin-bottom: 2.75rem;
     }
     .franchise-grid {
-      display: flex; flex-wrap: wrap;
-      gap: 2.25rem 3.5rem; align-items: center; justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 2.25rem 3rem; align-items: center; justify-items: center;
     }
     .franchise-grid a { cursor: pointer; }
     .franchise-logo {
@@ -935,6 +992,7 @@
       color: rgba(255,255,255,0.6); margin-bottom: 0;
       position: relative; z-index: 1;
     }
+    .essay-meta-part { white-space: nowrap; }
     .essay-body { position: relative; z-index: 1; }
     .essay-body p {
       font-size: 1rem; line-height: 1.85; color: rgba(255,255,255,0.82);
@@ -951,9 +1009,10 @@
     .essay-toggle {
       display: block; margin: 1.5rem auto 0;
       background: transparent; border: 1px solid rgba(255,255,255,0.3);
-      color: rgba(255,255,255,0.85); padding: 0.6rem 1.5rem; border-radius: 100px;
+      color: rgba(255,255,255,0.85); padding: 0.75rem 1.5rem; border-radius: 100px;
       cursor: pointer; font-size: 0.85rem; font-weight: 600;
       letter-spacing: 0.5px; transition: all 0.2s;
+      min-height: 44px;
     }
     .essay-toggle:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
@@ -1138,6 +1197,7 @@
       padding: 0.6rem 1.4rem; border-radius: 6px; border: none;
       cursor: pointer; font-size: 0.85rem; font-weight: 700;
       letter-spacing: 0.5px; transition: background 0.2s, color 0.2s, transform 0.2s;
+      min-height: 44px;
     }
     .pong-btn-juneau {
       background: var(--cat-blue); color: var(--white);
@@ -1853,19 +1913,18 @@
 
     /* ─── RESPONSIVE ────────────────────────────────────────── */
     @media (max-width: 768px) {
-      nav { padding: 0.75rem 1.25rem; top: 0.5rem; left: 0.75rem; right: 0.75rem; }
+      nav { padding: 0.75rem 1.25rem; top: 0.5rem; left: 0.75rem; right: 0.75rem;
+        backdrop-filter: none; -webkit-backdrop-filter: none; /* avoid containing block on mobile so .nav-links.open can escape nav */
+      }
       .nav-hamburger { display: flex; flex-direction: column; }
       .nav-links {
         display: none; position: fixed;
-        top: 60px; right: 0.75rem; left: 0.75rem; bottom: auto;
+        top: 80px; right: 0; left: 0; bottom: 0;
         width: auto;
-        background: rgba(255,255,255,0.96);
+        background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(0,0,0,0.08);
-        border-radius: 14px;
-        box-shadow: 0 12px 40px rgba(0,0,0,0.12);
         flex-direction: column; align-items: center; justify-content: center;
-        gap: 0; padding: 1.5rem 0; z-index: 999;
+        gap: 0.25rem; padding: 2rem 0; z-index: 998;
       }
       .nav-links.open { display: flex; }
       .nav-links li { width: 100%; text-align: center; }
@@ -1888,12 +1947,23 @@
       .essay-hero { padding: 3rem 1.5rem 2rem; }
       .essay-card-body { padding: 1.5rem; }
       .timeline-desc { font-size: 0.85rem; }
-      .pong-btn { padding: 0.5rem 1rem; font-size: 0.78rem; }
+      .pong-btn { padding: 0.6rem 1rem; font-size: 0.78rem; min-height: 44px; }
       .pong-score-row { gap: 1.2rem; }
       .company-logo { max-height: 40px !important; }
     }
 
     /* ─── SMALL PHONES ─────────────────────────────────────── */
+    @media (max-width: 520px) {
+      /* Stack About vertically: headshot → stats → text, all full-width */
+      .about-visual { flex-direction: column; align-items: stretch; gap: 1rem; }
+      .about-visual .headshot-wrap { width: 100%; max-width: 240px; margin: 0 auto; }
+      .about-visual .about-stats {
+        display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto;
+        gap: 0.5rem;
+      }
+      .about-visual .stat-card { padding: 0.75rem; }
+      .stat-label { min-height: 2.4em; }
+    }
     @media (max-width: 480px) {
       .hero-name { font-size: clamp(3.2rem, 14vw, 4.5rem); }
       .section-title { font-size: clamp(1.8rem, 6vw, 2.2rem); }
@@ -1961,7 +2031,7 @@
 
 <!-- ── NAV ─────────────────────────────────────────────────── -->
 <nav role="navigation" aria-label="Main navigation">
-  <a class="nav-logo" href="#hero">CZ</a>
+  <a class="nav-logo" href="#hero"><span class="nav-logo-text">CZ</span></a>
   <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
     <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.65,190.57A88,88,0,0,1,65.43,67.35,89.45,89.45,0,0,1,96,49.21,104.12,104.12,0,0,0,206.79,160,89.3,89.3,0,0,1,188.65,190.57Z"/></svg>
     <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="display:none"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg>
@@ -1990,7 +2060,7 @@
   <div class="hero-cursor-glow" id="heroCursorGlow"></div>
   <div class="hero-content">
     <p class="hero-eyebrow hero-enter hero-enter-1" id="heroGreeting">Hey there — I'm</p>
-    <h1 class="hero-name hero-enter hero-enter-1">Christopher<br><span>Zdenek</span></h1>
+    <h1 class="hero-name hero-enter hero-enter-1">Christopher <br><span>Zdenek</span></h1>
     <p class="sr-only">Also known as Chris Zdenek</p>
     <p class="hero-tagline hero-enter hero-enter-2">
       Creativity meets strategy. I'm just as comfortable on an improv stage as I am working with a spreadsheet.
@@ -2635,8 +2705,9 @@
 <section id="franchises">
   <div class="container">
     <p class="section-label reveal">IP &amp; Franchises</p>
-    <p class="franchise-intro reveal reveal-delay-1">A few of the properties and franchises I've had the chance to work on.</p>
-    <div class="franchise-grid reveal reveal-delay-2">
+    <h2 class="section-title reveal reveal-delay-1">Stories I've helped ship</h2>
+    <p class="franchise-intro reveal reveal-delay-2">A few of the properties and franchises I've had the chance to work on.</p>
+    <div class="franchise-grid reveal reveal-delay-3">
       <a href="https://en.wikipedia.org/wiki/SpongeBob_SquarePants" target="_blank" rel="noopener"><img src="images/franchises/spongebob-logo.png" class="franchise-logo" alt="SpongeBob SquarePants" width="1280" height="682" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
       <a href="https://en.wikipedia.org/wiki/Grey%27s_Anatomy" target="_blank" rel="noopener"><img src="images/franchises/greys-anatomy-logo.png" class="franchise-logo" alt="Grey's Anatomy" width="1280" height="280" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
       <a href="https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles" target="_blank" rel="noopener"><img src="images/franchises/tmnt-logo.png" class="franchise-logo" alt="Teenage Mutant Ninja Turtles" width="400" height="225" onerror="this.parentElement.style.display='none'" loading="lazy"></a>
@@ -2671,11 +2742,11 @@
 
     <div class="essay-card reveal reveal-delay-3" id="essayCard">
       <div class="essay-hero">
-        <video class="essay-hero-video" muted loop playsinline preload="none" id="poolVideo">
+        <video class="essay-hero-video" muted loop playsinline autoplay preload="metadata" id="poolVideo">
           <source src="images/Essay Photo/Pool Parties Video.mp4" type="video/mp4">
         </video>
         <div class="essay-title">I Hate Pool Parties</div>
-        <div class="essay-meta">Personal Essay &nbsp;·&nbsp; Christopher Zdenek</div>
+        <div class="essay-meta"><span class="essay-meta-part">Personal Essay</span>&nbsp;·&nbsp;<span class="essay-meta-part">Christopher Zdenek</span></div>
       </div>
       <div class="essay-card-body">
       <div class="essay-body" id="essayBody">
@@ -3187,7 +3258,13 @@
       </a>
       <a href="https://letterboxd.com/chriszdenek/" target="_blank" class="contact-card">
         <div class="contact-card-icon">
-          <img src="images/logos/letterboxd.png" alt="Letterboxd" width="500" height="500" style="height:28px;width:auto;filter:brightness(0) invert(1) opacity(0.85);" loading="lazy">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 18" width="56" height="12" aria-hidden="true" style="display:block;">
+            <circle cx="8.5" cy="9" r="8.5" fill="#00E054"/>
+            <circle cx="42.5" cy="9" r="8.5" fill="#40BCF4"/>
+            <circle cx="76.5" cy="9" r="8.5" fill="#FF8000"/>
+            <circle cx="25.5" cy="9" r="8.5" fill="#40BCF4" style="mix-blend-mode:multiply;opacity:0.85"/>
+            <circle cx="59.5" cy="9" r="8.5" fill="#FF8000" style="mix-blend-mode:multiply;opacity:0.85"/>
+          </svg>
         </div>
         <div class="contact-card-label">Letterboxd</div>
         <div class="contact-card-value">chriszdenek</div>
@@ -5215,35 +5292,48 @@ var interestData = [
   var stats = document.querySelectorAll('.stat-number');
   if (!stats.length) return;
 
-  function animateCounter(el) {
-    var text = el.textContent.trim();
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Capture the authored final values up-front so we can always restore them
+  stats.forEach(function(el) {
+    if (!el.dataset.finalText) el.dataset.finalText = el.textContent.trim();
+  });
+
+  function parse(text) {
     var suffix = '';
-    var target = 0;
+    var target = parseInt(text, 10);
+    if (text.indexOf('+') !== -1) suffix = '+';
+    else if (text.indexOf('\u00d7') !== -1 || text.indexOf('x') !== -1) suffix = '\u00d7';
+    return { target: target, suffix: suffix };
+  }
 
-    if (text.indexOf('+') !== -1) {
-      suffix = '+';
-      target = parseInt(text);
-    } else if (text.indexOf('\u00d7') !== -1 || text.indexOf('x') !== -1) {
-      suffix = '\u00d7';
-      target = parseInt(text);
-    } else {
-      target = parseInt(text);
-    }
+  function setFinal(el) {
+    el.textContent = el.dataset.finalText;
+  }
 
-    if (isNaN(target)) return;
+  function animateCounter(el) {
+    var parsed = parse(el.dataset.finalText);
+    if (isNaN(parsed.target)) { setFinal(el); return; }
+    if (reduced) { setFinal(el); return; }
 
     var duration = 1500;
     var start = performance.now();
-    el.textContent = '0' + suffix;
+    el.textContent = '0' + parsed.suffix;
 
     function step(now) {
       var progress = Math.min((now - start) / duration, 1);
       var eased = 1 - Math.pow(1 - progress, 3);
-      var current = Math.round(eased * target);
-      el.textContent = current + suffix;
+      var current = Math.round(eased * parsed.target);
+      el.textContent = current + parsed.suffix;
       if (progress < 1) requestAnimationFrame(step);
+      else setFinal(el);
     }
     requestAnimationFrame(step);
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    stats.forEach(setFinal);
+    return;
   }
 
   var observer = new IntersectionObserver(function(entries) {
@@ -5256,6 +5346,11 @@ var interestData = [
   }, { threshold: 0.5 });
 
   stats.forEach(function(el) { observer.observe(el); });
+
+  // On bfcache restore, make sure values are settled
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) stats.forEach(setFinal);
+  });
 })();
 </script>
 
@@ -5570,8 +5665,28 @@ var interestData = [
     }
   }
 
+  function finalize() {
+    container.style.transform = 'rotateX(0deg) scale(1) translateY(0px)';
+    container.style.opacity = '1';
+    done = true;
+    window.removeEventListener('scroll', onScroll);
+  }
+
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Run initial check on load and bfcache restore
   onScroll();
+  window.addEventListener('pageshow', onScroll);
+
+  // Safety: if the section was already past the trigger on load (e.g. anchor-link
+  // navigation or deep scroll position), force the final state so nothing stays
+  // stuck at opacity 0.4.
+  setTimeout(function() {
+    if (!done) {
+      var rect = about.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.3 || rect.bottom < 0) finalize();
+    }
+  }, 150);
 })();
 </script>
 

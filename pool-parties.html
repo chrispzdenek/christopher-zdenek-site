@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = saved || (prefersLight ? 'light' : 'dark');
+        if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      } catch (e) {}
+    })();
+  </script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -195,6 +205,23 @@
       .essay-page-hero { min-height: 40vh; padding: 5rem 1.25rem 2.5rem; }
       .essay-page-body { padding: 2rem 1.25rem 4rem; }
     }
+
+    /* ─── LIGHT THEME (inherits from home page via localStorage) ─── */
+    [data-theme="light"] body { background: var(--cream); color: #1D1D1F; }
+    [data-theme="light"] .essay-nav { background: rgba(255,255,255,0.85); border-color: rgba(0,0,0,0.08); }
+    [data-theme="light"] .essay-nav a { color: rgba(29,29,31,0.7); }
+    [data-theme="light"] .essay-nav a:hover { color: #1D1D1F; }
+    [data-theme="light"] .essay-nav .nav-logo { color: #1D1D1F; }
+    [data-theme="light"] .essay-page-hero::after {
+      background: linear-gradient(to top, var(--cream) 0%, transparent 60%);
+    }
+    [data-theme="light"] .essay-page-hero video { opacity: 0.45; }
+    [data-theme="light"] .hero-content h1 { color: #1D1D1F; }
+    [data-theme="light"] .hero-content .essay-byline { color: rgba(29,29,31,0.55); }
+    [data-theme="light"] .essay-page-body p { color: rgba(29,29,31,0.82); }
+    [data-theme="light"] .essay-page-body p:first-child::first-letter { color: #1D1D1F; }
+    [data-theme="light"] .essay-author-note { color: rgba(29,29,31,0.5); }
+    [data-theme="light"] .essay-divider { border-top-color: rgba(0,0,0,0.1); }
 
     /* ─── ANIMATION ─── */
     .fade-in {
