@@ -4,7 +4,7 @@
     {
       "name": "christopher-zdenek-site",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["http-server", "/Volumes/Boh/Coding/christopher-zdenek-site", "-p", "8090", "-c-1"],
+      "runtimeArgs": ["http-server", "/Volumes/Boh/Projects/christopher-zdenek-site", "-p", "8090", "-c-1"],
       "port": 8090
     }
   ]
