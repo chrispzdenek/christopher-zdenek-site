@@ -3,3 +3,6 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+# Wrangler (Cloudflare Workers) cache
+.wrangler/
