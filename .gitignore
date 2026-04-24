@@ -6,3 +6,13 @@ Thumbs.db
 
 # Wrangler (Cloudflare Workers) cache
 .wrangler/
+
+# Secrets (added by security_phase_0_5.sh)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.staging
+*.env
+secrets/
