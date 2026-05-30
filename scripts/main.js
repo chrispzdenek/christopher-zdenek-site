@@ -79,39 +79,91 @@
   var lbCap = document.getElementById('lbCaption');
   var lbCnt = document.getElementById('lbCount');
 
+  // Serve the lighter WebP twin (e.g. event-1.jpg.webp) when one exists,
+  // falling back to the original JPEG if the browser/asset can't load it.
+  function lbSetSrc(src) {
+    var webp = src + '.webp';
+    lbImg.onerror = function () {
+      lbImg.onerror = null;   // avoid loops if the JPEG is also missing
+      lbImg.src = src;
+    };
+    lbImg.src = webp;
+  }
+
   function lbShow(i) {
     var photos = GALLERIES[lbGallery];
     lbCurrent = ((i % photos.length) + photos.length) % photos.length;
-    lbImg.src         = photos[lbCurrent].src;
+    lbSetSrc(photos[lbCurrent].src);
     lbImg.alt         = photos[lbCurrent].alt;
     lbCap.textContent = photos[lbCurrent].alt;
     lbCnt.textContent = (lbCurrent + 1) + ' / ' + photos.length;
   }
-  function lbOpen(gallery, i) {
+  var lbTrigger = null;   // element to restore focus to on close
+  var lbClose0  = document.getElementById('lbClose');
+  function lbFocusable() {
+    // Visible, in-DOM controls inside the overlay, in tab order.
+    return [lbClose0,
+            document.getElementById('lbPrev'),
+            document.getElementById('lbNext')]
+           .filter(function (el) { return el && el.offsetParent !== null; });
+  }
+  function lbOpen(gallery, i, trigger) {
     lbGallery = gallery;
+    lbTrigger = trigger || document.activeElement;
     lbShow(i);
     lbOv.classList.add('open');
     document.body.style.overflow = 'hidden';
+    lbOv.setAttribute('aria-hidden', 'false');
+    // Move focus into the dialog so keyboard/AT users aren't left behind it.
+    lbClose0.focus();
   }
   function lbClose() {
     lbOv.classList.remove('open');
     document.body.style.overflow = '';
+    lbOv.setAttribute('aria-hidden', 'true');
+    // Return focus to the thumbnail that opened the lightbox.
+    if (lbTrigger && typeof lbTrigger.focus === 'function') lbTrigger.focus();
+    lbTrigger = null;
   }
 
   document.querySelectorAll('[data-lb]').forEach(function (el) {
-    el.addEventListener('click', function () {
-      lbOpen(el.dataset.gallery || 'firefighter', parseInt(el.dataset.lb, 10));
+    // Make the (non-native) thumbnails keyboard-operable so the lightbox can
+    // be opened without a mouse, and restore-focus has a real target.
+    if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    if (!el.hasAttribute('aria-label')) {
+      var t = el.getAttribute('title') || 'Enlarge photo';
+      el.setAttribute('aria-label', t);
+    }
+    function open() {
+      lbOpen(el.dataset.gallery || 'firefighter', parseInt(el.dataset.lb, 10), el);
+    }
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
     });
   });
-  document.getElementById('lbClose').addEventListener('click', lbClose);
+  lbClose0.addEventListener('click', lbClose);
   document.getElementById('lbPrev').addEventListener('click', function () { lbShow(lbCurrent - 1); });
   document.getElementById('lbNext').addEventListener('click', function () { lbShow(lbCurrent + 1); });
   lbOv.addEventListener('click', function (e) { if (e.target === lbOv) lbClose(); });
   document.addEventListener('keydown', function (e) {
     if (!lbOv.classList.contains('open')) return;
-    if (e.key === 'Escape')     lbClose();
+    if (e.key === 'Escape')     { lbClose(); return; }
     if (e.key === 'ArrowLeft')  lbShow(lbCurrent - 1);
     if (e.key === 'ArrowRight') lbShow(lbCurrent + 1);
+    if (e.key === 'Tab') {
+      // Trap focus within the lightbox controls.
+      var f = lbFocusable();
+      if (!f.length) { e.preventDefault(); return; }
+      var first = f[0], last = f[f.length - 1];
+      var active = document.activeElement;
+      if (e.shiftKey) {
+        if (active === first || !lbOv.contains(active)) { e.preventDefault(); last.focus(); }
+      } else {
+        if (active === last || !lbOv.contains(active)) { e.preventDefault(); first.focus(); }
+      }
+    }
   });
 
   // Touch drag for lightbox — image follows your finger
@@ -229,9 +281,9 @@ var interestData = [
     id: "musical-theater",
     title: "Musical Theater",
     images: [
-      { src: "images/interests/musical-hamilton.jpeg", alt: "Hamilton at Pantages" },
-      { src: "images/interests/musical-legally-blonde.jpg", alt: "Legally Blonde The Musical" },
-      { src: "images/interests/musical-mousetrap.jpeg", alt: "The Mousetrap" }
+      { src: "images/interests/musical-hamilton.jpeg", alt: "Hamilton at Pantages", width: 2000, height: 1500 },
+      { src: "images/interests/musical-legally-blonde.jpg", alt: "Legally Blonde The Musical", width: 1100, height: 1208 },
+      { src: "images/interests/musical-mousetrap.jpeg", alt: "The Mousetrap", width: 2000, height: 1500 }
     ],
     body: "From Sondheim's intricate puzzle-box lyrics to Howard Ashman's gift for making animated characters feel painfully human, musical theater is where music and storytelling fuse into something neither can achieve alone. There's nothing quite like a well-constructed eleven o'clock number that recontextualizes everything you've seen.",
     video: null
@@ -258,8 +310,8 @@ var interestData = [
     id: "basketball-tennis",
     title: "Playing Basketball & Tennis",
     images: [
-      { src: "images/interests/basketball-dad.jpg", alt: "Basketball with Dad" },
-      { src: "images/interests/tennis-lisa.jpg", alt: "Tennis with Lisa" }
+      { src: "images/interests/basketball-dad.jpg", alt: "Basketball with Dad", width: 1450, height: 1222 },
+      { src: "images/interests/tennis-lisa.jpg", alt: "Tennis with Lisa", width: 1264, height: 1034 }
     ],
     body: "On the court, not just from the couch. Basketball demands your full presence \u2014 there's no time to think about anything else when someone's driving to the hoop. It's meditation through movement, and the pickup game community is one of the most democratic spaces in American life.",
     video: null
@@ -268,8 +320,8 @@ var interestData = [
     id: "cat-dad",
     title: "Cat Dad Extraordinaire",
     images: [
-      { src: "images/interests/cat-elie.jpg", alt: "Chris and Baby Elie" },
-      { src: "images/interests/cat-juneau.jpg", alt: "Chris Facetime with Juneau" }
+      { src: "images/interests/cat-elie.jpg", alt: "Chris and Baby Elie", width: 1440, height: 1440 },
+      { src: "images/interests/cat-juneau.jpg", alt: "Chris Facetime with Juneau", width: 1170, height: 2532 }
     ],
     body: "Elie and Juneau are Balinese cats. They are perfect. Elie is a seal-point diva who believes she runs the household (she does). Juneau is a blue-point sweetheart who follows me from room to room. All other pets are fine, I suppose.",
     video: null
@@ -278,10 +330,10 @@ var interestData = [
     id: "sports",
     title: "Sports Fanatic",
     images: [
-      { src: "images/interests/sports-baby-football.jpg", alt: "Baby Football" },
-      { src: "images/interests/sports-dodgers.jpg", alt: "Chris and Dad at Dodgers Game" },
-      { src: "images/interests/sports-soccer.jpg", alt: "Chris playing soccer" },
-      { src: "images/interests/sports-orioles.jpg", alt: "Lisa and Chris at Orioles Game" }
+      { src: "images/interests/sports-baby-football.jpg", alt: "Baby Football", width: 1108, height: 1416 },
+      { src: "images/interests/sports-dodgers.jpg", alt: "Chris and Dad at Dodgers Game", width: 1714, height: 1124 },
+      { src: "images/interests/sports-soccer.jpg", alt: "Chris playing soccer", width: 1004, height: 1336 },
+      { src: "images/interests/sports-orioles.jpg", alt: "Lisa and Chris at Orioles Game", width: 1112, height: 1268 }
     ],
     body: "Orioles. Dodgers. Lakers. Ravens. Yes, all four. My allegiances are multifaceted and I stand by them. Sports fandom is about community, narrative, and the rare thrill of watching something unfold that no screenwriter could have planned.",
     video: null
@@ -290,9 +342,9 @@ var interestData = [
     id: "old-bay",
     title: "Old Bay Seasoning",
     images: [
-      { src: "images/interests/oldbay-collection.jpg", alt: "My personal Old Bay Collection" },
-      { src: "images/interests/oldbay-beanie.jpg", alt: "My Old Bay Beanie" },
-      { src: "images/interests/oldbay-plush.jpg", alt: "Old Bay Plush" }
+      { src: "images/interests/oldbay-collection.jpg", alt: "My personal Old Bay Collection", width: 824, height: 1208 },
+      { src: "images/interests/oldbay-beanie.jpg", alt: "My Old Bay Beanie", width: 1298, height: 1308 },
+      { src: "images/interests/oldbay-plush.jpg", alt: "Old Bay Plush", width: 1104, height: 1290 }
     ],
     body: "Baltimore in a can. I put Old Bay on almost everything I cook — eggs, fries, popcorn, pasta, you name it. It reminds me of home. I even make a homemade Old Bay Caramel Ice Cream that has earned genuine testimonials from people who were fully prepared to hate it. The obsession is real, and I stand by every shake.",
     video: null
@@ -698,12 +750,23 @@ var interestData = [
       var gallery = document.createElement('div');
       gallery.className = 'interest-modal-gallery';
       item.images.forEach(function(img) {
+        // Prefer the WebP twin (e.g. sports-soccer.jpg.webp); the original
+        // JPEG remains the <img> fallback for browsers without WebP support.
+        var picture = document.createElement('picture');
+        var source = document.createElement('source');
+        source.type = 'image/webp';
+        source.srcset = img.src + '.webp';
         var imgEl = document.createElement('img');
         imgEl.src = img.src;
         imgEl.alt = img.alt;
         imgEl.loading = 'lazy';
+        imgEl.decoding = 'async';
         imgEl.className = 'interest-modal-photo';
-        gallery.appendChild(imgEl);
+        if (img.width)  imgEl.width  = img.width;
+        if (img.height) imgEl.height = img.height;
+        picture.appendChild(source);
+        picture.appendChild(imgEl);
+        gallery.appendChild(picture);
       });
       modalContent.appendChild(gallery);
     }

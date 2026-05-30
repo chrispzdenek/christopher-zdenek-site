@@ -829,9 +829,9 @@
       I rotate what's featured here — think of this as the current selection.
     </p>
 
-    <div class="essay-card reveal reveal-delay-3" id="essayCard">
+    <div class="essay-card essay-collapsed reveal reveal-delay-3" id="essayCard">
       <div class="essay-hero">
-        <video class="essay-hero-video" muted loop playsinline autoplay preload="metadata" id="poolVideo">
+        <video class="essay-hero-video" muted loop playsinline autoplay preload="metadata" id="poolVideo" poster="images/Essay Photo/Pool Parties Photo.jpg">
           <source src="images/Essay Photo/Pool Parties Video.mp4" type="video/mp4">
         </video>
         <div class="essay-title">I Hate Pool Parties</div>
@@ -858,6 +858,7 @@
         <p>After I met Sahil, I wasn't afraid of being the seizure kid since I was now <em>a</em> seizure kid. After I met Sahil, I didn't feel alone anymore. I no longer hated sitting on the side of pool parties, since I wasn't sitting alone.</p>
       </div>
       <button class="essay-toggle" id="essayToggle" onclick="toggleEssay()">Read Full Essay</button>
+      <a class="essay-permalink" href="/pool-parties.html">Open as a standalone page &rarr;</a>
       </div>
     </div>
 
@@ -1156,6 +1157,7 @@
         </div>
         <div class="volunteer-media">
           <video controls playsinline muted preload="none"
+                 poster="images/coaching-video-poster.jpg"
                  onerror="this.parentElement.style.display='none'">
             <source src="images/coaching-video.mp4" type="video/mp4">
           </video>
@@ -1381,7 +1383,7 @@
 <script defer src="scripts/pong.js"></script>
 
 <!-- ── Lightbox overlay ── -->
-<div class="lb-overlay" id="lbOverlay">
+<div class="lb-overlay" id="lbOverlay" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
   <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
   <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&#8249;</button>
   <div class="lb-img-wrap">

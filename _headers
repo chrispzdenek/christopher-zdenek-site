@@ -7,6 +7,11 @@
 /scripts/*
   Cache-Control: public, max-age=3600, must-revalidate
 
+# Images: stable filenames (no content hashing), so cache long but keep them
+# fresh in the background. If you swap an image, rename it or drop this block.
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
 # HTML: always revalidate (Netlify's default is fine; explicit for clarity)
 /*.html
   Cache-Control: public, max-age=0, must-revalidate

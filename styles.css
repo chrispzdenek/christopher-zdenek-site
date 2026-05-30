@@ -914,6 +914,13 @@
       min-height: 44px;
     }
     .essay-toggle:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+    .essay-permalink {
+      display: block; text-align: center; margin: 0.9rem auto 0;
+      font-size: 0.8rem; letter-spacing: 0.3px;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .essay-permalink:hover { color: var(--accent); }
 
     /* ─── INTERESTS ─────────────────────────────────────────── */
     #interests { background: var(--white); }
@@ -1458,7 +1465,7 @@
     }
     .lb-caption {
       position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      color: rgba(255,255,255,0.48); font-size: 0.82rem;
+      color: rgba(255,255,255,0.75); font-size: 0.82rem;
       text-align: center; white-space: nowrap;
       pointer-events: none;
     }
@@ -1481,7 +1488,7 @@
     .lb-next { right: 0.5rem; }
     .lb-count {
       position: fixed; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
-      color: rgba(255,255,255,0.28); font-size: 0.75rem; pointer-events: none;
+      color: rgba(255,255,255,0.6); font-size: 0.75rem; pointer-events: none;
     }
 
     /* ─── PROJECT / INTEREST MODAL ──────────────────────────── */

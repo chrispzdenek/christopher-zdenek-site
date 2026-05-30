@@ -6,10 +6,12 @@
   <script>
     (function() {
       try {
-        var saved = localStorage.getItem('theme');
-        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-        var theme = saved || (prefersLight ? 'light' : 'dark');
-        if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        // Mirror index.html exactly: with no saved preference, default to light
+        // unless the OS explicitly prefers dark. (Previously this page defaulted
+        // to dark, so a no-preference visitor saw a light homepage but a dark essay.)
+        var t = localStorage.getItem('theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
       } catch (e) {}
     })();
   </script>
@@ -132,7 +134,7 @@
     }
     .hero-content .essay-byline {
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.7);
       font-weight: 400;
     }
 
@@ -195,7 +197,7 @@
     }
     .essay-author-note {
       font-size: 0.82rem;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.7);
       margin-bottom: 2rem;
       line-height: 1.6;
     }
@@ -217,10 +219,10 @@
     }
     [data-theme="light"] .essay-page-hero video { opacity: 0.45; }
     [data-theme="light"] .hero-content h1 { color: #1D1D1F; }
-    [data-theme="light"] .hero-content .essay-byline { color: rgba(29,29,31,0.55); }
+    [data-theme="light"] .hero-content .essay-byline { color: rgba(29,29,31,0.7); }
     [data-theme="light"] .essay-page-body p { color: rgba(29,29,31,0.82); }
     [data-theme="light"] .essay-page-body p:first-child::first-letter { color: #1D1D1F; }
-    [data-theme="light"] .essay-author-note { color: rgba(29,29,31,0.5); }
+    [data-theme="light"] .essay-author-note { color: rgba(29,29,31,0.7); }
     [data-theme="light"] .essay-divider { border-top-color: rgba(0,0,0,0.1); }
 
     /* ─── ANIMATION ─── */
@@ -246,7 +248,7 @@
   </nav>
 
   <header class="essay-page-hero">
-    <video muted loop playsinline autoplay>
+    <video muted loop playsinline autoplay poster="images/Essay Photo/Pool Parties Photo.jpg">
       <source src="images/Essay Photo/Pool Parties Video.mp4" type="video/mp4">
     </video>
     <div class="hero-content fade-in">
