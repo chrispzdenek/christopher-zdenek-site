@@ -1063,6 +1063,7 @@
       border-radius: 12px; padding: 1.25rem;
       border: 2px solid transparent; transition: border-color 0.2s;
       display: flex; gap: 1rem; align-items: flex-start;
+      color: #1D1D1F; /* pastel card stays light in both themes — keep text dark */
     }
     .cat-profile:hover { border-color: var(--dark); }
     .cat-juneau { background: linear-gradient(135deg, #c8e6f7 0%, #e0f2fe 100%); }
@@ -1085,16 +1086,20 @@
     .cat-emoji { font-size: 3.5rem; margin-bottom: 0.5rem; display: block; }
 
     /* ─── PONG GAME ─────────────────────────────────────────── */
+    /* The game card is a permanently-dark surface in BOTH themes, so all of
+       its colors are literals — theme variables flip in dark mode and would
+       leave white text on a light card. */
     .pong-section {
-      background: var(--navy);
+      background: #1D1D1F;
       border-radius: 16px; padding: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
     }
     .pong-header { text-align: center; margin-bottom: 2rem; }
     .pong-header h3 {
       font-family: 'DM Sans', sans-serif;
-      font-size: 1.8rem; font-weight: 400; color: var(--white); margin-bottom: 0.5rem;
+      font-size: 1.8rem; font-weight: 400; color: #ffffff; margin-bottom: 0.5rem;
     }
-    .pong-header p { color: var(--muted); font-size: 0.9rem; }
+    .pong-header p { color: rgba(255,255,255,0.60); font-size: 0.9rem; }
     .pong-controls-row {
       display: flex; gap: 1rem; justify-content: center;
       flex-wrap: wrap; margin-bottom: 1.5rem;
@@ -1106,22 +1111,22 @@
       min-height: 44px;
     }
     .pong-btn-juneau {
-      background: var(--cat-blue); color: var(--white);
+      background: var(--cat-blue); color: #ffffff;
     }
     .pong-btn-juneau:hover { background: #5a9dc4; transform: scale(1.05); }
     .pong-btn-juneau.active { box-shadow: 0 0 0 3px #7ab3d4, 0 0 16px rgba(122,179,212,0.5); }
     .pong-btn-elie {
-      background: var(--cat-seal); color: var(--white);
+      background: var(--cat-seal); color: #ffffff;
     }
     .pong-btn-elie:hover { background: #7a5f42; transform: scale(1.05); }
     .pong-btn-elie.active { box-shadow: 0 0 0 3px #8b6f52, 0 0 16px rgba(139,111,82,0.5); }
     .pong-btn-start {
-      background: var(--accent); color: var(--white);
+      background: #0066CC; color: #ffffff;
       box-shadow: 0 2px 12px rgba(0,102,204,0.45);
     }
     .pong-btn-start:hover { background: #0055b3; transform: scale(1.05); }
     .pong-btn-reset {
-      background: rgba(255,255,255,0.12); color: var(--white);
+      background: rgba(255,255,255,0.12); color: #ffffff;
       border: 1px solid rgba(255,255,255,0.25);
     }
     .pong-btn-reset:hover { background: rgba(255,255,255,0.22); }
@@ -1135,13 +1140,13 @@
     }
     .pong-score-name.juneau-label { color: var(--cat-blue); }
     .pong-score-name.elie-label   { color: var(--cat-seal); }
-    .pong-score-name.ai-label     { color: var(--muted); }
+    .pong-score-name.ai-label     { color: rgba(255,255,255,0.55); }
     .pong-score-num {
       font-family: 'DM Sans', sans-serif;
-      font-size: 3rem; font-weight: 200; color: var(--white);
+      font-size: 3rem; font-weight: 200; color: #ffffff;
       line-height: 1;
     }
-    .pong-score-sep { font-size: 2rem; color: var(--muted); }
+    .pong-score-sep { font-size: 2rem; color: rgba(255,255,255,0.45); }
     #pongCanvas {
       display: block; margin: 0 auto;
       border-radius: 8px;
@@ -1152,11 +1157,11 @@
     }
     .pong-instructions {
       text-align: center; margin-top: 1rem;
-      font-size: 0.8rem; color: var(--muted);
+      font-size: 0.8rem; color: rgba(255,255,255,0.55);
     }
     .pong-instructions kbd {
       background: rgba(255,255,255,0.1); border-radius: 4px;
-      padding: 0.15rem 0.4rem; color: var(--cream);
+      padding: 0.15rem 0.4rem; color: #F5F5F7;
       font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.2);
     }
     .pong-overlay {
@@ -1169,9 +1174,9 @@
     .pong-canvas-wrap { position: relative; width: fit-content; margin: 0 auto; }
     .pong-overlay h4 {
       font-family: sans-serif;
-      font-size: 1.6rem; color: var(--white); margin-bottom: 0.5rem;
+      font-size: 1.6rem; color: #ffffff; margin-bottom: 0.5rem;
     }
-    .pong-overlay p { color: var(--muted); font-size: 0.9rem; }
+    .pong-overlay p { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
 
     /* ─── PONG FULLSCREEN (mobile) ─────────────────────────── */
     .pong-section.pong-fullscreen {
@@ -1212,7 +1217,7 @@
     /* Orientation choice overlay */
     .pong-rotate-overlay {
       display: none; position: fixed; inset: 0; z-index: 10003;
-      background: var(--navy);
+      background: #1D1D1F;
       flex-direction: column; align-items: center; justify-content: center;
       color: #fff; text-align: center; gap: 1.5rem;
     }
@@ -1390,6 +1395,9 @@
       box-shadow: 0 8px 28px rgba(0,0,0,0.55);
     }
     .photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s; }
+    /* Tall photos whose faces sit near the top of frame: anchor the thumb
+       crop there instead of the default center (which shows torsos). */
+    .photo-thumb img.crop-faces { object-position: center 15%; }
     .photo-thumb:hover img { opacity: 0.65; }
     .photo-thumb::after {
       content: '⤢'; position: absolute;
@@ -1660,14 +1668,17 @@
       display: flex; flex-wrap: wrap; gap: 10px;
       margin-top: 1.2rem; justify-content: center;
     }
+    /* Uniform-height strip: width follows each photo's natural aspect ratio,
+       so portrait shots stay small instead of blowing up to half the modal. */
     .interest-modal-photo {
-      width: calc(50% - 5px); border-radius: 8px;
-      object-fit: cover; box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      height: 230px; width: auto; max-width: 100%;
+      object-fit: contain; border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
       cursor: pointer; transition: transform 0.2s;
     }
     .interest-modal-photo:hover { transform: scale(1.03); }
     @media (max-width: 480px) {
-      .interest-modal-photo { width: 100%; }
+      .interest-modal-photo { height: 170px; }
     }
 
     /* Modal responsive */
@@ -1693,6 +1704,7 @@
     .volunteer-card {
       background: #fff; border-radius: 12px;
       border: 1px solid rgba(0,0,0,0.07); overflow: hidden;
+      display: flex; flex-direction: column;
     }
     .volunteer-card-body { padding: 1.4rem 1.5rem 1.25rem; }
     .volunteer-eyebrow {
@@ -1716,9 +1728,20 @@
       text-transform: uppercase; padding: 0.28rem 0.65rem;
       background: rgba(0,102,204,0.08); color: var(--accent); border-radius: 4px;
     }
-    .volunteer-media { width: 100%; display: block; border-top: 1px solid rgba(0,0,0,0.07); }
-    .volunteer-media img { width: 100%; display: block; }
-    .volunteer-media video { width: 100%; display: block; max-height: 300px; object-fit: cover; object-position: center 35%; }
+    /* Media pins to the card bottom and absorbs the height difference between
+       the two cards, so neither shows a dead white block below its content. */
+    .volunteer-media {
+      width: 100%; display: block; border-top: 1px solid rgba(0,0,0,0.07);
+      margin-top: auto; flex: 1; min-height: 0; position: relative;
+    }
+    .volunteer-media img,
+    .volunteer-media video {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover; object-position: center 35%;
+      position: absolute; inset: 0;
+    }
+    /* Fallback height so media never collapses if the sibling card is shorter */
+    .volunteer-media::before { content: ''; display: block; padding-top: 56%; }
 
     /* ── Photo-event overrides for cream (volunteer) background ── */
     #volunteer .photo-event-feature {
@@ -1891,9 +1914,9 @@
     /* ─── SCROLL REVEAL (Apple-style) ──────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-                  transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transform: translateY(24px);
+      transition: opacity 0.55s cubic-bezier(0.25, 0.1, 0.25, 1),
+                  transform 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
     .reveal.visible {
       opacity: 1;

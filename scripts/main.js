@@ -25,6 +25,39 @@
 
 /* ─────────────────────────────────────────────────────────── */
 
+/* ── Timeline accordion (work + education) ── */
+(function () {
+  var headers = document.querySelectorAll('.timeline-header');
+
+  function toggle(header) {
+    var item = header.parentElement;
+    var details = header.nextElementSibling;
+    var expanded = item.classList.toggle('expanded');
+    header.setAttribute('aria-expanded', expanded);
+    details.style.maxHeight = expanded ? details.scrollHeight + 'px' : null;
+  }
+
+  headers.forEach(function (header) {
+    header.addEventListener('click', function () { toggle(header); });
+    header.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(header); }
+    });
+  });
+
+  // Keep open panels sized correctly if the viewport changes after expanding
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      document.querySelectorAll('.timeline-item.expanded .timeline-details').forEach(function (d) {
+        d.style.maxHeight = d.scrollHeight + 'px';
+      });
+    }, 150);
+  });
+})();
+
+/* ─────────────────────────────────────────────────────────── */
+
 (function () {
   var GALLERIES = {
     firefighter: [
@@ -45,7 +78,6 @@
     ],
     gotham2122: [
       { src: 'images/work/gotham-team.jpg',  alt: 'The Gotham Group team' },
-      { src: 'images/work/gotham-event.jpg', alt: 'The Gotham Group at event' },
       { src: 'images/work/gotham-chris-siobhan.jpg', alt: 'Chris & Siobhan at The Gotham Group' },
       { src: 'images/work/gotham-halloween.jpeg', alt: 'Halloween Contest at The Gotham Group' }
     ],
@@ -377,7 +409,9 @@ var interestData = [
     var marqueeAnimId = null;
 
     var offset = 0;
-    var speed = 0.5;
+    // Honor reduced-motion: no auto-scroll, but drag/flick still works.
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var speed = reducedMotion ? 0 : 0.5;
     var currentSpeed = speed;
     var isDragging = false;
     var dragStartX = 0;
@@ -759,7 +793,8 @@ var interestData = [
         var imgEl = document.createElement('img');
         imgEl.src = img.src;
         imgEl.alt = img.alt;
-        imgEl.loading = 'lazy';
+        // No lazy-loading here: the gallery is only built when the modal opens,
+        // so deferring just makes the photos pop in late.
         imgEl.decoding = 'async';
         imgEl.className = 'interest-modal-photo';
         if (img.width)  imgEl.width  = img.width;
@@ -777,6 +812,8 @@ var interestData = [
     modalCounter.style.display = 'none';
   }
 
+  var modalTrigger = null;   // element to restore focus to on close
+
   window.openProjectModal = function(category, index) {
     currentCategory = category;
     currentIndex = index;
@@ -785,16 +822,24 @@ var interestData = [
     else if (category === 'interest') renderInterestModal();
     modal.classList.toggle('interest-mode', category === 'interest');
     modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    // Move focus into the dialog so keyboard/AT users aren't left behind it.
+    modalTrigger = document.activeElement;
+    document.getElementById('projectModalClose').focus();
   };
 
   function closeProjectModal() {
     modal.classList.remove('open');
     modal.classList.remove('interest-mode');
+    modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     // Stop YouTube if playing
     var iframe = modalContent.querySelector('iframe');
     if (iframe) iframe.src = '';
+    // Return focus to the card/poster that opened the dialog.
+    if (modalTrigger && typeof modalTrigger.focus === 'function') modalTrigger.focus();
+    modalTrigger = null;
   }
 
   function navigateProjectModal(dir) {
@@ -1425,8 +1470,18 @@ var interestData = [
     }
   });
 
-  // Recache rects on scroll (since getBoundingClientRect is viewport-relative)
-  window.addEventListener('scroll', cacheCardRects, { passive: true });
+  // Recache rects on scroll (since getBoundingClientRect is viewport-relative).
+  // rAF-throttled: measuring every card on every scroll event forces layout
+  // repeatedly per frame and janks scrolling.
+  var rectsRafPending = false;
+  window.addEventListener('scroll', function () {
+    if (rectsRafPending) return;
+    rectsRafPending = true;
+    requestAnimationFrame(function () {
+      cacheCardRects();
+      rectsRafPending = false;
+    });
+  }, { passive: true });
 
   document.addEventListener('mouseleave', function() {
     cards.forEach(function(card) {

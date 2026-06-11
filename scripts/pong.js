@@ -221,19 +221,29 @@ function launchGame() {
   aiY     = H / 2 - PAD_H / 2;
   initBall(Math.random() > 0.5);
   overlay.style.display = 'none';
+  lastFrameTime = 0;
   loop();
 }
 
-function loop() {
+// Normalize to a 60fps baseline so the game plays at the same speed on
+// 120Hz/ProMotion displays (capped so a background-tab pause can't teleport the ball).
+let lastFrameTime = 0;
+function loop(now) {
   if (!gameRunning) return;
-  update();
+  var dt = 1;
+  if (typeof now === 'number') {
+    if (lastFrameTime) dt = Math.min((now - lastFrameTime) / (1000 / 60), 3);
+    lastFrameTime = now;
+  }
+  update(dt);
   draw();
   animId = requestAnimationFrame(loop);
 }
 
-function update() {
+function update(dt) {
+  dt = dt || 1;
   // Player movement
-  const speed = 7;
+  const speed = 7 * dt;
   if (keys['w'] || keys['arrowup']) {
     playerY = Math.max(0, playerY - speed);
   }
@@ -242,29 +252,31 @@ function update() {
   }
 
   // AI movement
-  aiReactTimer++;
+  aiReactTimer += dt;
   if (aiReactTimer >= aiReactDelay) {
     // Predict ball landing position
-    const timeToReach = (W - PAD_W*2 - ballX) / Math.abs(ballVX + 0.001);
+    const timeToReach = (W - PAD_W*2 - ballX) / Math.max(Math.abs(ballVX), 0.001);
     let predictY = ballY + ballVY * timeToReach;
-    // Bounce prediction (rough)
-    while (predictY < 0 || predictY > H) {
+    // Bounce prediction (rough) — bounded so a degenerate value can never spin forever
+    if (!isFinite(predictY)) predictY = H / 2;
+    for (var bounces = 0; (predictY < 0 || predictY > H) && bounces < 16; bounces++) {
       if (predictY < 0) predictY = -predictY;
       if (predictY > H) predictY = 2*H - predictY;
     }
+    predictY = Math.max(0, Math.min(H, predictY));
     aiTargetY = predictY - PAD_H / 2;
   }
   if (aiTargetY !== undefined) {
     const diff = aiTargetY - aiY;
     if (Math.abs(diff) > 3) {
-      aiY += (diff > 0 ? 1 : -1) * Math.min(aiSpeed, Math.abs(diff));
+      aiY += (diff > 0 ? 1 : -1) * Math.min(aiSpeed * dt, Math.abs(diff));
     }
     aiY = Math.max(0, Math.min(H - PAD_H, aiY));
   }
 
   // Ball movement
-  ballX += ballVX;
-  ballY += ballVY;
+  ballX += ballVX * dt;
+  ballY += ballVY * dt;
 
   // Top / bottom wall
   if (ballY - BALL_R <= 0)     { ballY = BALL_R;        ballVY = Math.abs(ballVY); }
@@ -729,6 +741,8 @@ function drawIdleFrame() {
   const ix = W / 2 + Math.cos(t) * 60;
   const iy = H / 2 + Math.sin(t * 1.3) * 40;
   drawBall(ix, iy);
+  // Honor reduced-motion: render a single static frame instead of looping
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { idleAnimId = null; return; }
   if (!gameRunning && !gameOver) { idleAnimId = requestAnimationFrame(drawIdleFrame); }
   else                            { idleAnimId = null; }
 }
@@ -741,6 +755,16 @@ document.addEventListener('keydown', e => {
   if (gameRunning && ['arrowup','arrowdown'].includes(e.key.toLowerCase())) e.preventDefault();
 });
 document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+// Mouse control — paddle follows the cursor over the court (desktop).
+// Map from CSS pixels to logical court coords since the canvas can render scaled down.
+canvas.addEventListener('mousemove', e => {
+  if (!gameRunning) return;
+  const rect = canvas.getBoundingClientRect();
+  if (!rect.height) return;
+  const y = (e.clientY - rect.top) * (H / rect.height);
+  playerY = Math.max(0, Math.min(H - PAD_H, y - PAD_H / 2));
+});
 
 // Touch support for mobile
 let touchStartY = null;
