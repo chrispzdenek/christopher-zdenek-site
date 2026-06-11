@@ -25,7 +25,7 @@
       --dark2: #C7C7CC;
       --cream: #1C1C1E;
       --white: #141414;
-      --muted: rgba(255,255,255,0.55);
+      --muted: rgba(255,255,255,0.68);
       --red: #FF6B6B;
       --accent: #4DA3FF;
       --text: rgba(255,255,255,0.92);
@@ -86,7 +86,7 @@
 
     /* Tag pills in hero */
     [data-theme="dark"] .current-badge { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.12); }
-    [data-theme="dark"] .hero-tags { color: rgba(255,255,255,0.45); }
+    [data-theme="dark"] .hero-tags { color: rgba(255,255,255,0.70); }
 
     /* Headshot shadow */
     [data-theme="dark"] .headshot-img,
@@ -176,6 +176,15 @@
     [data-theme="dark"] #volunteer .photo-event-desc,
     [data-theme="dark"] #volunteer .writing-intro { color: rgba(255,255,255,0.75); }
     [data-theme="dark"] #volunteer .photo-thumb-hint { color: rgba(255,255,255,0.5); }
+
+    /* Dark-mode readability: copy that is hardcoded dark-on-light elsewhere */
+    [data-theme="dark"] .hero-tagline { color: rgba(255,255,255,0.80); }
+    [data-theme="dark"] .about-text p { color: rgba(255,255,255,0.80); }
+    [data-theme="dark"] .taste-marquee-label { color: rgba(255,255,255,0.60); }
+    [data-theme="dark"] .timeline-item .photo-thumb-hint { color: rgba(255,255,255,0.50); }
+    [data-theme="dark"] .yt-thumb-label { color: rgba(255,255,255,0.60); }
+    [data-theme="dark"] .project-modal-overlay.interest-mode .project-modal-close { color: rgba(255,255,255,0.7); }
+    [data-theme="dark"] .project-modal-overlay.interest-mode .project-modal-close:hover { color: #ffffff; }
 
     /* Dark mode mobile nav overlay */
     @media (max-width: 768px) {
