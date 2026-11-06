@@ -938,12 +938,10 @@ var interestData = [
 
 (function () {
   var phrases = [
-    'AI Generalist',
-    'Entrepreneurship',
+    'Building Tools',
     'Improv',
-    'Analytics',
     'Storytelling',
-    'Emerging Tech',
+    'Entrepreneurship',
     'Cat Dad',
     '& A Lot More'
   ];
